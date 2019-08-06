@@ -22,15 +22,16 @@
                 <#assign isOnlyPage = pagesLength == 2 >
                 <#assign showNextOrPreviousButton = !isOnlyPage >
                 <#assign middlePage = !isFirstPage && !isLastPage && (pageIndex < pagesLength) >
+                <#assign formSuccessMethod = (pageIndex == pagesLength - 1)?then("submit-success: AMP.setState({currentPage: '${pagesLength}'}); submit-error: AMP.setState({currentPage: '${pagesLength}'})", "submit-success: AMP.setState({responseId: event.response.responseId})") >
                 
                 <section <#if pageIndex != 1>hidden </#if>
                     [hidden]="currentPage != '${(pageIndex)!}'">
                     <form
-                        class="form" 
+                        class="form"
                         method="post" 
                         action-xhr="https://push-notification-test-37477.firebaseapp.com/saveUserResponse"
                         custom-validation-reporting="show-all-on-submit"
-                        on="submit-success: AMP.setState({responseId: event.response.responseId})"
+                        on="${formSuccessMethod}"
                     >
                     <input type="hidden" name="responseId" [value]="responseId"> <!-- to maintain the response id -->
                     <input type="hidden" name="surveyId" value="${(surveyData.surveyId)!}">
@@ -60,12 +61,18 @@
                     </#list>
                     <!-- END Questions list html -->
 
+                    <!-- Last page thank you message -->
+                    <#if pageIndex == pagesLength >
+                        <h3>${(page.thankyouMsg)}</h3>
+                    </#if>
+                    <!-- END last page thank you message -->
+
                     <!-- Previous next button logic -->
                     <#if (isFirstPage || middlePage) && !isOnlyPage>
                         <button on="tap:AMP.setState({ currentPage: '${pageIndex + 1}' })" class="button button-secondary">Next</button>
                     </#if>
 
-                    <#if !isFirstPage && !isOnlyPage>
+                    <#if !isFirstPage && !isOnlyPage && (pageIndex !== pagesLength)>
                         <button on="tap:AMP.setState({ currentPage: '${pageIndex - 1}' })" class="button button-secondary">Previous</button>
                     </#if>
 
