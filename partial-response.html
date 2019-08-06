@@ -1,0 +1,80 @@
+<!--
+     Below is the mininum valid AMP4EMAIL document. Just type away
+     here and the AMP Validator will re-check your document on the fly.
+-->
+<!doctype html>
+<html ⚡4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+      <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+      <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+      <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+</head>
+<body>
+    <!-- <amp-state id="newResponse">
+        <script type="application/json">
+            {
+                "res": "initial"
+            }
+        </script>
+    </amp-state> -->
+    <div class="pick-one-question" style="background-image: url(&quot;https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/Service_desktop.jpg&quot;);"><div><div class="pickone-business"> BMW_Survey </div><div class="pickone-title"><span>1.</span> Were you satisfied with the customer service?</div><div class="choice-wrap clearfix"><div class="choices"><div class="ripple" data-value="1061905" data-selectedindex="0" style="background: rgb(25, 118, 210); color: rgb(255, 255, 255);"><div class="icon"><span class="icon-pickone_check"></span></div><div class="option-choice">Yes</div></div></div><div class="choices"><div class="ripple" data-value="1061906" data-selectedindex="1" style="background: rgb(13, 71, 161); color: rgb(255, 255, 255);"><div class="icon"><span class="icon-pickone_cross"></span></div><div class="option-choice">No</div></div></div></div><div class="pick-one footer-comp-wrap"><div class="footerComp"><a href="https://birdeye.com/surveys/" target="_blank" rel="noopener noreferrer"><amp-img src="https://d3cnqzq0ivprch.cloudfront.net/public-forms/prod/assets/powered-by-birdeye-white.png" class="birdeye-logo" width="100" height="100"></a></div></div></div></div>
+  <form 
+        method="post" 
+        action-xhr="https://push-notification-test-37477.firebaseapp.com/saveSource" 
+        on="submit-success: AMP.setState({ res : event.response.body }), form2.show"
+   >
+    <input type="text" name="source" value="" />
+    <input type="submit" value="Submit" />
+    <div submit-success class="success">
+                     <template type="amp-mustache">
+                        <p>Thanks for taking out your time.We have collected your feedback successfully.</p>
+                        <p>Your responseId returned in submit success: {{test}}</p>
+                     </template>
+                  </div>
+                  <div submit-error class="error">
+                     <template type="amp-mustache">
+                        Some error occured. It's not you, it's us. Please try after some time.
+                     </template>
+                  </div>
+  </form>
+
+  <p class="" [text]="res"></p>
+
+  <form id="form2" hidden>
+        <p>But wait! There's more!</p>
+        <input type="text" [value]="res" />
+        <!-- ... -->
+    </form>
+
+  <!-- <form 
+        method="post" 
+        action-xhr="https://push-notification-test-37477.firebaseapp.com/saveSurveyResponse"
+        custom-validation-reporting="show-all-on-submit"
+   >
+
+  <input type="text" name="responseId" [value]="responseId" />
+  <template type="amp-mustache">
+        <p>Response id</p>
+        <p>{{responseId}}</p>
+     </template>
+  <input type="submit" value="Submit2" />
+  <div submit-success class="success">
+        <template type="amp-mustache">
+           <p>Thanks for taking out your time.We have collected your feedback successfully.</p>
+           <p>Your responseId: {{id}}</p>
+        </template>
+     </div>
+     <div submit-error class="error">
+        <template type="amp-mustache">
+           Some error occured. It's not you, it's us. Please try after some time.
+        </template>
+     </div>
+  </form> -->
+
+
+</body>
+</html>

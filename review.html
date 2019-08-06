@@ -1,0 +1,306 @@
+<!doctype html>
+<html ⚡4email>
+   <head>
+      <meta charset="utf-8">
+      <script async src="https://cdn.ampproject.org/v0.js"></script>
+      <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+      <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+      <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+      <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+      <style amp4email-boilerplate>body{visibility:hidden}</style>
+      <style amp-custom>
+         body {
+         padding-bottom: 40px;
+         }
+         h1 {
+         margin: 1rem;
+         }
+         .review {
+         text-align: center; 
+         }
+         .success {
+         color: green; 
+         margin: 10px 0;
+         }
+         .error {
+         color: red;
+         margin: 10px 0;
+         }
+         .block {
+         display: block; 
+         }
+         .button {
+         background-color: #eee;
+         color: #999;
+         cursor: default;
+         width: 315px;
+         height: 55px;
+         font-size: 18px;
+         line-height: 22.5px;
+         padding: 0;
+         background: #1976d2;
+         border-radius: 2px;
+         color: #fff;
+         text-align: center;
+         cursor: pointer;
+         border: medium none;
+         min-height: 26px;
+         text-transform: none;
+         flex: 2 1 200px;
+         margin: auto;
+         order: 2;
+         cursor: pointer;
+         margin-top: 0;
+         margin-bottom: 10px;
+         }
+         .review-button {
+         background-color: #4CAF50;
+         color: #FFFFFF;
+         margin-bottom: 6px;
+         position: relative;
+         }
+         .review-button:after{
+            background-image: url(https://d3cnqzq0ivprch.cloudfront.net/public-forms/prod/assets/sprite-aggr-icon40.png);
+            background-position: -120px -530px;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 16px;
+            top: 7px;
+            content:"";
+         }
+         .google-button:after{
+            background-position: 0 0;
+            height: 42px;
+            width: 42px;
+         }
+         .contact-button {
+         background: none repeat scroll 0 0 #E53935;
+         color: #FFFFFF;
+         margin-top: 0;
+         margin-bottom: 6px;
+         }
+         .text {
+         margin-bottom: 20px;
+         margin-top: 0;
+         font-size: 28px;
+         font-weight: normal;
+         line-height: normal;
+         letter-spacing: normal;
+         text-align: center;
+         color: #212121;
+         }
+         .textarea {
+         border: 1px solid #ccc;
+         padding: 15px 10px;
+         width: 100%;
+         border-radius: 2px;
+         color: #212121;
+         font-size: 16px;
+         font-weight: 300;
+         line-height: 25px;
+         box-sizing: border-box;
+         font-family: "Roboto", arial, sans-serif;
+         margin-bottom: 20px;
+         }
+         ul{
+            list-style: none;
+            padding: 0;
+            display: inline-block;
+            margin: 0;
+         }
+         li{
+            display: inline-block;
+         }
+         .bf-brand-color{
+            color:#fff;
+            background-color: #1976d2;
+            border-radius: 30px;
+            margin-right: 10px;
+            padding: 0 5px;
+         }
+         section{
+            border: 1px solid #272729;
+            max-width: 500px;
+            margin: 0 auto;
+         }
+      </style>
+   </head>
+   <body>
+      <amp-layout layout="responsive" width="1" height="1" class="review">
+         <section>
+            <div class="common-header" style="background-color: #272729; padding: 15px 20px; display:flex;">
+               <div class="img-box">
+                  <amp-img width="50" height="50" src="https://bzimages-prod.s3.amazonaws.com/398331/fileUpload/398331_1562830503606_starbuckslogotransparent60x60.png" />
+               </div>
+               <div class="info-box" style="text-align:left; margin:0 20px;">
+                  <h1 class="checkInLocationName business-name" style="color: #f4f4fc; margin:0 0 7px 0;">McDonalds</h1>
+                  <div class="rating-preview" id="rating-preview">
+                     <div class="rating-wrap" style="display:flex; align-items:center;">
+                           <div class="starsWithBubble">
+                              <div class="bew-avgstars bf-brand-color bewe-avgstars-inverse bf-brand-color-bg ">
+                                 <span class="be-c-ratingval">4.8</span>
+                                 <ul>
+                                    <li class="be-c-star">
+                                      <span class="be-star-off">★</span>
+                                    </li>
+                                    <li class="be-c-star">
+                                       <span class="be-star-off">★</span>
+                                    </li>
+                                    <li class="be-c-star">
+                                       <span class="be-star-off">★</span>
+                                    </li>
+                                    <li class="be-c-star">
+                                       <span class="be-star-off">★</span>
+                                    </li>
+                                    <li class="be-c-star">
+                                         <span style="width: 8px;" class="be-star-on">★</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        <span class="review-count" style="color:#f4f4fc;">298 reviews</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section [hidden]="currentPage != 'home'" style="padding:30px 0">
+            <div>
+               <h3 class="text">We’d love to hear from you!</h3>
+               <h4>Please take a moment to leave us a review.</h4>
+               <button class="button review-button block" on="tap:AMP.setState({ currentPage: 'birdeye-rating' })">Review us on BirdEye</button>
+               <button class="button review-button block google-button" on="tap:AMP.setState({ currentPage: 'google' })">Review us on Google</button>
+               <p>If your experience wasn’t great, we want to make it right.</p>
+               <button class="button contact-button block" on="tap:AMP.setState({ currentPage: 'contact-us' })">Contact us directly</button>
+            </div>
+         </section>
+         <section hidden
+            [hidden]="currentPage != 'birdeye-rating'" style="padding:20px 0;">
+            <div>
+               <h3>Hi Deepika</h3>
+               <h3>How did we do?</h3>
+               <div style="margin-bottom:20px;">
+                  <input type="radio" name="rating" id="rating-1" value="1" on="change:AMP.setState({ rating: 1 })"/>
+                  <label for="rating-1">1</label>
+                  <input type="radio" name="rating" id="rating-2" value="2" on="change:AMP.setState({ rating: 2 })"/>
+                  <label for="rating-2">2</label>
+                  <input type="radio" name="rating" id="rating-3" value="3" on="change:AMP.setState({ rating: 3 })"/>
+                  <label for="rating-3">3</label>
+                  <input type="radio" name="rating" id="rating-4" value="4" on="change:AMP.setState({ rating: 4 })"/>
+                  <label for="rating-4">4</label>
+                  <input type="radio" name="rating" id="rating-5" value="5" on="change:AMP.setState({ rating: 5 })"/>
+                  <label for="rating-5">5</label>
+               </div>
+               <button on="tap:AMP.setState({ currentPage: 'birdeye-comment' })" class="button button-secondary">Next</button>
+            </div>
+         </section>
+         <section hidden
+            [hidden]="currentPage != 'birdeye-comment'" style="padding:20px 0;">
+            <div style="margin:20px;">
+               <form 
+                  method="post" 
+                  action-xhr="https://push-notification-test-37477.firebaseapp.com/saveUserResponse" 
+                  on="submit-success: AMP.setState({currentPage: 'thanks'})"
+                  custom-validation-reporting="show-all-on-submit"
+                  >
+                  <input type="hidden" name="rating" [value]="rating" />
+                  <input type="textarea" required placeholder="Tell us about your experience.." id="birdeye-comment" name="comment" class="textarea"/>
+                  <div visible-when-invalid="valueMissing" validation-for="birdeye-comment" class="error">Comment should be between 10 to 4000 characters.</div>
+                  <input type="submit" value="Submit" class="button button-secondary"/>
+                  <div submitting class="success">
+                     Collecting your feedback...
+                  </div>
+                  <div submit-success class="success">
+                     <template type="amp-mustache">
+                        <p>Thanks for taking out your time.We have collected your feedback successfully.</p>
+                        <p>Your rating: {{rating}}</p>
+                        <p>Your comment: {{comment}}</p>
+                     </template>
+                  </div>
+                  <div submit-error class="error">
+                     <template type="amp-mustache">
+                        Some error occured. It's not you, it's us. Please try after some time.
+                     </template>
+                  </div>
+               </form>
+            </div>
+         </section>
+         <section hidden
+            [hidden]="currentPage != 'google'" style="padding:20px 0;">
+            <div>
+               <h3>Pennsylvania Center for Dental Excellence</h3>
+               <div style="margin-bottom:10px;display:flex; justify-content:center;">
+                     <div class="img-box" style="margin-right:10px;">
+                           <amp-img width="40" height="40" style="border-radius:50%;" src="https://i.pravatar.cc/40" />
+                        </div>
+                  <div style="display:flex;flex-flow:column;">
+                     <span style="margin-bottom:3px;display:block;">Deepika Guliani</span>
+                     <span style="color:#ccc; font-size:14px;text-align:left;">Posting publicly</span>
+                  </div>
+               </div>
+               <form style="margin:20px;"
+                  method="post" 
+                  action-xhr="https://push-notification-test-37477.firebaseapp.com/saveGoogleResponse" 
+                  on="submit-success: AMP.setState({currentPage: 'thanks'})"
+                  custom-validation-reporting="show-all-on-submit"
+                  >
+                  <input type="textarea" required placeholder="Share details of your experience at this place" id="google-comment" name="comment" class="textarea"/>
+                  <div visible-when-invalid="valueMissing" validation-for="google-comment" class="error">Comment should be between 10 to 4000 characters.</div>
+                  <input type="submit" value="Post" class="button button-secondary"/>
+                  <div submitting class="success">Posting your comment..</div>
+                  <div submit-success class="success">
+                     <template type="amp-mustache">
+                        We have posted your comment !!
+                     </template>
+                  </div>
+                  <div submit-error class="error">
+                     <template type="amp-mustache">
+                        Some error occured. It's not you, it's us. Please try after some time.
+                     </template>
+                  </div>
+               </form>
+            </div>
+         </section>
+         <section hidden
+            [hidden]="currentPage != 'thanks'" style="padding:20px 0;">
+            <div style="margin:20px;">
+               <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
+            </div>
+            <h3>Thanks!</h3>
+            <p>Thanks for letting us know, we value your feedback.</p>
+            <p>Have a great day</p>
+            <p>McDonalds</p>
+            <p>(305) 573-6064</p>
+         </section>
+         <section hidden
+            [hidden]="currentPage != 'contact-us'" style="padding:20px 0;">
+            <div style="margin:20px">
+               <h3>Sorry to hear that! Can you tell us more so we can make it right?</h3>
+               <form 
+                  method="post" 
+                  action-xhr="https://push-notification-test-37477.firebaseapp.com/saveContactResponse" 
+                  on="submit-success: AMP.setState({currentPage: 'thanks'})"
+                  custom-validation-reporting="show-all-on-submit"
+                  >
+                  <input type="textarea" required placeholder="Please share your experience" id="contact-comment" name="comment" class="textarea"/>
+                  <div visible-when-invalid="valueMissing" validation-for="contact-comment" class="error">Comment should be between 10 to 4000 characters.</div>
+                  <input type="submit" value="Send" class="button button-secondary"/>
+                  <div submitting class="success">Posting your comment..</div>
+                  <div submit-success class="success">
+                     <template type="amp-mustache">
+                        We have posted your comment !!
+                     </template>
+                  </div>
+                  <div submit-error class="error">
+                     <template type="amp-mustache">
+                        Some error occured. It's not you, it's us. Please try after some time.
+                     </template>
+                  </div>
+               </form>
+               <p></p>
+            </div>
+         </section>
+      </amp-layout>
+   </body>
+</html>

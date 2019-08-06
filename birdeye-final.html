@@ -1,0 +1,139 @@
+<!doctype html>
+<html ⚡4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+  <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <style amp-custom>
+    body {
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin: 1rem;
+    }
+    .review {
+     	text-align: center; 
+    }
+    .success {
+        color: green; 
+    }
+    .error {
+      color: red;
+    }
+    .button {
+      background-color: #eee;
+      color: #999;
+      cursor: default;
+      width: 315px;
+      height: 55px;
+      font-size: 18px;
+      line-height: 22.5px;
+      padding: 0;
+      background: #1976d2;
+      border-radius: 2px;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+      border: medium none;
+      min-height: 26px;
+      text-transform: none;
+      flex: 2 1 200px;
+      margin: auto;
+      order: 2;
+      margin-top: 30px;
+    }
+    .text {
+      margin-bottom: 20px;
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #212121;
+    }
+    .textarea {
+      border: 1px solid;
+      padding: 25px 10px 10px;
+      width: 100%;
+      border-radius: 2px;
+      color: #212121;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 25px;
+      box-sizing: border-box;
+      font-family: "Roboto", arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+    <amp-layout layout="responsive" width="300" height="100" class="review">
+      <section
+      [hidden]="currentPage != 0">
+        <div>
+          <h3 class="text">How did we do?</h3>
+          <input type="radio" name="rating" id="rating-1" value="1" on="change:AMP.setState({ currentPage: 0, rating: 1 })"/>
+          <label for="rating-1">1</label>
+
+          <input type="radio" name="rating" id="rating-2" value="2" on="change:AMP.setState({ currentPage: 0, rating: 2 })"/>
+          <label for="rating-2">2</label>
+
+          <input type="radio" name="rating" id="rating-3" value="3" on="change:AMP.setState({ currentPage: 0, rating: 3 })"/>
+          <label for="rating-3">3</label>
+
+          <input type="radio" name="rating" id="rating-4" value="4" on="change:AMP.setState({ currentPage: 0, rating: 4 })"/>
+          <label for="rating-4">4</label>
+
+          <input type="radio" name="rating" id="rating-5" value="5" on="change:AMP.setState({ currentPage: 0, rating: 5 })"/>
+          <label for="rating-5">5</label>
+        </div>
+        <button on="tap:AMP.setState({ currentPage: 1 })" class="button button-secondary">Next</button>
+      </section>
+
+      <section hidden
+      [hidden]="currentPage != 1">
+        <!-- <button on="tap:AMP.setState({ currentPage: 2 })" class="button button-secondary">Next</button> -->
+        <h3 class="text">Please tell us in a few words how we did.</h3>
+
+        <form method="post" action-xhr="https://push-notification-test-37477.firebaseapp.com/saveUserResponse">
+          <input type="hidden" name="rating" [value]="rating" />
+          <input type="textarea" placeholder="Tell us about your experience.." name="comment" class="textarea"/>
+          <input type="submit" value="Submit" class="button button-secondary"/>
+          <div submitting class="success">
+              Collecting your feedback...
+            </div>
+            <div submit-success class="success">
+              <template type="amp-mustache">
+                <p>
+                  Thanks for taking out your time.
+                  We have collected your feedback successfully.
+                </p>
+                <p>
+                  Your rating: {{rating}}
+                </p>
+                <p>
+                  Your comment: {{comment}}
+                </p>
+              </template>
+            </div>
+            <div submit-error class="error">
+              <template type="amp-mustache">
+                Some error occured. It's not you, it's us. Please try after some time.
+              </template>
+            </div>
+        </form>
+      </section>
+
+      <section hidden
+      [hidden]="currentPage != 2">
+        <div>
+          <h3>Thanks for submitting your response !!!!</h3>
+        </div>
+      </section>
+  </amp-layout>
+</body>
+</html>

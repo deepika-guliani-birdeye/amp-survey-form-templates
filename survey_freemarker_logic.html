@@ -1,0 +1,595 @@
+<!doctype html>
+<html ⚡4email>
+   <head>
+      <meta charset="utf-8">
+       <script async src="https://cdn.ampproject.org/v0.js"></script>
+       <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+       <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+       <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+       <style amp4email-boilerplate>body{visibility:hidden}</style>
+    </head>
+    <body>
+        <amp-layout layout="responsive" width="1" height="1" class="review">
+            <div class="logo-wrap">
+                <h1 class="logo-heading">${(surveyData.businessName)!}</h1>
+            </div>
+            <form 
+                class="form" 
+                method="post" 
+                action-xhr="https://push-notification-test-37477.firebaseapp.com/saveSurvey"
+                custom-validation-reporting="show-all-on-submit"
+                on="submit-success: AMP.setState({currentPage: 'thanks'})"
+            >
+            <#assign states = [{
+                "title": "Alabama",
+                "abbreviation": "AL"
+            },
+            {
+                "title": "Alaska",
+                "abbreviation": "AK"
+            },
+            {
+                "title": "American Samoa",
+                "abbreviation": "AS"
+            },
+            {
+                "title": "Arizona",
+                "abbreviation": "AZ"
+            },
+            {
+                "title": "Arkansas",
+                "abbreviation": "AR"
+            },
+            {
+                "title": "California",
+                "abbreviation": "CA"
+            },
+            {
+                "title": "Colorado",
+                "abbreviation": "CO"
+            },
+            {
+                "title": "Connecticut",
+                "abbreviation": "CT"
+            },
+            {
+                "title": "Delaware",
+                "abbreviation": "DE"
+            },
+            {
+                "title": "District Of Columbia",
+                "abbreviation": "DC"
+            },
+            {
+                "title": "Federated States Of Micronesia",
+                "abbreviation": "FM"
+            },
+            {
+                "title": "Florida",
+                "abbreviation": "FL"
+            },
+            {
+                "title": "Georgia",
+                "abbreviation": "GA"
+            },
+            {
+                "title": "Guam",
+                "abbreviation": "GU"
+            },
+            {
+                "title": "Hawaii",
+                "abbreviation": "HI"
+            },
+            {
+                "title": "Idaho",
+                "abbreviation": "ID"
+            },
+            {
+                "title": "Illinois",
+                "abbreviation": "IL"
+            },
+            {
+                "title": "Indiana",
+                "abbreviation": "IN"
+            },
+            {
+                "title": "Iowa",
+                "abbreviation": "IA"
+            },
+            {
+                "title": "Kansas",
+                "abbreviation": "KS"
+            },
+            {
+                "title": "Kentucky",
+                "abbreviation": "KY"
+            },
+            {
+                "title": "Louisiana",
+                "abbreviation": "LA"
+            },
+            {
+                "title": "Maine",
+                "abbreviation": "ME"
+            },
+            {
+                "title": "Marshall Islands",
+                "abbreviation": "MH"
+            },
+            {
+                "title": "Maryland",
+                "abbreviation": "MD"
+            },
+            {
+                "title": "Massachusetts",
+                "abbreviation": "MA"
+            },
+            {
+                "title": "Michigan",
+                "abbreviation": "MI"
+            },
+            {
+                "title": "Minnesota",
+                "abbreviation": "MN"
+            },
+            {
+                "title": "Mississippi",
+                "abbreviation": "MS"
+            },
+            {
+                "title": "Missouri",
+                "abbreviation": "MO"
+            },
+            {
+                "title": "Montana",
+                "abbreviation": "MT"
+            },
+            {
+                "title": "Nebraska",
+                "abbreviation": "NE"
+            },
+            {
+                "title": "Nevada",
+                "abbreviation": "NV"
+            },
+            {
+                "title": "New Hampshire",
+                "abbreviation": "NH"
+            },
+            {
+                "title": "New Jersey",
+                "abbreviation": "NJ"
+            },
+            {
+                "title": "New Mexico",
+                "abbreviation": "NM"
+            },
+            {
+                "title": "New York",
+                "abbreviation": "NY"
+            },
+            {
+                "title": "North Carolina",
+                "abbreviation": "NC"
+            },
+            {
+                "title": "North Dakota",
+                "abbreviation": "ND"
+            },
+            {
+                "title": "Northern Mariana Islands",
+                "abbreviation": "MP"
+            },
+            {
+                "title": "Ohio",
+                "abbreviation": "OH"
+            },
+            {
+                "title": "Oklahoma",
+                "abbreviation": "OK"
+            },
+            {
+                "title": "Oregon",
+                "abbreviation": "OR"
+            },
+            {
+                "title": "Palau",
+                "abbreviation": "PW"
+            },
+            {
+                "title": "Pennsylvania",
+                "abbreviation": "PA"
+            },
+            {
+                "title": "Puerto Rico",
+                "abbreviation": "PR"
+            },
+            {
+                "title": "Rhode Island",
+                "abbreviation": "RI"
+            },
+            {
+                "title": "South Carolina",
+                "abbreviation": "SC"
+            },
+            {
+                "title": "South Dakota",
+                "abbreviation": "SD"
+            },
+            {
+                "title": "Tennessee",
+                "abbreviation": "TN"
+            },
+            {
+                "title": "Texas",
+                "abbreviation": "TX"
+            },
+            {
+                "title": "Utah",
+                "abbreviation": "UT"
+            },
+            {
+                "title": "Vermont",
+                "abbreviation": "VT"
+            },
+            {
+                "title": "Virgin Islands",
+                "abbreviation": "VI"
+            },
+            {
+                "title": "Virginia",
+                "abbreviation": "VA"
+            },
+            {
+                "title": "Washington",
+                "abbreviation": "WA"
+            },
+            {
+                "title": "West Virginia",
+                "abbreviation": "WV"
+            },
+            {
+                "title": "Wisconsin",
+                "abbreviation": "WI"
+            },
+            {
+                "title": "Wyoming",
+                "abbreviation": "WY"
+            }]>
+            <#list surveyData.pages as page>
+                <#assign pageIndex = page?index >
+                <div>${(pageIndex)!}</div>
+                <#list page.questions as question>
+
+                    <#-- RADIO -->
+                    <#if question.type == "radio">
+                    <div class="question-wrap radio-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="options-wrap"></div>
+                            <#list question.choices as choice>
+                                <input class="styled-checkbox" type="radio" name="${(question.id)!}" value="${(choice.id)!}" required />
+                                <div class="pseudo-wrap">
+                                    <span class="before"></span>
+                                    <span class="after"></span>
+                                    <label for="${(question.id)!}">${(choice.title)!}</label>
+                                </div>
+                            </#list>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- RADIO -->
+
+
+                    <#-- CHECKBOX -->
+                    <#if question.type == "checkbox">
+                    <div class="question-wrap radio-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="options-wrap">
+                            <#list question.choices as choice>
+                                <input class="styled-checkbox" type="checkbox" name="${(question.id)!}" value="${(choice.id)!}" required />
+                                <div class="pseudo-wrap">
+                                    <span class="before"></span>
+                                    <span class="after"></span>
+                                    <label for="${(question.id)!}">${(choice.title)!}</label>
+                                </div>
+                            </div>
+                            </#list>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- CHECKBOX -->
+
+                    <#-- DROPDOWN -->
+                    <#if question.type == "dropdown">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="options-wrap">
+                            <div class="select-wrap">
+                                <select name="${(question.id)!}">
+                                <#list question.choices as choice>
+                                    <option value="${(choice.id)!}">${(choice.title)!}</option>
+                                </#list>
+                                </select>
+                                <span class="down-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- DROPDOWN -->
+
+                    <#-- SHORT ANSWER/TEXT -->
+                    <#if question.type == "text">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                                <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="options-wrap">
+                            <input type="textarea" required placeholder="Enter your response" id="${(question.id)!}" name="${(question.id)!}" class="textarea"/>
+                            <div visible-when-invalid="valueMissing" validation-for="${(question.id)!}" class="error">This is a required question</div>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- END SHORT ANSWER/TEXT -->
+
+                    <#-- PARAGRAPH/TEXTAREA -->
+                    <#if question.type == "textarea">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                                <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="options-wrap">
+                            <input type="textarea" required placeholder="Tell us about your experience.." id="${(question.id)!}" name="${(question.id)!}" class="textarea"/>
+                            <div visible-when-invalid="valueMissing" validation-for="${(question.id)}" class="error">This is a required question</div>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- END PARAGRAPH/TEXTAREA -->
+
+
+                    <#-- RATING -->
+                    <#if question.type == "rating">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                                <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div style= "margin: 0 20px;">
+                            <div class="rating-bubbles pl-0">
+                                    <span class="rating-min">
+                                        <span class="rating-min-text">${(question.minimumRateDescription)!}</span>
+                                    </span>
+                                    <span class="rating-max">
+                                        <span class="rating-max-text">${(question.maximumRateDescription)!}</span>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <#list question.choices as choice>
+                            <div class="options-wrap radio-wrap rate-wrap"></div>
+                                <input type="radio" class="styled-checkbox" name="${(question.id)!}" id="${(choice.id)!}" value="${(choice.id)!}" />
+                                <div class="pseudo-wrap">
+                                    <span class="before"></span>
+                                    <span class="after"></span>
+                                    <label for="${(choice.id)!}">${(choice.title)!}</label>
+                                </div>
+                            </div>
+                            </#list>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- END RATING -->
+
+                    <#-- NPS -->
+                    <#if question.type == "nps">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                                <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div style= "margin: 0 20px;">
+                            <div class="rating-bubbles pl-0">
+                                    <span class="rating-min">
+                                        <span class="rating-min-text">${(question.minimumRateDescription)!}</span>
+                                    </span>
+                                    <span class="rating-max">
+                                        <span class="rating-max-text">${(question.maximumRateDescription)!}</span>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <#list question.choices as choice>
+                            <div class="options-wrap radio-wrap rate-wrap"></div>
+                                <input type="radio" class="styled-checkbox" name="${(question.id)!}" id="${(choice.id)!}" value="${(choice.id)!}" />
+                                <div class="pseudo-wrap">
+                                    <span class="before"></span>
+                                    <span class="after"></span>
+                                    <label for="${(choice.id)!}">${(choice.title)!}</label>
+                                </div>
+                            </div>
+                            </#list>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- END NPS -->
+
+                    <#-- MATRIX RADIO -->
+                    <#if question.type == "matrixradio">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="rating-bubbles">
+                            <#list question.choices as choice>
+                                <span class="rating-text">${(choice.title)!}</span>
+                            </#list>
+                        </div>
+                        <#list question.rows as row>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">${(row.title)!}</span>
+                                <div class="radio-option-wrap d-flex">
+                                <div class="options-wrap radio-wrap">
+                                    <input class="styled-checkbox" type="radio" id="radio1" name="quest-8" value="radio1">
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="radio1"></label>
+                                    </div>
+                                </div>
+                            </span>
+                        </#list>
+                    </div>
+                    </#if>
+                    <#-- END MATRIX RADIO -->
+
+                    <#-- MATRIX RATING-->
+                    <#if question.type == "matrixrating">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="rating-bubbles">
+                            <span class="rating-min">
+                                <span class="rating-min-text">${(question.minimumRateDescription)!}</span>
+                            </span>
+                            <span class="rating-max">
+                                <span class="rating-max-text">${(question.maximumRateDescription)!}</span>
+                            </span>
+                        </div>
+                        <#list question.rows as row>
+                        <div class="options-wrap matrix-wrap">
+                            <span class="matrix-title">${(row.title)!}</span>
+                            <span>
+                                <#list question.minimumValue..question.maximumValue as value>
+                                    <input class="matrix-radio" type="radio" name="${(row.id)!}" id="${(row.id)!}" value=${(value)!}/>
+                                    <label for="${(row.id)!}">${(value)!}</label>
+                                </#list>
+                            </span>
+                        </div>
+                        </#list>
+                    </div>
+                    </#if>
+                    <#-- END MATRIX RATING -->
+
+                    <#-- MATRIX DROPDOWN-->
+                    <#if question.type == "matrixdropdown">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <#list question.rows as row>
+                            <div class="options-wrap matrix-dropdown">
+                                <span class= "label-wrap">${(row.title)!}</span>
+                                <span class="select-wrap">
+                                    <select name="${(row.id)!}">
+                                        <#list question.choices as choice>
+                                            <option value="${(choice.id)!}">${(choice.title)!}</option>
+                                        </#list>
+                                    </select>
+                                    <span class="down-arrow"></span>
+                                </span>
+                        </#list>
+                    </div>
+                    </#if>
+                    <#-- END MATRIX DROPDOWN -->
+
+                    <#-- CONTACT -->
+                    <#if question.type == "contact">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                        <div class="main-contact">
+                            <#list question.rows as row>
+                                <#if !row.hidden && row.visible>
+                                <div class="contact-wrapper">
+                                    <div class="contact-input-wrap">
+                                    <#if row.type == "text">
+                                        <label>${(row.title)!}</label>
+                                        <input required placeholder=" " type="text"
+                                                class="floating-input" data-qid="382936"
+                                                value="" id="first" name="${(row.id)}" />
+                                    </#if>
+
+                                    <#if row.type == "email">
+                                        <label>${(row.title)!}</label>
+                                        <input required placeholder="" type="email"
+                                            class="floating-input undefined" data-qid="382936"
+                                            value="" id="email"  name="${(row.id)}" />
+                                    </#if>
+
+                                    <#if row.type == "phone">
+                                        <label>${(row.title)!}</label>
+                                        <input required placeholder="" type="tel"
+                                            class="floating-input undefined" data-qid="382936"
+                                            value="" id="tel"  name="${(row.id)}" />
+                                    </#if>
+
+                                    <#if row.type == "country">
+                                        <label>${(row.title)!}</label>
+                                        <input required placeholder=" " type="text"
+                                                class="floating-input" data-qid="382936"
+                                                value="USA" id="first" name="${(row.id)}" />
+                                    </#if>
+
+                                    <#if row.type == "state">
+                                        <div class="dropdown-wrapper">
+                                            <div>
+                                                <span class="dropdown-menu active">
+                                                <label class="">select state *</label></span>
+                                                <div class="select-wrap">
+                                                    <select name="state" id="state">
+                                                        <#list states as state>
+                                                            <option value="${(state.abbreviation)}">${(state.title)}</option>
+                                                        </#list>
+                                                    </select>
+                                                    <span class="down-arrow"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </#if>
+
+                                    <#if row.type == "zipcode">
+                                        <label class="">${(row.title)!} *</label></span>
+                                        <input required placeholder=" " id="zipcode" type="tel"
+                                        class="floating-input" data-qid="382936"
+                                        value="" name="zip">
+                                    </#if>
+                                    </div>
+                                </div>
+                                </#if>
+                            </#list>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- END CONTACT -->
+
+                    <#-- DATETIME -->
+                    <#if question.type == "datetime">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- END DATETIME -->
+
+                    <#-- LABEL/HELPTEXT -->
+                    <#if question.type == "label">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                        </div>
+                    </div>
+                    </#if>
+                    <#-- END LABEL -->
+
+                </#list>
+            </#list>
+            </form>
+        </amp-layout>
+    </body>
+</html>

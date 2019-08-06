@@ -1,0 +1,411 @@
+<!doctype html>
+<html ⚡4email>
+   <head>
+      <meta charset="utf-8">
+       <script async src="https://cdn.ampproject.org/v0.js"></script>
+       <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+       <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+       <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+       <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+       <style amp4email-boilerplate>body{visibility:hidden}</style>
+       <style amp-custom>
+         body {
+           font-size: 16px;
+         }
+        .form {
+          overflow: scroll;
+          max-height: 600px;
+          padding: 30px;
+        }
+        select,.textarea,input {
+          height: 54px;
+          padding: 17px 15px;
+          color: #555;
+          border: 1px solid #ccc;
+          position: relative;
+          display: block;
+          cursor: pointer;
+          background-color: #fff;
+          width: 100%;
+          /* -webkit-appearance: none;
+          appearance: none; */
+        }
+        input:focus , select:focus, .textarea:focus{
+          outline: 0;
+        }
+        select {
+          height: 54px;
+          border:0;
+        }
+        .select-wrap {
+          border: 1px solid #ccc;
+          position: relative;
+        }
+        .down-arrow {
+          border: solid #555;
+          border-width: 0 3px 3px 0;
+          display: inline-block;
+          padding: 3px;
+          transform: rotate(45deg) translateY(-50%);
+          -webkit-transform: rotate(45deg) translateY(-50%);
+          position: absolute;
+          right: 15px;
+          display: none;
+          top: 50%;
+        }
+        input {
+          height: auto;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        span {
+          display: inline-block;
+        }
+         .question-wrap {
+           margin-bottom: 30px;
+         }
+         .question-title span {
+           margin-bottom: 20px;
+           display:block;
+           text-transform: capitalize;
+         }
+         .options-wrap {
+           margin:0 20px 20px;
+           position: relative;
+         }
+         .styled-checkbox {
+          opacity: 0;
+          position: absolute;
+          z-index: -1;
+          left: 0;
+          width: auto;
+         }
+
+        .styled-checkbox + .pseudo-wrap {
+          position: relative;
+          cursor: pointer;
+        }
+        .styled-checkbox + .pseudo-wrap label {
+          padding-left: 35px;
+        }
+        .pseudo-wrap .before {
+          content: '';
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: text-top;
+          width: 20px;
+          height: 20px;
+          border: 1px solid #999;
+          margin-top: -1px;
+          position: absolute;
+          z-index: -1;
+        }
+        .radio-wrap .pseudo-wrap .before{
+          border-radius:50%;
+        }
+        .styled-checkbox:checked + .pseudo-wrap .before {
+          background: #1565c0;
+        }
+        .radio-wrap .styled-checkbox:checked + .pseudo-wrap .before {
+          background: #bbdefb;
+          border: 1px solid #1976d2;
+        }
+        .styled-checkbox + .pseudo-wrap .after {
+          content: '';
+          position: absolute;
+          left: 5px;
+          top: 9px;
+          width: 5px;
+          height: 12px;
+          border: solid #fff;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg) translate(-50%, -50%);
+          display: none;
+        }
+        .styled-checkbox:checked + .pseudo-wrap .after{
+          display: block;
+        }
+        .radio-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+          width: 10px;
+          height: 10px;
+          background: #1976d2;
+          border-radius: 50%;
+          border: 0;
+          transform: none;
+          top: 5px;
+          left: 5px;
+          display: block;
+        }
+        .matrix-wrap label {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          padding: 5px 3px;
+          border: solid 2px #ccc;
+          border-radius: 50%;
+          text-align: center;
+        }
+        input.matrix-radio {
+          display: none;
+        }
+        input.matrix-radio:checked + label {
+          color:#fff;
+          background: #308dff;
+          border-color: #308dff;
+        }
+        .label-wrap {
+          margin-right: 15px;
+        }
+        .matrix-wrap, .matrix-dropdown {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .rating-bubbles {
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          padding-left: 31%;
+          margin-bottom: 20px;
+          width: 100%;
+        }
+        .matrix-title {
+          margin-right: 40px;
+        }
+        .matrix-title + span, .label-wrap + span {
+          width: 65.7%;
+          display: inline-flex;
+          justify-content: space-between;
+        }
+        .main-contact {
+          padding: 0 20px;
+        }
+        .contact-input-wrap {
+          margin-bottom: 20px;
+        }
+        .contact-input-wrap label {
+          display: block;
+          margin-bottom: 12px;
+          text-transform: capitalize;
+        }
+        .btn {
+          font-size: 18px;
+          color: #fff;
+          background: #1976d2;
+          border-radius: 2px;
+          text-align: center;
+          display: inline-block;
+          padding: 17px 37px;
+          cursor: pointer;
+          height: 54px;
+          width: auto;
+        }
+        .btn-wrap {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .question-title em {
+          color: #db4437;
+        }
+        .logo-heading {
+          text-align: center;
+          padding: 30px;
+          background: #fff;
+          font-size: 30px;
+          color: #212121;
+          font-weight: 700;
+          border-bottom: 5px solid #005dab;
+        }
+        .rate-wrap {
+          margin: 0;
+        }
+        .rate-wrap .pseudo-wrap .before {
+          top: 26px;
+        }
+        .rate-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+          top: 31px;
+          left: 5px;
+        }
+        .rate-wrap .styled-checkbox + .pseudo-wrap label {
+          padding-left: 0;
+          text-align: center;
+          padding-bottom: 28px;
+          width: 20px;
+          display: inline-block;
+        }
+        .d-flex {
+          display: flex;
+          justify-content: space-between;
+        }
+        .pl-0 {
+          padding:0;
+        }
+        .error {
+          margin: 8px 0 3px;
+        }
+        .date-time-wrapper, .date-wrap{
+          display: flex;
+          align-items:center;
+        }
+        .date-wrap {
+          margin: 0 10px 0 20px;
+        }
+        .date-wrap span {
+          margin-right: 15px;
+        }
+</style>
+   </head>
+   <body>
+     <amp-state id="survey">
+            <script type="application/json">
+                {
+                    "completed" : false
+                }
+            </script>
+    </amp-state>
+      <amp-layout layout="responsive" width="1" height="1" class="review">
+          <div class="logo-wrap">
+              <h1 class="logo-heading">Social Stress</h1>
+          </div>
+
+            <form 
+                class="form" 
+                method="post" 
+                action-xhr="https://push-notification-test-37477.firebaseapp.com/saveSurvey"
+                custom-validation-reporting="show-all-on-submit"
+                on="submit-success: AMP.setState({currentPage: 'thanks'})"
+            >
+                <input type="hidden" name="surveyId" [value]="1234567" />
+
+                <!-- QUESTION 1 -->
+                <section
+                    [hidden]="currentPage != '1'">
+                    <div class="question-wrap radio-wrap">
+                        <div class="question-title">
+                            <span> 1. Multiple choice <em>*</em> </span>
+                        </div>
+                        <div class="options-wrap">
+                            <input class="styled-checkbox" type="radio" id="opt4" name="quest-1" value="opt1" required on="change:AMP.setState({ currentPage: 'home', quest1: 'opt1' })" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="opt4">skip to 3</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap">
+                            <input class="styled-checkbox" type="radio" id="opt5" name="quest-1" value="opt2" required on="change:AMP.setState({ currentPage: 'home', quest1: 'opt2' })"/>
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="opt5">skip to 4</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap">
+                            <input class="styled-checkbox" type="radio" id="opt6" name="quest-1" value="opt3" required on="change:AMP.setState({ currentPage: 'home', quest1: 'opt3' })"/>
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="opt6">skip to 5</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="button contact-button block" on="tap:AMP.setState({ currentPage: '2' })">Next</button>
+                </section>
+                <!-- END QUESTION 1-->
+
+                <!-- QUESTION 2 -->
+                <section hidden [hidden]="quest1 != 'opt1' && currentPage != '2'">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span> 3. Dropdown <em>*</em></span>
+                        </div>
+                        <div class="options-wrap">
+                            <div class="select-wrap">
+                            <select name="ques-3">
+                                <option value="ch1">Answer choice 1</option>
+                                <option value="ch2">Answer choice 2</option>
+                                <option value="ch3">Answer choice 3</option>
+                                <option value="ch4">Answer choice 4</option>
+                            </select>
+                            <span class="down-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button contact-button block" on="tap:AMP.setState({ completed: true })">Next</button>
+                </section>
+                <!-- END QUESTION 2 -->
+
+                <!-- QUESTION 3 -->
+                <section hidden [hidden]="quest1 != 'opt2' && currentPage != '2'">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span> 4. Dropdown <em>*</em></span>
+                        </div>
+                        <div class="options-wrap">
+                            <div class="select-wrap">
+                            <select name="ques-3">
+                                <option value="ch1">Answer choice 1</option>
+                                <option value="ch2">Answer choice 2</option>
+                                <option value="ch3">Answer choice 3</option>
+                                <option value="ch4">Answer choice 4</option>
+                            </select>
+                            <span class="down-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END QUESTION 3 -->
+
+                <!-- QUESTION 4 -->
+                <section hidden [hidden]="quest1 != 'opt3' && currentPage != '2'">
+                    <div class="question-wrap">
+                        <div class="question-title">
+                            <span> 5. Dropdown <em>*</em></span>
+                        </div>
+                        <div class="options-wrap">
+                            <div class="select-wrap">
+                            <select name="ques-3">
+                                <option value="ch1">Answer choice 1</option>
+                                <option value="ch2">Answer choice 2</option>
+                                <option value="ch3">Answer choice 3</option>
+                                <option value="ch4">Answer choice 4</option>
+                            </select>
+                            <span class="down-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END QUESTION 4 -->
+
+                <section hidden [hidden]="completed != true">
+                    <div class="btn-wrap">
+                        <input class="btn" type="submit" value="Submit"></input>
+                    </div>
+                </section>
+
+                <div submit-success>
+                    <template type="amp-mustache">
+                        Thank you for filling the survey !!!
+                    </template>
+                </div>
+        
+                <div submit-error>
+                    <template type="amp-mustache">
+                        Oops! something went wrong
+                    </template>
+                </div>
+            </form>
+
+           
+            <section hidden [hidden]="completed != true" style="padding:20px 0; text-align: center;">
+                <div style="margin:20px;">
+                <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
+                </div>
+                <h3>Thank you for filling the survey !!!</h3>
+            </section>
+       
+      </amp-layout>
+   </body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html ⚡4email>
+   <head>
+      <meta charset="utf-8">
+      <script async src="https://cdn.ampproject.org/v0.js"></script>
+      <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+      <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+      <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+      <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+      <style amp4email-boilerplate>body{visibility:hidden}</style>
+      <style amp-custom>
+         body {
+         	padding-bottom: 40px;
+         }
+         h1 {
+         	margin: 1rem;
+         }
+         .button{
+            font-size: 18px;
+            color: #fff;
+            background: #1976d2;
+            border-radius: 2px;
+            text-align: center;
+            display: inline-block;
+            padding: 17px 37px;
+            cursor: pointer;
+            height: 54px;
+         }
+         .full-width{
+            width:100%;
+            padding:10px;
+            font-size:14px;
+         }
+         *{
+            box-sizing: border-box;
+         }
+         h3{
+            font-weight:400;
+         }
+         .radio-wrap{
+            margin:10px;
+         }
+         .radio-wrap label{
+            margin-left:7px;
+         }
+      </style>
+   </head>
+   <body>
+      <amp-layout layout="responsive" width="1" height="1" class="review">
+         <section>
+            <div class="common-header" style="padding: 15px 20px; text-align:center; color:#212121; border-bottom:5px solid #005dab;
+            font-size: 30px;font-weight: 700;">
+            McDonalds
+            </div>
+         </section>
+         <section [hidden]="currentPage != 1" style="padding:30px;">
+            <div>
+                <div>
+                    <h3>1. Please share with us what made your experience at TLC Laser Eye Centers great.</h3>
+                    <input class="full-width" type="textarea" required placeholder="Enter your response" name="ques-1" class="textarea"/>
+                </div>
+                <div>
+                    <h3>2. How likely are you to recommend us to your family and friends test?</h3>
+                    <div style="margin-bottom:20px;">
+                        <div class="radio-wrap">
+                           <input type="radio" name="rating" id="rating-1" value="1" on="change:AMP.setState({ currentPage: 1, rating: 1 })"/>
+                           <label for="rating-1">1</label>
+                        </div>
+                        <div class="radio-wrap">
+                           <input type="radio" name="rating" id="rating-2" value="2" on="change:AMP.setState({ currentPage: 1, rating: 2 })"/>
+                           <label for="rating-2">2</label>
+                        </div>
+                        <div class="radio-wrap">
+                           <input type="radio" name="rating" id="rating-3" value="3" on="change:AMP.setState({ currentPage: 1, rating: 3 })"/>
+                           <label for="rating-3">3</label>
+                        </div>
+                        <div class="radio-wrap">
+                           <input type="radio" name="rating" id="rating-4" value="4" on="change:AMP.setState({ currentPage: 1, rating: 4 })"/>
+                           <label for="rating-4">4</label>
+                        </div>
+                        <div class="radio-wrap">
+                           <input type="radio" name="rating" id="rating-5" value="5" on="change:AMP.setState({ currentPage: 1, rating: 5 })"/>
+                           <label for="rating-5">5</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center;">
+               <button class="button contact-button block" on="tap:AMP.setState({ currentPage: 2 })">Next</button>
+            </div>
+         </section>
+         <section hidden
+            [hidden]="currentPage != 2" style="padding:30px;">
+            <div style="margin-bottom:20px;">
+                    <form 
+                       method="post" 
+                       action-xhr="https://push-notification-test-37477.firebaseapp.com/saveUserResponse"
+                       >
+                       <input type="hidden" name="rating" [value]="rating" />
+                       <h3>3. Which store did you visit</h3>
+                       <input class="full-width" type="textarea" required placeholder="Enter your response." id="birdeye-comment" name="comment" class="textarea"/>
+                       <div submitting class="success">
+                          Collecting your feedback...
+                       </div>
+                       <div submit-success class="success">
+                          <template type="amp-mustache">
+                             <p>Thanks for taking out your time.We have collected your feedback successfully.</p>
+                             <p>Your rating: {{rating}}</p>
+                             <p>Your comment: {{comment}}</p>
+                          </template>
+                       </div>
+                       <div submit-error class="error">
+                          <template type="amp-mustache">
+                             Some error occured. It's not you, it's us. Please try after some time.
+                          </template>
+                       </div>
+                    </form>
+                 </div>
+            <div style="text-align:center;">
+               <button on="tap:AMP.setState({ currentPage: 1 })" class="button button-secondary">Previous</button>
+               <button on="tap:AMP.setState({ currentPage: 3 })" class="button button-secondary">Submit</button>
+            </div>
+         </section>
+         <section hidden
+            [hidden]="currentPage != 3" style="padding:30px;">
+            <div style="text-align:center;font-size: 24px;color: #212121;">
+                Thank you for taking the survey!
+            </div>
+         </section>
+      </amp-layout>
+   </body>
+</html>

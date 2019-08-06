@@ -1,0 +1,46 @@
+<!doctype html>
+<html ⚡4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <style amp-custom>
+    body {
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin: 1rem;
+    }
+    .button {
+      display: inline-block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h3>How was your experience?</h3>
+  <h4>
+    <p>Thank you for choosing us! Please take a moment to leave us a review. Your responses will help us serve you better in the future.</p>
+  </h4>
+  <form id="myform" method="post" action-xhr="https://push-notification-test-37477.firebaseapp.com/saveSource">
+    <div>
+      <input type="radio" class="button" id="google" name="source" value="google" on="change:myform.submit">
+    </div>
+    <div>
+        <input type="radio" class="button" id="yelp" name="source" value="yelp" on="change:myform.submit">
+      </div>
+    <div submit-success>
+      <template type="amp-mustache">
+        Success! Thanks {{source}} with onchange
+      </template>
+    </div>
+    <div submit-error>
+      <template type="amp-mustache">
+        Errors! Thanks {{source}} with on change
+      </template>
+    </div>
+  </form>
+</body>
+</html>
