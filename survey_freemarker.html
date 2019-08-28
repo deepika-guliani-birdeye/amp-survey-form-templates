@@ -7,6 +7,253 @@
        <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
        <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
        <style amp4email-boilerplate>body{visibility:hidden}</style>
+        <style amp-custom>
+            body {
+                font-size: 16px;
+            }
+            .form {
+                overflow: scroll;
+                max-height: 600px;
+                padding: 30px;
+            }
+            select,.textarea,input {
+                height: 54px;
+                padding: 17px 15px;
+                color: #555;
+                border: 1px solid #ccc;
+                position: relative;
+                display: block;
+                cursor: pointer;
+                background-color: #fff;
+                width: 100%;
+                /* -webkit-appearance: none;
+                appearance: none; */
+            }
+            input:focus , select:focus, .textarea:focus{
+                outline: 0;
+            }
+            select {
+                height: 54px;
+                border:0;
+            }
+            .select-wrap {
+                border: 1px solid #ccc;
+                position: relative;
+            }
+            .down-arrow {
+                border: solid #555;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 3px;
+                transform: rotate(45deg) translateY(-50%);
+                -webkit-transform: rotate(45deg) translateY(-50%);
+                position: absolute;
+                right: 15px;
+                display: none;
+                top: 50%;
+            }
+            input {
+                height: auto;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            span {
+                display: inline-block;
+            }
+            .question-wrap {
+                margin-bottom: 30px;
+            }
+            .question-title span {
+                margin-bottom: 20px;
+                display:block;
+                text-transform: capitalize;
+            }
+            .options-wrap {
+                margin:0 20px 20px;
+                position: relative;
+            }
+            .styled-checkbox {
+                opacity: 0;
+                position: absolute;
+                z-index: -1;
+                left: 0;
+                width: auto;
+            }
+
+            .styled-checkbox + .pseudo-wrap {
+                position: relative;
+                cursor: pointer;
+            }
+            .styled-checkbox + .pseudo-wrap label {
+                padding-left: 35px;
+            }
+            .pseudo-wrap .before {
+                content: '';
+                margin-right: 10px;
+                display: inline-block;
+                vertical-align: text-top;
+                width: 20px;
+                height: 20px;
+                border: 1px solid #999;
+                margin-top: -1px;
+                position: absolute;
+                z-index: -1;
+            }
+            .radio-wrap .pseudo-wrap .before{
+                border-radius:50%;
+            }
+            .styled-checkbox:checked + .pseudo-wrap .before {
+                background: #1565c0;
+            }
+            .radio-wrap .styled-checkbox:checked + .pseudo-wrap .before {
+                background: #bbdefb;
+                border: 1px solid #1976d2;
+            }
+            .styled-checkbox + .pseudo-wrap .after {
+                content: '';
+                position: absolute;
+                left: 5px;
+                top: 9px;
+                width: 5px;
+                height: 12px;
+                border: solid #fff;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg) translate(-50%, -50%);
+                display: none;
+            }
+            .styled-checkbox:checked + .pseudo-wrap .after{
+                display: block;
+            }
+            .radio-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+                width: 10px;
+                height: 10px;
+                background: #1976d2;
+                border-radius: 50%;
+                border: 0;
+                transform: none;
+                top: 5px;
+                left: 5px;
+                display: block;
+            }
+            .matrix-wrap label {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                padding: 5px 3px;
+                border: solid 2px #ccc;
+                border-radius: 50%;
+                text-align: center;
+            }
+            input.matrix-radio {
+                display: none;
+            }
+            input.matrix-radio:checked + label {
+                color:#fff;
+                background: #308dff;
+                border-color: #308dff;
+            }
+            .label-wrap {
+                margin-right: 15px;
+            }
+            .matrix-wrap, .matrix-dropdown {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .rating-bubbles {
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                padding-left: 31%;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+            .matrix-title {
+                margin-right: 40px;
+            }
+            .matrix-title + span, .label-wrap + span {
+                width: 65.7%;
+                display: inline-flex;
+                justify-content: space-between;
+            }
+            .main-contact {
+                padding: 0 20px;
+            }
+            .contact-input-wrap {
+                margin-bottom: 20px;
+            }
+            .contact-input-wrap label {
+                display: block;
+                margin-bottom: 12px;
+                text-transform: capitalize;
+            }
+            .btn {
+                font-size: 18px;
+                color: #fff;
+                background: #1976d2;
+                border-radius: 2px;
+                text-align: center;
+                display: inline-block;
+                padding: 17px 37px;
+                cursor: pointer;
+                height: 54px;
+                width: auto;
+            }
+            .btn-wrap {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            .question-title em {
+                color: #db4437;
+            }
+            .logo-heading {
+                text-align: center;
+                padding: 30px;
+                background: #fff;
+                font-size: 30px;
+                color: #212121;
+                font-weight: 700;
+                border-bottom: 5px solid #005dab;
+            }
+            .rate-wrap {
+                margin: 0;
+            }
+            .rate-wrap .pseudo-wrap .before {
+                top: 26px;
+            }
+            .rate-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+                top: 31px;
+                left: 5px;
+            }
+            .rate-wrap .styled-checkbox + .pseudo-wrap label {
+                padding-left: 0;
+                text-align: center;
+                padding-bottom: 28px;
+                width: 20px;
+                display: inline-block;
+            }
+            .d-flex {
+                display: flex;
+                justify-content: space-between;
+            }
+            .pl-0 {
+                padding:0;
+            }
+            .error {
+                margin: 8px 0 3px;
+            }
+            .date-time-wrapper, .date-wrap{
+                display: flex;
+                align-items:center;
+            }
+            .date-wrap {
+                margin: 0 10px 0 20px;
+            }
+            .date-wrap span {
+                margin-right: 15px;
+            }
+        </style>
     </head>
     <body>
         <amp-layout layout="responsive" width="1" height="1" class="review">
