@@ -270,9 +270,9 @@
                 custom-validation-reporting="show-all-on-submit"
                 on="submit-success: AMP.setState({currentPage: 'thanks'})"
             >
-            <input type="hidden" name="surveyId" [value]="${(surveyData.surveyId)!}" />
-            <input type="hidden" name="businessId" [value]="${(surveyData.businessId)!}" />
-            <input type="hidden" name="requestId" [value]="${(surveyData.requestId)!}" />
+            <input type="hidden" name="surveyId" [value]="${(surveyData.surveyId?c)!}" />
+            <input type="hidden" name="businessId" [value]="${(surveyData.businessId?c)!}" />
+            <input type="hidden" name="requestId" [value]="${(surveyData.requestId?c)!}" />
             <input type="hidden" name="fromEmail" [value]="${(surveyData.fromEmail)!}" />
             <#assign states = [{
                 "title": "Alabama",
@@ -522,11 +522,11 @@
                         </div>
                         <div class="options-wrap"></div>
                             <#list question.choices as choice>
-                                <input class="styled-checkbox" type="radio" name="${(question.type)!}-${(question.id)!}" value="${(choice.id)!}" required />
+                                <input class="styled-checkbox" type="radio" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" required />
                                 <div class="pseudo-wrap">
                                     <span class="before"></span>
                                     <span class="after"></span>
-                                    <label for="${(question.id)!}">${(choice.title)!}</label>
+                                    <label for="${(question.id?c)!}">${(choice.title)!}</label>
                                 </div>
                             </#list>
                         </div>
@@ -543,11 +543,11 @@
                         </div>
                         <div class="options-wrap">
                             <#list question.choices as choice>
-                                <input class="styled-checkbox" type="checkbox" name="${(question.type)!}-${(question.id)!}" value="${(choice.id)!}" required />
+                                <input class="styled-checkbox" type="checkbox" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" required />
                                 <div class="pseudo-wrap">
                                     <span class="before"></span>
                                     <span class="after"></span>
-                                    <label for="${(question.id)!}">${(choice.title)!}</label>
+                                    <label for="${(question.id?c)!}">${(choice.title)!}</label>
                                 </div>
                             </div>
                             </#list>
@@ -564,9 +564,9 @@
                         </div>
                         <div class="options-wrap">
                             <div class="select-wrap">
-                                <select name="${(question.type)!}-${(question.id)!}">
+                                <select name="${(question.type)!}-${(question.id?c)!}">
                                 <#list question.choices as choice>
-                                    <option value="${(choice.id)!}">${(choice.title)!}</option>
+                                    <option value="${(choice.id?c)!}">${(choice.title)!}</option>
                                 </#list>
                                 </select>
                                 <span class="down-arrow"></span>
@@ -583,8 +583,8 @@
                                 <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
                         </div>
                         <div class="options-wrap">
-                            <input type="textarea" required placeholder="Enter your response" id="${(question.type)!}-${(question.id)!}" name="${(question.type)!}-${(question.id)!}" class="textarea"/>
-                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id)!}" class="error">This is a required question</div>
+                            <input type="textarea" required placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
+                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}" class="error">This is a required question</div>
                         </div>
                     </div>
                     </#if>
@@ -597,8 +597,8 @@
                                 <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
                         </div>
                         <div class="options-wrap">
-                            <input type="textarea" required placeholder="Tell us about your experience.." id="${(question.type)!}-${(question.id)!}" name="${(question.type)!}-${(question.id)!}" class="textarea"/>
-                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id)!}" class="error">This is a required question</div>
+                            <input type="textarea" required placeholder="Tell us about your experience.." id="${(question.type)!}-${(question.id?c)!}" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
+                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}" class="error">This is a required question</div>
                         </div>
                     </div>
                     </#if>
@@ -624,11 +624,11 @@
                         <div class="d-flex">
                             <#list question.choices as choice>
                             <div class="options-wrap radio-wrap rate-wrap"></div>
-                                <input type="radio" class="styled-checkbox" name="${(question.type)!}-${(question.id)!}" id="${(choice.id)!}" value="${(choice.id)!}" />
+                                <input type="radio" class="styled-checkbox" name="${(question.type)!}-${(question.id?c)!}" id="${(choice.id?c)!}" value="${(choice.id?c)!}" />
                                 <div class="pseudo-wrap">
                                     <span class="before"></span>
                                     <span class="after"></span>
-                                    <label for="${(choice.id)!}">${(choice.title)!}</label>
+                                    <label for="${(choice.id?c)!}">${(choice.title)!}</label>
                                 </div>
                             </div>
                             </#list>
@@ -656,11 +656,11 @@
                         <div class="d-flex">
                             <#list question.choices as choice>
                             <div class="options-wrap radio-wrap rate-wrap"></div>
-                                <input type="radio" class="styled-checkbox" name="${(question.type)!}-${(question.id)!}" id="${(choice.id)!}" value="${(choice.id)!}" />
+                                <input type="radio" class="styled-checkbox" name="${(question.type)!}-${(question.id?c)!}" id="${(choice.id?c)!}" value="${(choice.id?c)!}" />
                                 <div class="pseudo-wrap">
                                     <span class="before"></span>
                                     <span class="after"></span>
-                                    <label for="${(choice.id)!}">${(choice.title)!}</label>
+                                    <label for="${(choice.id?c)!}">${(choice.title)!}</label>
                                 </div>
                             </div>
                             </#list>
@@ -685,7 +685,7 @@
                             <span class="matrix-title">${(row.title)!}</span>
                                 <div class="radio-option-wrap d-flex">
                                 <div class="options-wrap radio-wrap">
-                                    <input class="styled-checkbox" name="${(question.type)!}-${(question.id)!}-${(row.id)!}" id="${(row.id)!}" value=${(row.title)!}>
+                                    <input class="styled-checkbox" name="${(question.type)!}-${(question.id?c)!}-${(row.id?c)!}" id="${(row.id?c)!}" value=${(row.title)!}>
                                     <div class="pseudo-wrap">
                                         <span class="before"></span>
                                         <span class="after"></span>
@@ -717,8 +717,8 @@
                             <span class="matrix-title">${(row.title)!}</span>
                             <span>
                                 <#list question.minimumValue..question.maximumValue as value>
-                                    <input class="matrix-radio" type="radio" name="${(question.type)!}-${(question.id)!}-${(row.type)!}-${(row.id)!}" id="${(row.id)!}" value=${(value)!}/>
-                                    <label for="${(row.id)!}">${(value)!}</label>
+                                    <input class="matrix-radio" type="radio" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}" id="${(row.id?c)!}" value=${(value)!}/>
+                                    <label for="${(row.id?c)!}">${(value)!}</label>
                                 </#list>
                             </span>
                         </div>
@@ -737,9 +737,9 @@
                             <div class="options-wrap matrix-dropdown">
                                 <span class= "label-wrap">${(row.title)!}</span>
                                 <span class="select-wrap">
-                                    <select name="${(question.type)!}-${(question.id)!}-${(row.type)!}-${(row.id)!}">
+                                    <select name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}">
                                         <#list question.choices as choice>
-                                            <option value="${(choice.id)!}">${(choice.title)!}</option>
+                                            <option value="${(choice.id?c)!}">${(choice.title)!}</option>
                                         </#list>
                                     </select>
                                     <span class="down-arrow"></span>
@@ -764,28 +764,28 @@
                                         <label>${(row.title)!}</label>
                                         <input required placeholder=" " type="text"
                                                 class="floating-input" data-qid="382936"
-                                                value="" id="first" name="${(question.type)!}-${(question.id)!}-${(row.type)!}-${(row.id)}" />
+                                                value="" id="first" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
                                     </#if>
 
                                     <#if row.type == "email">
                                         <label>${(row.title)!}</label>
                                         <input required placeholder="" type="email"
                                             class="floating-input undefined" data-qid="382936"
-                                            value="" id="email"  name="${(question.type)!}-${(question.id)!}-${(row.type)!}-${(row.id)}" />
+                                            value="" id="email"  name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
                                     </#if>
 
                                     <#if row.type == "phone">
                                         <label>${(row.title)!}</label>
                                         <input required placeholder="" type="tel"
                                             class="floating-input undefined" data-qid="382936"
-                                            value="" id="tel"  name="${(question.type)!}-${(question.id)!}-${(row.type)!}-${(row.id)}" />
+                                            value="" id="tel"  name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
                                     </#if>
 
                                     <#if row.type == "country">
                                         <label>${(row.title)!}</label>
                                         <input required placeholder=" " type="text"
                                                 class="floating-input" data-qid="382936"
-                                                value="USA" id="first" name="${(question.type)!}-${(question.id)!}-${(row.type)!}-${(row.id)}" />
+                                                value="USA" id="first" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
                                     </#if>
 
                                     <#if row.type == "state">
