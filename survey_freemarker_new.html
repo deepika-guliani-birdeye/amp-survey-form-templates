@@ -269,6 +269,9 @@
                 custom-validation-reporting="show-all-on-submit"
                 on="submit-success: AMP.setState({currentPage: 'thanks'})"
             >
+            <input type="hidden" name="surveyId" [value]="${(surveyData.surveyId)!}" />
+            <input type="hidden" name="businessId" [value]="${(surveyData.businessId)!}" />
+            <input type="hidden" name="requestId" [value]="${(surveyData.requestId)!}" />
             <#assign states = [{
                 "title": "Alabama",
                 "abbreviation": "AL"
