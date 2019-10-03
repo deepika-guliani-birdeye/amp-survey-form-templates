@@ -6,6 +6,7 @@
        <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
        <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
        <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+       <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
        <style amp4email-boilerplate>body{visibility:hidden}</style>
         <style amp-custom>
             body {
@@ -866,6 +867,30 @@
 
                 </#list>
             </#list>
+
+            <div class="btn-wrap">
+                <input class="btn" type="submit" value="Submit"></input>
+            </div>
+
+            <div submit-success>
+                <template type="amp-mustache">
+                    Thank you for filling the survey !!!
+                </template>
+            </div>
+            <div submit-error>
+                <template type="amp-mustache">
+                    Oops! something went wrong
+                </template>
+            </div>
+
+            <section hidden
+                [hidden]="currentPage != 'thanks'" style="padding:20px 0; text-align: center;">
+                <div style="margin:20px;">
+                <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
+                </div>
+                <h3>Thank you for filling the survey !!!</h3>
+            </section>
+
             </form>
         </amp-layout>
     </body>
