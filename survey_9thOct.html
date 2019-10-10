@@ -348,6 +348,8 @@
         <template type="amp-mustache" id="submit_error_template">
             Error
         </template> -->
+        <amp-layout>
+            <section [hidden]="page.currentPage == 'thanks' || page.currentPage == 'submitting'">
         <amp-list 
             width="auto"
             height="1000"
@@ -365,7 +367,7 @@
                                     method="post" 
                                     action-xhr="https://apidemo9.birdeye.com/resources/v1/survey/save/response/amp"
                                     custom-validation-reporting="show-all-on-submit"
-                                    on="submit-success: AMP.setState({ page : {currentPage: 'thanks'} });submit-error: AMP.setState({ page : {currentPage: 'error'} });submit: AMP.setState({ page : {currentPage: 'submitting'} });"
+                                    on="submit-success: AMP.setState({ page : {currentPage: 'thanks'} });"
                                     >
                                     <input type="hidden" name="surveyId" value="${(surveyData.surveyId?c)!}" />
                                     <input type="hidden" name="businessId" value="${(surveyData.businessId?c)!}" />
@@ -624,7 +626,7 @@
                                                 </div>
                                                 <#list question.choices as choice>
                                                 <div class="options-wrap">
-                                                    <input class="styled-checkbox" type="radio" id="${(choice.id?c)!}" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}"/>
+                                                    <input class="styled-checkbox" type="radio" id="${(choice.id?c)!}" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" />
                                                     <div class="pseudo-wrap">
                                                         <span class="before"></span>
                                                         <span class="after"></span>
@@ -886,9 +888,9 @@
                                                             </#if>
                                                             <#if row.type == "country">
                                                             <label>${(row.title)!}</label>
-                                                            <input placeholder=" " type="text"
+                                                            <input placeholder="Country" type="text"
                                                                 class="floating-input"
-                                                                value="USA" id="first" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
+                                                                value="USA" id="country" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
                                                             </#if>
                                                             <#if row.type == "state">
                                                             <div class="dropdown-wrapper">
@@ -970,20 +972,13 @@
                                     <div class="btn-wrap">
                                         <input class="btn" type="submit" [value]="page.currentPage == 'submitting' ? 'Submitting' : 'Submit'"></input>
                                     </div>
-                                    <!-- <div submitting class="submitting-loader">
+                                    <div submitting class="submitting-loader">
                                         Submitting survey response...
-                                    </div> -->
-                                    <div submit-error>
-                                        Error Message
+                                    </div>
+                                    <div submit-error class="error">
+                                        Something went wrong ! Please try again later !
                                     </div>
                                 </form>
-                            </section>
-                            <section hidden
-                                [hidden]="page.currentPage != 'thanks'" style="padding:20px 0; text-align: center;">
-                                <div style="margin:20px;">
-                                    <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
-                                </div>
-                                <h3>${(thankYouMsg)!}</h3>
                             </section>
                         </amp-layout>
             </template>
@@ -991,8 +986,21 @@
                 <div style="margin:20px;">
                     <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
                 </div>
-                <h3>${(thankYouMsg)!}</h3>
+                <h3>You have already taken this survey !</h3>
             </div>
         </amp-list>
+
+    </section>
+        </amp-layout>
+
+        <amp-layout>
+        <section hidden
+            [hidden]="page.currentPage != 'thanks'" style="padding:20px 0; text-align: center;">
+            <div style="margin:20px;">
+                <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
+            </div>
+            <h3>${(thankYouMsg)!}</h3>
+        </section>
+    </amp-layout>
     </body>
 </html>
