@@ -16,7 +16,7 @@
             }
             .form {
                 overflow: scroll;
-                max-height: 600px;
+                max-height: 1020px;
                 padding: 30px;
                 padding-bottom: 60px;
             }
@@ -241,6 +241,7 @@
             .btn-wrap {
                 text-align: center;
                 margin-bottom: 30px;
+                margin-top: 80px;
             }
             .question-title em {
                 color: #db4437;
@@ -369,9 +370,6 @@
                 bottom: 0;
                 width: 100%;
                 z-index: 1;
-                display: flex;
-                align-items: flex-end;
-                justify-content: center;
             }
         </style>
     </head>
@@ -659,7 +657,7 @@
                                                     <#if question.type == "radio">
                                                     <div class="question-wrap radio-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <#list question.choices as choice>
                                                         <div class="options-wrap">
@@ -679,7 +677,7 @@
                                                     <#if question.type == "checkbox">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div class="options-wrap">
                                                             <#list question.choices as choice>
@@ -699,7 +697,7 @@
                                                     <#if question.type == "dropdown">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div class="options-wrap">
                                                             <div class="select-wrap">
@@ -748,7 +746,7 @@
                                                     <#if question.type == "rating">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div style= "margin: 0 20px;">
                                                             <div class="rating-bubbles pl-0">
@@ -780,7 +778,7 @@
                                                     <#if question.type == "nps">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div style= "margin: 0 20px;">
                                                             <div class="rating-bubbles pl-0">
@@ -812,7 +810,7 @@
                                                     <#if question.type == "matrixradio">
                                                     <div class="question-wrap matrix-wrapper">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div class="rating-bubbles">
                                                             <#list question.choices as choice>
@@ -844,7 +842,7 @@
                                                     <#if question.type == "matrixrating">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div class="rating-bubbles">
                                                             <span class="rating-min">
@@ -873,7 +871,7 @@
                                                     <#if question.type == "matrixdropdown">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <#list question.rows as row>
                                                         <div class="options-wrap matrix-dropdown">
@@ -897,7 +895,7 @@
                                                     <#if question.type == "contact">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div class="main-contact">
                                                             <#list question.rows as row>
@@ -963,7 +961,7 @@
                                                     <#if question.type == "datetime">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
                                                         </div>
                                                         <div class="date-time-wrapper">
                                                             <#if question.showDate>
@@ -997,7 +995,7 @@
                                                     <#if question.type == "label">
                                                     <div class="question-wrap">
                                                         <div class="question-title">
-                                                            <span>${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                            <span>${(question.title)!}</span>
                                                         </div>
                                                     </div>
                                                     </#if>
@@ -1015,7 +1013,9 @@
                                                 Something went wrong ! Please try again later !
                                             </div>
                                             <div submitting class="text-center loader">
-                                                <amp-img src="https://birdeye.com/web2/images/src/assets/images/loader/loader-birdeye.gif?a1cef4511f0b9a73f43077c4e5165877" height="80" width="80" noloading></amp-img>
+                                                <amp-img src="https://birdeye.com/web2/images/src/assets/images/loader/loader-birdeye.gif?a1cef4511f0b9a73f43077c4e5165877" height="60" width="60" style="position: absolute;
+                                                    bottom:200px; left:0; right:0; margin: 0 auto;" noloading>
+                                                </amp-img>
                                             </div>
                                         </form>
                                     </section>
