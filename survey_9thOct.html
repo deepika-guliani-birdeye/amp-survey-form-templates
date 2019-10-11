@@ -20,6 +20,18 @@
                 padding: 30px;
                 padding-bottom: 60px;
             }
+            .submit-btn .submitting-text {
+                display:none;
+            }
+            .form.amp-form-submitting .submit-btn {
+                cursor: not-allowed;
+            }
+            .form.amp-form-submitting .submit-btn .submitting-text {
+               display: inline-block;
+            }
+            .form.amp-form-submitting .submit-btn .submit-text {
+               display: none;
+            }
             select,.textarea,input {
                 height: 54px;
                 padding: 17px 15px;
@@ -343,13 +355,32 @@
             .submit-response {
                 margin-left: -17px;
             }
+            .form-submit-error {
+                height: 49px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+            .loader {
+                position: absolute;
+                height: 100%;
+                background: rgba(255,255,255,0.5);
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                z-index: 1;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+            }
         </style>
     </head>
     <body>
         <amp-state id="page">
             <script type="application/json">
                 {
-                    "currentPage": "home"
+                    "currentPage": "home",
+                    "submitting" : false
                 }
             </script>
         </amp-state>
@@ -373,7 +404,7 @@
                                             method="post" 
                                             action-xhr="https://apidemo9.birdeye.com/resources/v1/survey/save/response/amp"
                                             custom-validation-reporting="show-all-on-submit"
-                                            on="submit-success: AMP.setState({ page : {currentPage: 'thanks'} });"
+                                            on="submit-success: AMP.setState({ page : {currentPage: 'thanks', submitting: false} });submit-error: AMP.setState({ page : {currentPage: 'home', submitting: false} });"
                                             >
                                             <input type="hidden" name="surveyId" value="${(surveyData.surveyId?c)!}" />
                                             <input type="hidden" name="businessId" value="${(surveyData.businessId?c)!}" />
@@ -975,17 +1006,16 @@
                                                 </#list>
                                             </#list>
                                             <div class="btn-wrap">
-                                                <input class="btn" type="submit" [value]="page.currentPage == 'submitting' ? 'Submitting' : 'Submit'"></input>
+                                                <button class="btn submit-btn" type="submit" on="tap: AMP.setState({ page : { currentPage : 'home', submitting: true}})">
+                                                    <span class="submit-text">Submit</span>
+                                                    <span class="submitting-text">Submitting</span>
+                                                </button>
                                             </div>
-                                            <div submitting class="text-center">
-                                                <!-- <amp-img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" height="80" width="80" 
-                                                    style=" height: 80px; vertical-align: middle; width: 80px;" noloading></amp-img>
-                                                <span class="submit-response" style="vertical-align: middle; margin-left: -17px;position: relative;">Submitting 
-                                                    survey response...</span> -->
-                                                    Submitting response...
-                                            </div>
-                                            <div submit-error class="error text-center">
+                                            <div submit-error class="error text-center form-submit-error">
                                                 Something went wrong ! Please try again later !
+                                            </div>
+                                            <div submitting class="text-center loader">
+                                                <amp-img src="https://birdeye.com/web2/images/src/assets/images/loader/loader-birdeye.gif?a1cef4511f0b9a73f43077c4e5165877" height="80" width="80" noloading></amp-img>
                                             </div>
                                         </form>
                                     </section>
