@@ -721,7 +721,7 @@
                                                             <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
                                                         </div>
                                                         <div class="options-wrap">
-                                                            <input type="textarea" required placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-short" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
+                                                            <input type="textarea" maxlength="2000" required placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-short" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
                                                             <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-short" class="error">This is a required question</div>
                                                         </div>
                                                     </div>
@@ -735,7 +735,7 @@
                                                             <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
                                                         </div>
                                                         <div class="options-wrap">
-                                                            <input type="textarea" required placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-para" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
+                                                            <input type="textarea" maxlength="2000" required placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-para" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
                                                             <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-para" class="error">This is a required question</div>
                                                         </div>
                                                     </div>
