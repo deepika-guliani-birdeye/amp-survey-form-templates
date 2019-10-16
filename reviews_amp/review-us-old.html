@@ -25,12 +25,7 @@
     <p>Thank you for choosing us! Please take a moment to leave us a review. Your responses will help us serve you better in the future.</p>
   </h4>
   <form id="myform" method="post" action-xhr="https://push-notification-test-37477.firebaseapp.com/saveSource">
-    <div>
-      <input type="radio" class="button" id="google" name="source" value="google" on="change:myform.submit">
-    </div>
-    <div>
-        <input type="radio" class="button" id="yelp" name="source" value="yelp" on="change:myform.submit">
-      </div>
+    <input type="hidden" name="reviewId" [value]="1234567" />
     <div submit-success>
       <template type="amp-mustache">
         Success! Thanks {{source}} with onchange

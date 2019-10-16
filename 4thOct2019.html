@@ -1,0 +1,1554 @@
+<!doctype html>
+<html ⚡4email>
+   <head>
+      <meta charset="utf-8">
+      <script async src="https://cdn.ampproject.org/v0.js"></script>
+      <style amp4email-boilerplate>body{visibility:hidden}</style>
+      <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+      <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+      <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+      <style amp-custom>
+            body {
+                font-size: 16px;
+            }
+            .form {
+                overflow: scroll;
+                max-height: 600px;
+                padding: 30px;
+            }
+            select,.textarea,input {
+                height: 54px;
+                padding: 17px 15px;
+                color: #555;
+                border: 1px solid #ccc;
+                position: relative;
+                display: block;
+                cursor: pointer;
+                background-color: #fff;
+                width: 100%;
+                /* -webkit-appearance: none;
+                appearance: none; */
+            }
+            input:focus , select:focus, .textarea:focus{
+                outline: 0;
+            }
+            select {
+                height: 54px;
+                border:0;
+            }
+            .select-wrap {
+                border: 1px solid #ccc;
+                position: relative;
+            }
+            .down-arrow {
+                border: solid #555;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 3px;
+                transform: rotate(45deg) translateY(-50%);
+                -webkit-transform: rotate(45deg) translateY(-50%);
+                position: absolute;
+                right: 15px;
+                display: none;
+                top: 50%;
+            }
+            input {
+                height: auto;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            span {
+                display: inline-block;
+            }
+            .question-wrap {
+                margin-bottom: 30px;
+            }
+            .question-title span {
+                margin-bottom: 20px;
+                display:block;
+                text-transform: capitalize;
+            }
+            .options-wrap {
+                margin:0 20px 20px;
+                position: relative;
+            }
+            .styled-checkbox {
+                opacity: 0;
+                position: absolute;
+                z-index: -1;
+                left: 0;
+                width: auto;
+            }
+
+            .styled-checkbox + .pseudo-wrap {
+                position: relative;
+                cursor: pointer;
+            }
+            .styled-checkbox + .pseudo-wrap label {
+                padding-left: 35px;
+            }
+            .pseudo-wrap .before {
+                content: '';
+                margin-right: 10px;
+                display: inline-block;
+                vertical-align: text-top;
+                width: 20px;
+                height: 20px;
+                border: 1px solid #999;
+                margin-top: -1px;
+                position: absolute;
+                z-index: -1;
+            }
+            .radio-wrap .pseudo-wrap .before{
+                border-radius:50%;
+            }
+            .styled-checkbox:checked + .pseudo-wrap .before {
+                background: #1565c0;
+            }
+            .radio-wrap .styled-checkbox:checked + .pseudo-wrap .before {
+                background: #bbdefb;
+                border: 1px solid #1976d2;
+            }
+            .styled-checkbox + .pseudo-wrap .after {
+                content: '';
+                position: absolute;
+                left: 5px;
+                top: 9px;
+                width: 5px;
+                height: 12px;
+                border: solid #fff;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg) translate(-50%, -50%);
+                display: none;
+            }
+            .styled-checkbox:checked + .pseudo-wrap .after{
+                display: block;
+            }
+            .radio-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+                width: 10px;
+                height: 10px;
+                background: #1976d2;
+                border-radius: 50%;
+                border: 0;
+                transform: none;
+                top: 5px;
+                left: 5px;
+                display: block;
+            }
+            .matrix-wrap label {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                padding: 5px 3px;
+                border: solid 2px #ccc;
+                border-radius: 50%;
+                text-align: center;
+            }
+            input.matrix-radio {
+                display: none;
+            }
+            input.matrix-radio:checked + label {
+                color:#fff;
+                background: #308dff;
+                border-color: #308dff;
+            }
+            .label-wrap {
+                margin-right: 15px;
+            }
+            .matrix-wrap, .matrix-dropdown {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .rating-bubbles {
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                padding-left: 31%;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+            .matrix-title {
+                margin-right: 40px;
+            }
+            .matrix-title + span, .label-wrap + span {
+                width: 65.7%;
+                display: inline-flex;
+                justify-content: space-between;
+            }
+            .main-contact {
+                padding: 0 20px;
+            }
+            .contact-input-wrap {
+                margin-bottom: 20px;
+            }
+            .contact-input-wrap label {
+                display: block;
+                margin-bottom: 12px;
+                text-transform: capitalize;
+            }
+            .btn {
+                font-size: 18px;
+                color: #fff;
+                background: #1976d2;
+                border-radius: 2px;
+                text-align: center;
+                display: inline-block;
+                padding: 17px 37px;
+                cursor: pointer;
+                height: 54px;
+                width: auto;
+            }
+            .btn-wrap {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            .question-title em {
+                color: #db4437;
+            }
+            .logo-heading {
+                text-align: center;
+                padding: 30px;
+                background: #fff;
+                font-size: 30px;
+                color: #212121;
+                font-weight: 700;
+                border-bottom: 5px solid #005dab;
+            }
+            .rate-wrap {
+                margin: 0;
+            }
+            .rate-wrap .pseudo-wrap .before {
+                top: 26px;
+            }
+            .rate-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+                top: 31px;
+                left: 5px;
+            }
+            .rate-wrap .styled-checkbox + .pseudo-wrap label {
+                padding-left: 0;
+                text-align: center;
+                padding-bottom: 28px;
+                width: 20px;
+                display: inline-block;
+            }
+            .d-flex {
+                display: flex;
+                justify-content: space-between;
+            }
+            .pl-0 {
+                padding:0;
+            }
+            .error {
+                margin: 8px 0 3px;
+            }
+            .date-time-wrapper, .date-wrap{
+                display: flex;
+                align-items:center;
+            }
+            .date-wrap {
+                margin: 0 10px 0 20px;
+            }
+            .date-wrap span {
+                margin-right: 15px;
+            }
+            .radio-option-wrap {
+                width: 65.7%;
+                display: inline-flex;
+                justify-content: space-between;
+            }
+            .rating-text {
+                margin-right:10px;
+            }
+            .matrix-wrapper .rating-bubbles {
+                justify-content: space-between;
+                padding: 0;
+                margin-bottom: 20px;
+                width: 69%;
+                float: right;
+            }
+            .matrix-wrapper .rating-text {
+                width: 95px;
+                text-align: center;
+                margin: 0;
+            }
+            .matrix-wrapper .row-wrap {
+                display:flex;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .matrix-wrapper .matrix-title {
+                width: 18%;
+                margin-right: 10px;
+            }
+            .matrix-wrapper .radio-option-wrap {
+                margin-bottom: 20px;
+                width: 69%;
+            }
+            .matrix-wrapper .options-wrap {
+                margin: 0;
+                width: 95px;
+            }
+            .matrix-wrapper .styled-checkbox {
+                padding: 0;
+            }
+            .matrix-wrapper .styled-checkbox + .pseudo-wrap {
+                height: 38px;
+            }
+            .matrix-wrapper .pseudo-wrap .before, .matrix-wrapper .styled-checkbox + .pseudo-wrap label {
+                left: 50%;
+                transform: translate(-50%, -50%);
+                top: 50%;
+            }
+            .matrix-wrapper .styled-checkbox + .pseudo-wrap label {
+                position: absolute;
+                padding: 10px;
+            }
+            .matrix-wrapper .radio-wrap .styled-checkbox:checked + .pseudo-wrap .after {
+                top: 14px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        </style>
+    </head>
+    <body>
+        <amp-layout>
+            <div class="logo-wrap">
+                <h1 class="logo-heading"></h1>
+            </div>
+            <section
+                [hidden]="currentPage != 'home'">
+            <form 
+                class="form" 
+                method="post" 
+                action-xhr="https://push-notification-test-37477.firebaseapp.com/saveSurvey"
+                on="submit-success: AMP.setState({currentPage: 'thanks'})"
+            >
+            <input type="hidden" name="surveyId" value="1234578" />
+            <input type="hidden" name="businessId" value="132425266" />
+            <input type="hidden" name="requestId" value="1234567" />
+            <input type="hidden" name="fromEmail" value="no-reply@birdeye.com" />
+
+
+            <div class="question-wrap">
+                    <div class="question-title">
+                        <span>1. Question text <em>*</em> </span>
+                    </div>
+                    <div class="options-wrap">
+                        <input type="textarea" required placeholder="Enter your response" id="text-393615-short" name="text-393615" class="textarea"/>
+                        <!-- <div visible-when-invalid="valueMissing" validation-for="text-393615" class="error">This is a required question</div> -->
+                    </div>
+                </div>
+
+
+                <div class="question-wrap">
+                    <div class="question-title">
+                        <span>2. Question text <em>*</em> </span>
+                    </div>
+                    <div class="options-wrap">
+                        <input type="textarea" required placeholder="Tell us about your experience.." id="textarea-393616-para" name="textarea-393616" class="textarea"/>
+                        <!-- <div visible-when-invalid="valueMissing" validation-for="textarea-393616" class="error">This is a required question</div> -->
+                    </div>
+                </div>
+
+            <!-- RATING -->
+            <div class="question-wrap">
+                    <div class="question-title">
+                            <span>Please rate us based on your experience <em>*</em></span>
+                    </div>
+                    <div style= "margin: 0 20px;">
+                        <div class="rating-bubbles pl-0">
+                                <span class="rating-min">
+                                    <span class="rating-min-text">Poor</span>
+                                </span>
+                                <span class="rating-max">
+                                    <span class="rating-max-text">Excellent</span>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091242" value="1091242" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091242">1</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091243" value="1091243" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091243">2</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091244" value="1091244" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091244">3</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091245" value="1091245" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091245">4</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091246" value="1091246" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091246">5</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091247" value="1091247" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091247">6</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091248" value="1091248" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091248">7</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091249" value="1091249" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091249">8</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091250" value="1091250" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091250">9</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap radio-wrap rate-wrap">
+                            <input type="radio" class="styled-checkbox" name="rating-393517" id="1091251" value="1091251" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091251">10</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- RATING -->
+
+
+
+
+
+                <div class="question-wrap matrix-wrapper">
+                        <div class="question-title">
+                            <span>1. Question text <em>*</em> </span>
+                        </div>
+                        <div class="rating-bubbles">
+                                <span class="rating-text">Extremely unsatisfactory</span>
+                                <span class="rating-text">Unsatisfactory</span>
+                                <span class="rating-text">Neutral</span>
+                                <span class="rating-text">Satisfactory</span>
+                                <span class="rating-text">Extremely satisfactory</span>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 1</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393619" id="nps-393619" value="1091634" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393619"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393619" id="nps-393619" value="1091635" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393619"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393619" id="nps-393619" value="1091636" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393619"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393619" id="nps-393619" value="1091637" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393619"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393619" id="nps-393619" value="1091638" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393619"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 2</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393620" id="nps-393620" value="1091634" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393620"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393620" id="nps-393620" value="1091635" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393620"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393620" id="nps-393620" value="1091636" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393620"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393620" id="nps-393620" value="1091637" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393620"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393620" id="nps-393620" value="1091638" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393620"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 3</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393621" id="nps-393621" value="1091634" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393621"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393621" id="nps-393621" value="1091635" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393621"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393621" id="nps-393621" value="1091636" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393621"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393621" id="nps-393621" value="1091637" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393621"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393621" id="nps-393621" value="1091638" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393621"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 4</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393622" id="nps-393622" value="1091634" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393622"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393622" id="nps-393622" value="1091635" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393622"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393622" id="nps-393622" value="1091636" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393622"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393622" id="nps-393622" value="1091637" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393622"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393622" id="nps-393622" value="1091638" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393622"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 5</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393623" id="nps-393623" value="1091634" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393623"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393623" id="nps-393623" value="1091635" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393623"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393623" id="nps-393623" value="1091636" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393623"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393623" id="nps-393623" value="1091637" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393623"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-393618-radio-393623" id="nps-393623" value="1091638" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="nps-393623"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+                    <!-- Matrix radio-->
+
+                    <!-- Matrix dropdown -->
+
+                    <div class="question-wrap">
+                            <div class="question-title">
+                                <span>1. dropdown <em>*</em> </span>
+                            </div>
+                                <div class="options-wrap matrix-dropdown">
+                                    <span class= "label-wrap">Row label 1</span>
+                                    <span class="select-wrap">
+                                        <select name="matrixdropdown-393626-dropdown-393627">
+                                            <option value="">Select</option>
+                                                <option value="1091669">Extremely unsatisfactory</option>
+                                                <option value="1091670">Unsatisfactory</option>
+                                                <option value="1091671">Neutral</option>
+                                                <option value="1091672">Satisfactory</option>
+                                                <option value="1091673">Extremely satisfactory</option>
+                                        </select>
+                                        <span class="down-arrow"></span>
+                                    </span>
+                                </div>
+                                <div class="options-wrap matrix-dropdown">
+                                    <span class= "label-wrap">Row label 2</span>
+                                    <span class="select-wrap">
+                                        <select name="matrixdropdown-393626-dropdown-393628">
+                                            <option value="">Select</option>
+                                                <option value="1091669">Extremely unsatisfactory</option>
+                                                <option value="1091670">Unsatisfactory</option>
+                                                <option value="1091671">Neutral</option>
+                                                <option value="1091672">Satisfactory</option>
+                                                <option value="1091673">Extremely satisfactory</option>
+                                        </select>
+                                        <span class="down-arrow"></span>
+                                    </span>
+                                </div>
+                                <div class="options-wrap matrix-dropdown">
+                                    <span class= "label-wrap">Row label 3</span>
+                                    <span class="select-wrap">
+                                        <select name="matrixdropdown-393626-dropdown-393629">
+                                            <option value="">Select</option>
+                                                <option value="1091669">Extremely unsatisfactory</option>
+                                                <option value="1091670">Unsatisfactory</option>
+                                                <option value="1091671">Neutral</option>
+                                                <option value="1091672">Satisfactory</option>
+                                                <option value="1091673">Extremely satisfactory</option>
+                                        </select>
+                                        <span class="down-arrow"></span>
+                                    </span>
+                                </div>
+                                <div class="options-wrap matrix-dropdown">
+                                    <span class= "label-wrap">Row label 4</span>
+                                    <span class="select-wrap">
+                                        <select name="matrixdropdown-393626-dropdown-393630">
+                                            <option value="">Select</option>
+                                                <option value="1091669">Extremely unsatisfactory</option>
+                                                <option value="1091670">Unsatisfactory</option>
+                                                <option value="1091671">Neutral</option>
+                                                <option value="1091672">Satisfactory</option>
+                                                <option value="1091673">Extremely satisfactory</option>
+                                        </select>
+                                        <span class="down-arrow"></span>
+                                    </span>
+                                </div>
+                                <div class="options-wrap matrix-dropdown">
+                                    <span class= "label-wrap">Row label 5</span>
+                                    <span class="select-wrap">
+                                        <select name="matrixdropdown-393626-dropdown-393631">
+                                            <option value="">Select</option>
+                                                <option value="1091669">Extremely unsatisfactory</option>
+                                                <option value="1091670">Unsatisfactory</option>
+                                                <option value="1091671">Neutral</option>
+                                                <option value="1091672">Satisfactory</option>
+                                                <option value="1091673">Extremely satisfactory</option>
+                                        </select>
+                                        <span class="down-arrow"></span>
+                                    </span>
+                                </div>
+                        </div>
+    
+                    <!-- END -->
+
+                    <!-- Contact question-->
+
+                    <!---->
+                    <div class="question-wrap">
+                            <div class="question-title">
+                                <span>2. Question text <em>*</em> </span>
+                            </div>
+                            <div class="rating-bubbles">
+                                <span class="rating-min">
+                                    <span class="rating-min-text">Strongly Disagree</span>
+                                </span>
+                                <span class="rating-max">
+                                    <span class="rating-max-text">Strongly Agree</span>
+                                </span>
+                            </div>
+                            <div class="options-wrap matrix-wrap">
+                                <span class="matrix-title">Row label 1</span>
+                                <span>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393607" id="393607" value="1"/>
+                                        <label for="393607">1</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393607" id="393607" value="2"/>
+                                        <label for="393607">2</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393607" id="393607" value="3"/>
+                                        <label for="393607">3</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393607" id="393607" value="4"/>
+                                        <label for="393607">4</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393607" id="393607" value="5"/>
+                                        <label for="393607">5</label>
+                                </span>
+                            </div>
+                            <div class="options-wrap matrix-wrap">
+                                <span class="matrix-title">Row label 2</span>
+                                <span>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393608" id="393608" value="1"/>
+                                        <label for="393608">1</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393608" id="393608" value="2"/>
+                                        <label for="393608">2</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393608" id="393608" value="3"/>
+                                        <label for="393608">3</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393608" id="393608" value="4"/>
+                                        <label for="393608">4</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393608" id="393608" value="5"/>
+                                        <label for="393608">5</label>
+                                </span>
+                            </div>
+                            <div class="options-wrap matrix-wrap">
+                                <span class="matrix-title">Row label 3</span>
+                                <span>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393609" id="393609" value="1"/>
+                                        <label for="393609">1</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393609" id="393609" value="2"/>
+                                        <label for="393609">2</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393609" id="393609" value="3"/>
+                                        <label for="393609">3</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393609" id="393609" value="4"/>
+                                        <label for="393609">4</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393609" id="393609" value="5"/>
+                                        <label for="393609">5</label>
+                                </span>
+                            </div>
+                            <div class="options-wrap matrix-wrap">
+                                <span class="matrix-title">Row label 4</span>
+                                <span>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393610" id="393610" value="1"/>
+                                        <label for="393610">1</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393610" id="393610" value="2"/>
+                                        <label for="393610">2</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393610" id="393610" value="3"/>
+                                        <label for="393610">3</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393610" id="393610" value="4"/>
+                                        <label for="393610">4</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393610" id="393610" value="5"/>
+                                        <label for="393610">5</label>
+                                </span>
+                            </div>
+                            <div class="options-wrap matrix-wrap">
+                                <span class="matrix-title">Row label 5</span>
+                                <span>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393611" id="393611" value="1"/>
+                                        <label for="393611">1</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393611" id="393611" value="2"/>
+                                        <label for="393611">2</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393611" id="393611" value="3"/>
+                                        <label for="393611">3</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393611" id="393611" value="4"/>
+                                        <label for="393611">4</label>
+                                        <input class="matrix-radio" type="radio" name="matrixrating-393606-rating-393611" id="393611" value="5"/>
+                                        <label for="393611">5</label>
+                                </span>
+                            </div>
+                        </div>
+                    <!-- -->
+
+            <!-- END -->
+            <div class="question-wrap radio-wrap">
+                    <div class="question-title">
+                        <span>1. Radio <em>*</em> </span>
+                    </div>
+                        <div class="options-wrap">
+                            <input class="styled-checkbox" type="radio" id="1091699" name="radio-393632" value="1091699" required />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091699">Answer choice 1</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap">
+                            <input class="styled-checkbox" type="radio" id="1091700" name="radio-393632" value="1091700" required />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091700">Answer choice 2</label>
+                            </div>
+                        </div>
+                        <div class="options-wrap">
+                            <input class="styled-checkbox" type="radio" id="1091701" name="radio-393632" value="1091701" required />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091701">Answer choice 3</label>
+                            </div>
+                        </div>
+                </div>
+
+
+
+                <div class="question-wrap">
+                    <div class="question-title">
+                        <span>2. Checkbox <em>*</em> </span>
+                    </div>
+                    <div class="options-wrap">
+                            <input class="styled-checkbox" type="checkbox" id="1091702" name="checkbox-393633" value="1091702" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091702">Answer choice 1</label>
+                            </div>
+                            <input class="styled-checkbox" type="checkbox" id="1091703" name="checkbox-393633" value="1091703" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091703">Answer choice 2</label>
+                            </div>
+                            <input class="styled-checkbox" type="checkbox" id="1091704" name="checkbox-393633" value="1091704" />
+                            <div class="pseudo-wrap">
+                                <span class="before"></span>
+                                <span class="after"></span>
+                                <label for="1091704">Answer choice 3</label>
+                            </div>
+                    </div>
+                </div>
+
+
+
+                <div class="question-wrap">
+                    <div class="question-title">
+                        <span>3. Dropdown <em>*</em> </span>
+                    </div>
+                    <div class="options-wrap">
+                        <div class="select-wrap">
+                            <select name="dropdown-393634">
+                                <option value="1091705">Answer choice 1</option>
+                                <option value="1091706">Answer choice 2</option>
+                                <option value="1091707">Answer choice 3</option>
+                            </select>
+                            <span class="down-arrow"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            <!-- -->
+
+
+
+            <div class="question-wrap matrix-wrapper">
+                    <div class="question-title">
+                        <span>1. Question text <em>*</em> </span>
+                    </div>
+                    <div class="rating-bubbles">
+                            <span class="rating-text">Extremely unsatisfactory</span>
+                            <span class="rating-text">Unsatisfactory</span>
+                            <span class="rating-text">Neutral</span>
+                            <span class="rating-text">Satisfactory</span>
+                            <span class="rating-text">Extremely satisfactory</span>
+                    </div>
+                    <div class="row-wrap d-flex">
+                        <span class="matrix-title">Row label 1</span>
+                        <div class="radio-option-wrap d-flex">
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393638" id="mrd-393638-1091713" value="1091713" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393638-1091713"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393638" id="mrd-393638-1091714" value="1091714" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393638-1091714"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393638" id="mrd-393638-1091715" value="1091715" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393638-1091715"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393638" id="mrd-393638-1091716" value="1091716" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393638-1091716"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393638" id="mrd-393638-1091717" value="1091717" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393638-1091717"></label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row-wrap d-flex">
+                        <span class="matrix-title">Row label 2</span>
+                        <div class="radio-option-wrap d-flex">
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393639" id="mrd-393639-1091713" value="1091713" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393639-1091713"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393639" id="mrd-393639-1091714" value="1091714" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393639-1091714"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393639" id="mrd-393639-1091715" value="1091715" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393639-1091715"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393639" id="mrd-393639-1091716" value="1091716" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393639-1091716"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393639" id="mrd-393639-1091717" value="1091717" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393639-1091717"></label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row-wrap d-flex">
+                        <span class="matrix-title">Row label 3</span>
+                        <div class="radio-option-wrap d-flex">
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393640" id="mrd-393640-1091713" value="1091713" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393640-1091713"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393640" id="mrd-393640-1091714" value="1091714" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393640-1091714"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393640" id="mrd-393640-1091715" value="1091715" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393640-1091715"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393640" id="mrd-393640-1091716" value="1091716" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393640-1091716"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393640" id="mrd-393640-1091717" value="1091717" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393640-1091717"></label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row-wrap d-flex">
+                        <span class="matrix-title">Row label 4</span>
+                        <div class="radio-option-wrap d-flex">
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393641" id="mrd-393641-1091713" value="1091713" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393641-1091713"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393641" id="mrd-393641-1091714" value="1091714" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393641-1091714"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393641" id="mrd-393641-1091715" value="1091715" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393641-1091715"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393641" id="mrd-393641-1091716" value="1091716" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393641-1091716"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393641" id="mrd-393641-1091717" value="1091717" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393641-1091717"></label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row-wrap d-flex">
+                        <span class="matrix-title">Row label 5</span>
+                        <div class="radio-option-wrap d-flex">
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393642" id="mrd-393642-1091713" value="1091713" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393642-1091713"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393642" id="mrd-393642-1091714" value="1091714" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393642-1091714"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393642" id="mrd-393642-1091715" value="1091715" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393642-1091715"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393642" id="mrd-393642-1091716" value="1091716" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393642-1091716"></label>
+                                    </div>
+                                </div>
+                                <div class="options-wrap radio-wrap rate-wrap">
+                                    <input type="radio" class="styled-checkbox" name="matrixradio-393637-radio-393642" id="mrd-393642-1091717" value="1091717" />
+                                    <div class="pseudo-wrap">
+                                        <span class="before"></span>
+                                        <span class="after"></span>
+                                        <label for="mrd-393642-1091717"></label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="question-wrap">
+                    <div class="question-title">
+                        <span>2. Question text <em>*</em> </span>
+                    </div>
+                    <div class="rating-bubbles">
+                        <span class="rating-min">
+                            <span class="rating-min-text">Strongly Disagree</span>
+                        </span>
+                        <span class="rating-max">
+                            <span class="rating-max-text">Strongly Agree</span>
+                        </span>
+                    </div>
+                    <div class="options-wrap matrix-wrap">
+                        <span class="matrix-title">Row label 1</span>
+                        <span>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393644" id="mrt-393644-1" value="1"/>
+                                <label for="mrt-393644-1">1</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393644" id="mrt-393644-2" value="2"/>
+                                <label for="mrt-393644-2">2</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393644" id="mrt-393644-3" value="3"/>
+                                <label for="mrt-393644-3">3</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393644" id="mrt-393644-4" value="4"/>
+                                <label for="mrt-393644-4">4</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393644" id="mrt-393644-5" value="5"/>
+                                <label for="mrt-393644-5">5</label>
+                        </span>
+                    </div>
+                    <div class="options-wrap matrix-wrap">
+                        <span class="matrix-title">Row label 2</span>
+                        <span>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393645" id="mrt-393645-1" value="1"/>
+                                <label for="mrt-393645-1">1</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393645" id="mrt-393645-2" value="2"/>
+                                <label for="mrt-393645-2">2</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393645" id="mrt-393645-3" value="3"/>
+                                <label for="mrt-393645-3">3</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393645" id="mrt-393645-4" value="4"/>
+                                <label for="mrt-393645-4">4</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393645" id="mrt-393645-5" value="5"/>
+                                <label for="mrt-393645-5">5</label>
+                        </span>
+                    </div>
+                    <div class="options-wrap matrix-wrap">
+                        <span class="matrix-title">Row label 3</span>
+                        <span>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393646" id="mrt-393646-1" value="1"/>
+                                <label for="mrt-393646-1">1</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393646" id="mrt-393646-2" value="2"/>
+                                <label for="mrt-393646-2">2</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393646" id="mrt-393646-3" value="3"/>
+                                <label for="mrt-393646-3">3</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393646" id="mrt-393646-4" value="4"/>
+                                <label for="mrt-393646-4">4</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393646" id="mrt-393646-5" value="5"/>
+                                <label for="mrt-393646-5">5</label>
+                        </span>
+                    </div>
+                    <div class="options-wrap matrix-wrap">
+                        <span class="matrix-title">Row label 4</span>
+                        <span>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393647" id="mrt-393647-1" value="1"/>
+                                <label for="mrt-393647-1">1</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393647" id="mrt-393647-2" value="2"/>
+                                <label for="mrt-393647-2">2</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393647" id="mrt-393647-3" value="3"/>
+                                <label for="mrt-393647-3">3</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393647" id="mrt-393647-4" value="4"/>
+                                <label for="mrt-393647-4">4</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393647" id="mrt-393647-5" value="5"/>
+                                <label for="mrt-393647-5">5</label>
+                        </span>
+                    </div>
+                    <div class="options-wrap matrix-wrap">
+                        <span class="matrix-title">Row label 5</span>
+                        <span>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393648" id="mrt-393648-1" value="1"/>
+                                <label for="mrt-393648-1">1</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393648" id="mrt-393648-2" value="2"/>
+                                <label for="mrt-393648-2">2</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393648" id="mrt-393648-3" value="3"/>
+                                <label for="mrt-393648-3">3</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393648" id="mrt-393648-4" value="4"/>
+                                <label for="mrt-393648-4">4</label>
+                                <input class="matrix-radio" type="radio" name="matrixrating-393643-rating-393648" id="mrt-393648-5" value="5"/>
+                                <label for="mrt-393648-5">5</label>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="question-wrap matrix-wrapper">
+                        <div class="question-title">
+                            <span>1. Question text <em>*</em> </span>
+                        </div>
+                        <div class="rating-bubbles">
+                                <span class="rating-text">Extremely unsatisfactory</span>
+                                <span class="rating-text">Unsatisfactory</span>
+                                <span class="rating-text">Neutral</span>
+                                <span class="rating-text">Satisfactory</span>
+                                <span class="rating-text">Extremely satisfactory</span>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 1</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70502" id="mrd-70502-215218" value="215218" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70502-215218"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70502" id="mrd-70502-215219" value="215219" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70502-215219"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70502" id="mrd-70502-215220" value="215220" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70502-215220"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70502" id="mrd-70502-215221" value="215221" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70502-215221"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70502" id="mrd-70502-215222" value="215222" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70502-215222"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 2</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70503" id="mrd-70503-215218" value="215218" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70503-215218"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70503" id="mrd-70503-215219" value="215219" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70503-215219"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70503" id="mrd-70503-215220" value="215220" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70503-215220"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70503" id="mrd-70503-215221" value="215221" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70503-215221"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70503" id="mrd-70503-215222" value="215222" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70503-215222"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 3</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70504" id="mrd-70504-215218" value="215218" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70504-215218"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70504" id="mrd-70504-215219" value="215219" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70504-215219"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70504" id="mrd-70504-215220" value="215220" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70504-215220"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70504" id="mrd-70504-215221" value="215221" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70504-215221"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70504" id="mrd-70504-215222" value="215222" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70504-215222"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 4</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70505" id="mrd-70505-215218" value="215218" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70505-215218"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70505" id="mrd-70505-215219" value="215219" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70505-215219"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70505" id="mrd-70505-215220" value="215220" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70505-215220"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70505" id="mrd-70505-215221" value="215221" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70505-215221"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70505" id="mrd-70505-215222" value="215222" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70505-215222"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row-wrap d-flex">
+                            <span class="matrix-title">Row label 5</span>
+                            <div class="radio-option-wrap d-flex">
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70506" id="mrd-70506-215218" value="215218" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70506-215218"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70506" id="mrd-70506-215219" value="215219" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70506-215219"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70506" id="mrd-70506-215220" value="215220" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70506-215220"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70506" id="mrd-70506-215221" value="215221" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70506-215221"></label>
+                                        </div>
+                                    </div>
+                                    <div class="options-wrap radio-wrap rate-wrap">
+                                        <input type="radio" class="styled-checkbox" name="matrixradio-70501-radio-70506" id="mrd-70506-215222" value="215222" />
+                                        <div class="pseudo-wrap">
+                                            <span class="before"></span>
+                                            <span class="after"></span>
+                                            <label for="mrd-70506-215222"></label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+            <div class="btn-wrap">
+                <input class="btn" type="submit" value="Submit"></input>
+            </div>
+
+            <!-- <div submit-success>
+                <template type="amp-mustache">
+                    Thank you for filling the survey !!!
+                </template>
+            </div>
+            <div submit-error>
+                <template type="amp-mustache">
+                    Oops! something went wrong
+                </template>
+            </div> -->
+
+        </form>
+    </section>
+
+            <section hidden
+                [hidden]="currentPage != 'thanks'" style="padding:20px 0; text-align: center;">
+                <div style="margin:20px;">
+                <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
+                </div>
+                <h3>Thank you for filling the survey !!!</h3>
+            </section>
+
+            
+        </amp-layout>
+    </body>
+</html>

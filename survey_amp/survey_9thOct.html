@@ -661,14 +661,15 @@
                                                         </div>
                                                         <#list question.choices as choice>
                                                         <div class="options-wrap">
-                                                            <input class="styled-checkbox" type="radio" id="${(choice.id?c)!}" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" />
+                                                            <input class="styled-checkbox" type="radio" id="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-radio" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" />
                                                             <div class="pseudo-wrap">
                                                                 <span class="before"></span>
                                                                 <span class="after"></span>
-                                                                <label for="${(choice.id?c)!}">${(choice.title)!}</label>
+                                                                <label for="${(question.type)!}-${(question.id?c)!}-radio">${(choice.title)!}</label>
                                                             </div>
                                                         </div>
                                                         </#list>
+                                                        <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-radio" class="error">This is a required question</div>
                                                     </div>
                                                     </#if>
                                                     <#-- RADIO -->
@@ -681,11 +682,11 @@
                                                         </div>
                                                         <div class="options-wrap">
                                                             <#list question.choices as choice>
-                                                            <input class="styled-checkbox" type="checkbox" id="${(choice.id?c)!}" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" />
+                                                            <input class="styled-checkbox" type="checkbox" id="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-checkbox" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" />
                                                             <div class="pseudo-wrap">
                                                                 <span class="before"></span>
                                                                 <span class="after"></span>
-                                                                <label for="${(choice.id?c)!}">${(choice.title)!}</label>
+                                                                <label for="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-checkbox">${(choice.title)!}</label>
                                                             </div>
                                                             </#list>
                                                         </div>
@@ -701,7 +702,7 @@
                                                         </div>
                                                         <div class="options-wrap">
                                                             <div class="select-wrap">
-                                                                <select name="${(question.type)!}-${(question.id?c)!}">
+                                                                <select name="${(question.type)!}-${(question.id?c)!}" id="${(question.type)!}-${(question.id?c)!}-dropdown">
                                                                     <option value="" disabled selected hidden>Select</option>
                                                                     <#list question.choices as choice>
                                                                     <option value="${(choice.id?c)!}">${(choice.title)!}</option>
@@ -709,6 +710,7 @@
                                                                 </select>
                                                                 <span class="down-arrow"></span>
                                                             </div>
+                                                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-dropdown" class="error">This is a required question</div>
                                                         </div>
                                                     </div>
                                                     </#if>
@@ -721,7 +723,7 @@
                                                             <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
                                                         </div>
                                                         <div class="options-wrap">
-                                                            <input type="textarea" maxlength="2000" required placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-short" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
+                                                            <input type="textarea" required maxlength="2000" placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-short" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
                                                             <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-short" class="error">This is a required question</div>
                                                         </div>
                                                     </div>
@@ -877,7 +879,7 @@
                                                         <div class="options-wrap matrix-dropdown">
                                                             <span class= "label-wrap">${(row.title)!}</span>
                                                             <span class="select-wrap">
-                                                                <select name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}">
+                                                                <select name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}" id="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}-md">
                                                                     <option value="" disabled selected hidden>Select</option>
                                                                     <#list question.choices as choice>
                                                                     <option value="${(choice.id?c)!}">${(choice.title)!}</option>
@@ -885,6 +887,7 @@
                                                                 </select>
                                                                 <span class="down-arrow"></span>
                                                             </span>
+                                                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}-md" class="error">This is a required question</div>
                                                         </div>
                                                         </#list>
                                                     </div>
