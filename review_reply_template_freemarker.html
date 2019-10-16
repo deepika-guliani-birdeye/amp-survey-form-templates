@@ -1,0 +1,149 @@
+<!doctype html>
+<html amp4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <script custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js" async></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+  <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+</head>
+<body>
+
+    <#list reviews as reviewObject>
+        <#assign reviewIndex = reviewObject?counter >
+        <!-- copied from template -->
+        <#if reviewObject.reviewUrl??>
+            <a href="${(reviewObject.reviewUrl)!}" target="_blank" style="font-family:'Roboto',Arial,sans-serif;font-weight:500;color: #1976d2;font-size: 16px;">${(reviewObject.sourceAlias)!}</a>
+            <#else>
+            ${(reviewObject.sourceAlias)!}
+        </#if>
+
+        <#if reviewObject.sourceId == 110>
+            <#if !reviewObject.recommended??>
+            <div class="star-val"> <amp-img src="${(reviewObject.starImageUrl)!}" alt="" width="10" height="10"/></div>
+            <#elseif reviewObject.recommended == 0>
+                <div>&nbsp; <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/no-star-rating-box.png"
+                     style=" vertical-align: top; margin: 0; " width="10" height="10">&nbsp;&nbsp;<b
+                    style="font-size: 15px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #455b76;">Not
+                    recommended</b></div>
+                <#else>
+                <div>&nbsp; <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/star-rating-box.png"
+                     style=" vertical-align: top; margin: 0; " width="10" height="10">&nbsp;&nbsp;<b
+                    style="font-size: 15px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #f57c00;">Recommended</b></div>
+            </#if>
+            <#else>
+            <div class="star-val" style="vertical-align: middle;color: #f88900;padding:0 2px;font-size: 27px;"> <amp-img src="${(reviewObject.starImageUrl)!}" width="10" height="10" alt=""/></div>
+        </#if>
+
+        <#if reviewObject.reviewText??>
+            <div>
+                <div>
+                <p style="font-family:'Roboto',Arial,sans-serif;font-size:18px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.44;letter-spacing:normal;color:#212121;margin:0;display:block;text-align: center;margin:0;">"${(reviewObject.reviewText)!}"</p>
+                </div>
+            </div>
+            <div>
+                <div>&nbsp;</div>
+            </div>
+        </#if>
+
+        <#if (reviewObject.reviewerEmail?? && reviewObject.reviewerPhone??)>
+            <div>
+                <div>
+                <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
+                    <a style="color:#1976d2">${(reviewObject.reviewerEmail)!}</a> |
+                    ${(reviewObject.reviewerPhone)!}</p>
+                </div>
+            </div>
+            <#elseif (!reviewObject.reviewerEmail?? && reviewObject.reviewerPhone??)>
+                <div>
+                <div>
+                    <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
+                    <a style="color:#1976d2">${(reviewObject.reviewerPhone)!}</p>
+                </div>
+                </div>
+                <#elseif (reviewObject.reviewerEmail?? && !reviewObject.reviewerPhone??)>
+                <div>
+                    <div>
+                    <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
+                        <a style="color:#1976d2">${(reviewObject.reviewerEmail)!}</a></p>
+                    </div>
+                </div>
+                <#else>
+            </#if>
+            <#if reviewObject.canBeContacted??>
+            <div>
+                <div>
+                <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">To
+                    be contacted: <#if reviewObject.canBeContacted>Yes<#else>No</#if>
+                </p>
+                </div>
+            </div>
+        </#if>
+
+        <template type="amp-mustache" id="submit_success_template_${(reviewIndex)!}">
+            <div>You replied on Google</div>
+            <div>{{reviewReplyText}}</div>
+            <a href="https://birdeye.com/sign-in">Edit Reply</a>
+        </template>
+        <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
+            Something went wrong while posting reply !
+        </template>
+        
+            <div class="review-wrap">
+                <div>
+                    <amp-list 
+                        width="auto"
+                        height="50"
+                        layout="fixed-height"
+                        src="https://push-notification-test-37477.firebaseapp.com/getData">
+                            <template type="amp-mustache">
+                                    <amp-layout>
+                                            <section [hidden]="{{userCanReply}} == false">
+                                                <form 
+                                                    class="form" 
+                                                    method="post" 
+                                                    action-xhr="https://push-notification-test-37477.firebaseapp.com/postReply"
+                                                    custom-validation-reporting="show-all-on-submit"
+                                                    on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='https://birdeye.com/dashboard/home');">
+                                                        <div [hidden]="userReplied${(reviewIndex)!} == true">
+                                                            <div>Your reply will be automatically posted on Google</div>
+                                                            <input type="hidden" name="reviewId" value="1234567" />
+                                                            <textarea
+                                                                name="reply"
+                                                                [hidden]="userReplied${(reviewIndex)!} == true"
+                                                                placeholder="Reply"
+                                                                on="input-debounced: AMP.setState({userReply${(reviewIndex)!}: event.value});"
+                                                                required
+                                                            ></textarea>
+                                                            <input type="submit" [disabled]="!userReply${(reviewIndex)!}" value="Reply" />
+                                                            <a href="https://birdeye.com/dashboard/reviews">Open Review</a>
+                                                        </div>
+                                                        <div submit-success template="submit_success_template_${(reviewIndex)!}"></div>
+                                                        <div submit-error template="submit_error_template_${(reviewIndex)!}"></div>
+                                                </form>
+                                            </section>
+        
+                                            <section [hidden]="{{userCanReply}} == true && '{{reviewReplyText}}'">
+                                                {{reviewReplyText}} <a href="https://birdeye.com/sign-in">Edit Reply</a>
+                                            </section>
+        
+                                            <section [hidden]="{{userCanReply}} == true && !'{{reviewReplyText}}'">
+                                                <a href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                                            </section>
+        
+                                        </amp-layout>
+                            </template>
+                            <div fallback>
+                                <a href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                            </div>
+                    </amp-list>
+                </div>
+        
+            </div>
+
+    </#list>
+</body>
+</html>
