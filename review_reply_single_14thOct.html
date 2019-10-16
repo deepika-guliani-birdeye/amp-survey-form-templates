@@ -1,0 +1,84 @@
+<!doctype html>
+<html amp4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <script custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js" async></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+  <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+</head>
+<body>
+    <amp-state id="reply">
+        <script type="application/json">
+            {
+                "userReplied" : false,
+                "userReply": ""
+            }
+        </script>
+    </amp-state>
+
+    <template type="amp-mustache" id="submit_success_template">
+        <div>You replied on Google</div>
+        <div>{{reviewReplyText}}</div>
+        <a href="https://birdeye.com/sign-in">Edit Reply</a>
+    </template>
+    <template type="amp-mustache" id="submit_error_template">
+        Something went wrong while posting reply !
+    </template>
+
+    <div class="review-wrap">
+        <div>
+            <amp-list 
+                width="auto"
+                height="50"
+                layout="fixed-height"
+                src="https://push-notification-test-37477.firebaseapp.com/getData">
+                    <template type="amp-mustache">
+                            <amp-layout>
+                                    <section [hidden]="{{userCanReply}} == false">
+                                        <form 
+                                            class="form" 
+                                            method="post" 
+                                            action-xhr="https://push-notification-test-37477.firebaseapp.com/postReply"
+                                            custom-validation-reporting="show-all-on-submit"
+                                            on="submit-success: AMP.setState({ reply : {userReplied: true } });submit-error: AMP.navigateTo(url='https://birdeye.com/dashboard/home');">
+                                                <div [hidden]="reply.userReplied == true">
+                                                    <div>Your reply will be automatically posted on Google</div>
+                                                    <input type="hidden" name="reviewId" value="1234567" />
+                                                    <textarea
+                                                        name="reply"
+                                                        [hidden]="reply.userReplied == true"
+                                                        placeholder="Reply"
+                                                        on="input-debounced: AMP.setState({ reply : {userReply: event.value, userReplied: false}});"
+                                                        required
+                                                    ></textarea>
+                                                    <input type="submit" [disabled]="reply.userReply == ''" value="Reply" />
+                                                    <a href="https://birdeye.com/dashboard/reviews">Open Review</a>
+                                                </div>
+                                                <div submit-success template="submit_success_template"></div>
+                                                <div submit-error template="submit_error_template"></div>
+                                        </form>
+                                    </section>
+
+                                    <section [hidden]="{{userCanReply}} == true && '{{reviewReplyText}}'">
+                                        {{reviewReplyText}} <a href="https://birdeye.com/sign-in">Edit Reply</a>
+                                    </section>
+
+                                    <section [hidden]="{{userCanReply}} == true && !'{{reviewReplyText}}'">
+                                        <a href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                                    </section>
+
+                                </amp-layout>
+                    </template>
+                    <div fallback>
+                        <a href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                    </div>
+            </amp-list>
+        </div>
+
+    </div>
+</body>
+</html>
