@@ -1,0 +1,1047 @@
+<!doctype html>
+<html amp4email>
+    <head>
+        <meta charset="utf-8">
+        <script async src="https://cdn.ampproject.org/v0.js"></script>
+        <script custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js" async></script>
+        <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+        <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+        <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+        <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+        <style amp4email-boilerplate>body{visibility:hidden}</style>
+        <style amp-custom>
+            body {
+                font-size: 16px;
+                font-family: 'Roboto', sans-serif;
+            }
+            .form {
+                overflow: scroll;
+                max-height: 1020px;
+                padding: 30px;
+                padding-bottom: 60px;
+            }
+            .submit-btn .submitting-text {
+                display:none;
+            }
+            .form.amp-form-submitting .submit-btn {
+                cursor: not-allowed;
+            }
+            .form.amp-form-submitting .submit-btn .submitting-text {
+               display: inline-block;
+            }
+            .form.amp-form-submitting .submit-btn .submit-text {
+               display: none;
+            }
+            select,.textarea,input {
+                height: 54px;
+                padding: 17px 15px;
+                color: #555;
+                border: 1px solid #ccc;
+                position: relative;
+                display: block;
+                cursor: pointer;
+                background-color: #fff;
+                width: 100%;
+                -webkit-appearance: none;
+                appearance: none;
+                font-size: 14px;
+            }
+            input:focus , select:focus, .textarea:focus{
+                outline: 0;
+            }
+            select {
+                height:auto;
+                border:0;
+                -webkit-appearance: none;
+                appearance: none;
+                padding: 0;
+            }
+            .select-wrap {
+                border: 1px solid #ccc;
+                position: relative;
+                padding: 17px 10px;
+                height: 54px;
+            }
+            .down-arrow {
+                border: solid #555;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 4px;
+                transform: rotate(45deg) translateY(-50%);
+                position: absolute;
+                right: 16px;
+                top: 45%;
+                background: #fff;
+            }
+            input {
+                height: auto;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            span {
+                display: inline-block;
+            }
+            .text-center {
+                text-align: center;
+            }
+            .question-wrap {
+                margin-bottom: 30px;
+            }
+            .question-title span {
+                margin-bottom: 20px;
+                display:block;
+                text-transform: capitalize;
+            }
+            .options-wrap {
+                margin:0 20px 10px;
+                position: relative;
+            }
+            .styled-checkbox {
+                opacity: 0;
+                position: absolute;
+                z-index: 0;
+                left: 0;
+                width: auto;
+            }
+            .pseudo-wrap{
+                padding: 10px;
+                background: #fff;
+            }
+            .pseudo-wrap:hover {
+                border-radius: 4px;
+                cursor:pointer;
+                background: #f4f6f7;
+            }
+            .styled-checkbox + .pseudo-wrap {
+                position: relative;
+                cursor: pointer;
+            }
+            .styled-checkbox + .pseudo-wrap label {
+                padding-left: 35px;
+                z-index: 1;
+                position: relative;
+                cursor: pointer;
+            }
+            .pseudo-wrap .before {
+                content: '';
+                margin-right: 10px;
+                display: inline-block;
+                vertical-align: text-top;
+                width: 20px;
+                height: 20px;
+                border: 1px solid #999;
+                margin-top: -1px;
+                position: absolute;
+                /* z-index: -1; */
+            }
+            .radio-wrap .pseudo-wrap .before{
+                border-radius:50%;
+            }
+            .styled-checkbox:checked + .pseudo-wrap .before {
+                background: #1565c0;
+            }
+            .radio-wrap .styled-checkbox:checked + .pseudo-wrap .before {
+                background: #bbdefb;
+                border: 1px solid #1976d2;
+            }
+            .styled-checkbox + .pseudo-wrap .after {
+                content: '';
+                position: absolute;
+                width: 5px;
+                height: 12px;
+                border: solid #fff;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg) translate(-50%, -50%);
+                display: none;
+                /* top: 9px;
+                left: 5px; */
+                top: 19px;
+                left: 15px;
+            }
+            .styled-checkbox:checked + .pseudo-wrap .after{
+                display: block;
+            }
+            .radio-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+                width: 10px;
+                height: 10px;
+                background: #1976d2;
+                border-radius: 50%;
+                border: 0;
+                transform: none;
+                top: 15px;
+                left: 15px;
+                display: block;
+            }
+            .matrix-wrap label {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                padding: 5px 3px;
+                border: solid 2px #ccc;
+                border-radius: 50%;
+                text-align: center;
+            }
+            input.matrix-radio {
+                display: none;
+            }
+            input.matrix-radio:checked + label {
+                color:#fff;
+                background: #308dff;
+                border-color: #308dff;
+            }
+            .label-wrap {
+                margin-right: 15px;
+            }
+            .matrix-wrap, .matrix-dropdown {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .rating-bubbles {
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                padding-left: 31%;
+                margin-bottom: 20px;
+                width: 100%;
+                font-size: 14px;
+            }
+            .matrix-title {
+                margin-right: 40px;
+            }
+            .matrix-title + span, .label-wrap + span {
+                width: 65.7%;
+                display: inline-flex;
+                justify-content: space-between;
+            }
+            .main-contact {
+                padding: 0 20px;
+            }
+            .contact-input-wrap {
+                margin-bottom: 20px;
+            }
+            .contact-input-wrap label {
+                display: block;
+                margin-bottom: 12px;
+                text-transform: capitalize;
+            }
+            .btn {
+                font-size: 18px;
+                color: #fff;
+                background: #1976d2;
+                border-radius: 2px;
+                text-align: center;
+                display: inline-block;
+                padding: 17px 37px;
+                cursor: pointer;
+                height: 54px;
+                width: auto;
+            }
+            .btn-wrap {
+                text-align: center;
+                margin-bottom: 30px;
+                margin-top: 80px;
+            }
+            .question-title em {
+                color: #db4437;
+            }
+            .logo-heading {
+                text-align: center;
+                padding: 30px;
+                background: #fff;
+                font-size: 30px;
+                color: #212121;
+                font-weight: 700;
+                border-bottom: 5px solid #005dab;
+            }
+            .rate-wrap {
+                margin: 0;
+            }
+            .rate-wrap .pseudo-wrap .before {
+                top: 35px;
+            }
+            .rate-wrap .styled-checkbox:checked + .pseudo-wrap .after{
+                top: 40px;
+                left: 15px;
+            }
+            .rate-wrap .styled-checkbox + .pseudo-wrap label {
+                padding-left: 0;
+                text-align: center;
+                padding-bottom: 28px;
+                width: 20px;
+                display: inline-block;
+            }
+            .d-flex {
+                display: flex;
+                justify-content: space-between;
+            }
+            .pl-0 {
+                padding:0;
+            }
+            .error {
+                margin: 8px 0 3px;
+                color: red;
+            }
+            .date-time-wrapper, .date-wrap{
+                display: flex;
+                align-items:center;
+            }
+            .date-wrap {
+                margin: 0 10px 0 20px;
+            }
+            .date-wrap span {
+                margin-right: 15px;
+            }
+            .radio-option-wrap {
+                width: 65.7%;
+                display: inline-flex;
+                justify-content: space-between;
+            }
+            .rating-text {
+                margin-right:10px;
+            }
+            .matrix-wrapper .rating-bubbles {
+                justify-content: space-between;
+                padding: 0;
+                margin-bottom: 20px;
+                width: 69%;
+                float: right;
+            }
+            .matrix-wrapper .rating-text {
+                width: 95px;
+                text-align: center;
+                margin: 0;
+            }
+            .matrix-wrapper .row-wrap {
+                display:flex;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .matrix-wrapper .matrix-title {
+                width: 18%;
+                margin-right: 10px;
+            }
+            .matrix-wrapper .radio-option-wrap {
+                margin-bottom: 20px;
+                width: 69%;
+            }
+            .matrix-wrapper .options-wrap {
+                margin: 0;
+                width: 95px;
+            }
+            .matrix-wrapper .styled-checkbox {
+                padding: 0;
+            }
+            .matrix-wrapper .styled-checkbox + .pseudo-wrap {
+                height: 38px;
+            }
+            .matrix-wrapper .pseudo-wrap .before, .matrix-wrapper .styled-checkbox + .pseudo-wrap label {
+                left: 50%;
+                transform: translate(-50%, -50%);
+                top: 50%;
+            }
+            .matrix-wrapper .styled-checkbox + .pseudo-wrap label {
+                position: absolute;
+                padding: 10px;
+            }
+            .matrix-wrapper .radio-wrap .styled-checkbox:checked + .pseudo-wrap .after {
+                top: 14px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .submitting-loader img, .submitting-loader span {
+                vertical-align: middle; 
+            }
+            .submit-response {
+                margin-left: -17px;
+            }
+            .form-submit-error {
+                height: 49px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+            .loader {
+                position: absolute;
+                height: 100%;
+                background: rgba(255,255,255,0.5);
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                z-index: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <amp-state id="page">
+            <script type="application/json">
+                {
+                    "currentPage": "home",
+                    "submitting" : false
+                }
+            </script>
+        </amp-state>
+
+        <amp-layout>
+            <section [hidden]="page.currentPage == 'thanks' || page.currentPage == 'submitting'">
+                <amp-list 
+                    width="auto"
+                    height="1000"
+                    layout="fixed-height"
+                    src="https://api.birdeye.com/resources/v1/survey/request/status/amp/${(surveyData.requestId?c)!}?fromEmail=${(surveyData.fromEmail)!}">
+                    <template type="amp-mustache">
+                            <amp-layout>
+                                    <div class="logo-wrap">
+                                        <h1 class="logo-heading">${(surveyData.businessName)!}</h1>
+                                    </div>
+                                    <section
+                                        [hidden]="page.currentPage != 'home'">
+                                        <form 
+                                            class="form" 
+                                            method="post" 
+                                            action-xhr="https://api.birdeye.com/resources/v1/survey/save/response/amp"
+                                            custom-validation-reporting="show-all-on-submit"
+                                            on="submit-success: AMP.setState({ page : {currentPage: 'thanks', submitting: false} });submit-error: AMP.setState({ page : {currentPage: 'home', submitting: false} });"
+                                            >
+                                            <input type="hidden" name="surveyId" value="${(surveyData.surveyId?c)!}" />
+                                            <input type="hidden" name="businessId" value="${(surveyData.businessId?c)!}" />
+                                            <input type="hidden" name="requestId" value="${(surveyData.requestId?c)!}" />
+                                            <input type="hidden" name="fromEmail" value="${(surveyData.fromEmail)!}" />
+                                            <#assign states = [{
+                                                "title": "Alabama",
+                                                "abbreviation": "AL"
+                                            },
+                                            {
+                                                "title": "Alaska",
+                                                "abbreviation": "AK"
+                                            },
+                                            {
+                                                "title": "American Samoa",
+                                                "abbreviation": "AS"
+                                            },
+                                            {
+                                                "title": "Arizona",
+                                                "abbreviation": "AZ"
+                                            },
+                                            {
+                                                "title": "Arkansas",
+                                                "abbreviation": "AR"
+                                            },
+                                            {
+                                                "title": "California",
+                                                "abbreviation": "CA"
+                                            },
+                                            {
+                                                "title": "Colorado",
+                                                "abbreviation": "CO"
+                                            },
+                                            {
+                                                "title": "Connecticut",
+                                                "abbreviation": "CT"
+                                            },
+                                            {
+                                                "title": "Delaware",
+                                                "abbreviation": "DE"
+                                            },
+                                            {
+                                                "title": "District Of Columbia",
+                                                "abbreviation": "DC"
+                                            },
+                                            {
+                                                "title": "Federated States Of Micronesia",
+                                                "abbreviation": "FM"
+                                            },
+                                            {
+                                                "title": "Florida",
+                                                "abbreviation": "FL"
+                                            },
+                                            {
+                                                "title": "Georgia",
+                                                "abbreviation": "GA"
+                                            },
+                                            {
+                                                "title": "Guam",
+                                                "abbreviation": "GU"
+                                            },
+                                            {
+                                                "title": "Hawaii",
+                                                "abbreviation": "HI"
+                                            },
+                                            {
+                                                "title": "Idaho",
+                                                "abbreviation": "ID"
+                                            },
+                                            {
+                                                "title": "Illinois",
+                                                "abbreviation": "IL"
+                                            },
+                                            {
+                                                "title": "Indiana",
+                                                "abbreviation": "IN"
+                                            },
+                                            {
+                                                "title": "Iowa",
+                                                "abbreviation": "IA"
+                                            },
+                                            {
+                                                "title": "Kansas",
+                                                "abbreviation": "KS"
+                                            },
+                                            {
+                                                "title": "Kentucky",
+                                                "abbreviation": "KY"
+                                            },
+                                            {
+                                                "title": "Louisiana",
+                                                "abbreviation": "LA"
+                                            },
+                                            {
+                                                "title": "Maine",
+                                                "abbreviation": "ME"
+                                            },
+                                            {
+                                                "title": "Marshall Islands",
+                                                "abbreviation": "MH"
+                                            },
+                                            {
+                                                "title": "Maryland",
+                                                "abbreviation": "MD"
+                                            },
+                                            {
+                                                "title": "Massachusetts",
+                                                "abbreviation": "MA"
+                                            },
+                                            {
+                                                "title": "Michigan",
+                                                "abbreviation": "MI"
+                                            },
+                                            {
+                                                "title": "Minnesota",
+                                                "abbreviation": "MN"
+                                            },
+                                            {
+                                                "title": "Mississippi",
+                                                "abbreviation": "MS"
+                                            },
+                                            {
+                                                "title": "Missouri",
+                                                "abbreviation": "MO"
+                                            },
+                                            {
+                                                "title": "Montana",
+                                                "abbreviation": "MT"
+                                            },
+                                            {
+                                                "title": "Nebraska",
+                                                "abbreviation": "NE"
+                                            },
+                                            {
+                                                "title": "Nevada",
+                                                "abbreviation": "NV"
+                                            },
+                                            {
+                                                "title": "New Hampshire",
+                                                "abbreviation": "NH"
+                                            },
+                                            {
+                                                "title": "New Jersey",
+                                                "abbreviation": "NJ"
+                                            },
+                                            {
+                                                "title": "New Mexico",
+                                                "abbreviation": "NM"
+                                            },
+                                            {
+                                                "title": "New York",
+                                                "abbreviation": "NY"
+                                            },
+                                            {
+                                                "title": "North Carolina",
+                                                "abbreviation": "NC"
+                                            },
+                                            {
+                                                "title": "North Dakota",
+                                                "abbreviation": "ND"
+                                            },
+                                            {
+                                                "title": "Northern Mariana Islands",
+                                                "abbreviation": "MP"
+                                            },
+                                            {
+                                                "title": "Ohio",
+                                                "abbreviation": "OH"
+                                            },
+                                            {
+                                                "title": "Oklahoma",
+                                                "abbreviation": "OK"
+                                            },
+                                            {
+                                                "title": "Oregon",
+                                                "abbreviation": "OR"
+                                            },
+                                            {
+                                                "title": "Palau",
+                                                "abbreviation": "PW"
+                                            },
+                                            {
+                                                "title": "Pennsylvania",
+                                                "abbreviation": "PA"
+                                            },
+                                            {
+                                                "title": "Puerto Rico",
+                                                "abbreviation": "PR"
+                                            },
+                                            {
+                                                "title": "Rhode Island",
+                                                "abbreviation": "RI"
+                                            },
+                                            {
+                                                "title": "South Carolina",
+                                                "abbreviation": "SC"
+                                            },
+                                            {
+                                                "title": "South Dakota",
+                                                "abbreviation": "SD"
+                                            },
+                                            {
+                                                "title": "Tennessee",
+                                                "abbreviation": "TN"
+                                            },
+                                            {
+                                                "title": "Texas",
+                                                "abbreviation": "TX"
+                                            },
+                                            {
+                                                "title": "Utah",
+                                                "abbreviation": "UT"
+                                            },
+                                            {
+                                                "title": "Vermont",
+                                                "abbreviation": "VT"
+                                            },
+                                            {
+                                                "title": "Virgin Islands",
+                                                "abbreviation": "VI"
+                                            },
+                                            {
+                                                "title": "Virginia",
+                                                "abbreviation": "VA"
+                                            },
+                                            {
+                                                "title": "Washington",
+                                                "abbreviation": "WA"
+                                            },
+                                            {
+                                                "title": "West Virginia",
+                                                "abbreviation": "WV"
+                                            },
+                                            {
+                                                "title": "Wisconsin",
+                                                "abbreviation": "WI"
+                                            },
+                                            {
+                                                "title": "Wyoming",
+                                                "abbreviation": "WY"
+                                            }]>
+                                            <#assign timeValues = [{"value":0,"label":"12:00 AM"},{"value":1,"label":"12:30 AM"}, {"value":2,"label":"01:00 AM"},{"value":3,"label":"01:30 AM"},{"value":4,"label":"02:00 AM"},{"value":5,"label":"02:30 AM"},{"value":6,"label":"03:00 AM"},{"value":7,"label":"03:30 AM"},{"value":8,"label":"04:00 AM"},{"value":9,"label":"04:30 AM"},{"value":10,"label":"05:00 AM"},{"value":11,"label":"05:30 AM"},{"value":12,"label":"06:00 AM"},{"value":13,"label":"06:30 AM"},{"value":14,"label":"07:00 AM"},{"value":15,"label":"07:30 AM"},{"value":16,"label":"08:00 AM"},{"value":17,"label":"08:30 AM"},{"value":18,"label":"09:00 AM"},{"value":19,"label":"09:30 AM"},{"value":20,"label":"10:00 AM"},{"value":21,"label":"10:30 AM"},{"value":22,"label":"11:00 AM"},{"value":23,"label":"11:30 AM"},{"value":24,"label":"12:00 PM"},{"value":25,"label":"12:30 PM"},{"value":26,"label":"01:00 PM"},{"value":27,"label":"01:30 PM"},{"value":28,"label":"02:00 PM"},{"value":29,"label":"02:30 PM"},{"value":30,"label":"03:00 PM"},{"value":31,"label":"03:30 PM"},{"value":32,"label":"04:00 PM"},{"value":33,"label":"04:30 PM"},{"value":34,"label":"05:00 PM"},{"value":35,"label":"05:30 PM"},{"value":36,"label":"06:00 PM"},{"value":37,"label":"06:30 PM"},{"value":38,"label":"07:00 PM"},{"value":39,"label":"07:30 PM"},{"value":40,"label":"08:00 PM"},{"value":41,"label":"08:30 PM"},{"value":42,"label":"09:00 PM"},{"value":43,"label":"09:30 PM"},{"value":44,"label":"10:00 PM"},{"value":45,"label":"10:30 PM"},{"value":46,"label":"11:00 PM"},{"value":47,"label":"11:30 PM"}] >
+                                            <#assign pagesLength = surveyData.pages?size>
+                                            <#list surveyData.pages as page>
+                                                <#assign thankYouMsg = page.thankyouMsg >
+                                                <#assign pageIndex = page?counter >
+                                                <#list page.questions as question>
+                                                    <#assign questionIndex = question?counter >
+                                                    <#assign isLastPage = pageIndex == pagesLength - 1 >
+
+                                                    <#-- RADIO -->
+                                                    <#if question.type == "radio">
+                                                    <div class="question-wrap radio-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <#list question.choices as choice>
+                                                        <div class="options-wrap">
+                                                            <input class="styled-checkbox" type="radio" id="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-radio" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" />
+                                                            <div class="pseudo-wrap">
+                                                                <span class="before"></span>
+                                                                <span class="after"></span>
+                                                                <label for="${(question.type)!}-${(question.id?c)!}-radio">${(choice.title)!}</label>
+                                                            </div>
+                                                        </div>
+                                                        </#list>
+                                                        <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-radio" class="error">This is a required question</div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- RADIO -->
+
+                                                    <#-- CHECKBOX -->
+                                                    <#if question.type == "checkbox">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div class="options-wrap">
+                                                            <#list question.choices as choice>
+                                                            <input class="styled-checkbox" type="checkbox" id="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-checkbox" name="${(question.type)!}-${(question.id?c)!}" value="${(choice.id?c)!}" />
+                                                            <div class="pseudo-wrap">
+                                                                <span class="before"></span>
+                                                                <span class="after"></span>
+                                                                <label for="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-checkbox">${(choice.title)!}</label>
+                                                            </div>
+                                                            </#list>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- CHECKBOX -->
+
+                                                    <#-- DROPDOWN -->
+                                                    <#if question.type == "dropdown">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div class="options-wrap">
+                                                            <div class="select-wrap">
+                                                                <select name="${(question.type)!}-${(question.id?c)!}" id="${(question.type)!}-${(question.id?c)!}-dropdown">
+                                                                    <option value="" disabled selected hidden>Select</option>
+                                                                    <#list question.choices as choice>
+                                                                    <option value="${(choice.id?c)!}">${(choice.title)!}</option>
+                                                                    </#list>
+                                                                </select>
+                                                                <span class="down-arrow"></span>
+                                                            </div>
+                                                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-dropdown" class="error">This is a required question</div>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- DROPDOWN -->
+
+                                                    <#-- SHORT ANSWER/TEXT -->
+                                                    <#if question.type == "text">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                        </div>
+                                                        <div class="options-wrap">
+                                                            <input type="textarea" required maxlength="2000" placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-short" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
+                                                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-short" class="error">This is a required question</div>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END SHORT ANSWER/TEXT -->
+
+                                                    <#-- PARAGRAPH/TEXTAREA -->
+                                                    <#if question.type == "textarea">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!} <#if question.isRequired><em>*</em></#if> </span>
+                                                        </div>
+                                                        <div class="options-wrap">
+                                                            <input type="textarea" maxlength="2000" required placeholder="Enter your response" id="${(question.type)!}-${(question.id?c)!}-para" name="${(question.type)!}-${(question.id?c)!}" class="textarea"/>
+                                                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-para" class="error">This is a required question</div>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END PARAGRAPH/TEXTAREA -->
+
+                                                    <#-- RATING -->
+                                                    <#if question.type == "rating">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div style= "margin: 0 20px;">
+                                                            <div class="rating-bubbles pl-0">
+                                                                <span class="rating-min">
+                                                                <span class="rating-min-text">${(question.minimumRateDescription)!}</span>
+                                                                </span>
+                                                                <span class="rating-max">
+                                                                <span class="rating-max-text">${(question.maximumRateDescription)!}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <#list question.choices as choice>
+                                                            <div class="options-wrap radio-wrap rate-wrap">
+                                                                <input type="radio" class="styled-checkbox" name="${(question.type)!}-${(question.id?c)!}" id="${(choice.id?c)!}" value="${(choice.title)!}" />
+                                                                <div class="pseudo-wrap">
+                                                                    <span class="before"></span>
+                                                                    <span class="after"></span>
+                                                                    <label for="${(choice.id?c)!}">${(choice.title)!}</label>
+                                                                </div>
+                                                            </div>
+                                                            </#list>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END RATING -->
+
+                                                    <#-- NPS -->
+                                                    <#if question.type == "nps">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div style= "margin: 0 20px;">
+                                                            <div class="rating-bubbles pl-0">
+                                                                <span class="rating-min">
+                                                                <span class="rating-min-text">${(question.minimumRateDescription)!}</span>
+                                                                </span>
+                                                                <span class="rating-max">
+                                                                <span class="rating-max-text">${(question.maximumRateDescription)!}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <#list question.choices as choice>
+                                                            <div class="options-wrap radio-wrap rate-wrap">
+                                                                <input type="radio" class="styled-checkbox" name="${(question.type)!}-${(question.id?c)!}" id="${(choice.id?c)!}" value="${(choice.title)!}" />
+                                                                <div class="pseudo-wrap">
+                                                                    <span class="before"></span>
+                                                                    <span class="after"></span>
+                                                                    <label for="${(choice.id?c)!}">${(choice.title)!}</label>
+                                                                </div>
+                                                            </div>
+                                                            </#list>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END NPS -->
+
+                                                    <#-- MATRIX RADIO -->
+                                                    <#if question.type == "matrixradio">
+                                                    <div class="question-wrap matrix-wrapper">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div class="rating-bubbles">
+                                                            <#list question.choices as choice>
+                                                            <span class="rating-text">${(choice.title)!}</span>
+                                                            </#list>
+                                                        </div>
+                                                        <#list question.rows as row>
+                                                        <div class="row-wrap d-flex">
+                                                            <span class="matrix-title">${(row.title)!}</span>
+                                                            <div class="radio-option-wrap d-flex">
+                                                                <#list question.choices as choice>
+                                                                <div class="options-wrap radio-wrap rate-wrap">
+                                                                    <input type="radio" class="styled-checkbox" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}" id="mrd-${(row.id?c)!}-${(choice.id?c)!}" value="${(choice.id?c)!}"/>
+                                                                    <div class="pseudo-wrap">
+                                                                        <span class="before"></span>
+                                                                        <span class="after"></span>
+                                                                        <label for="mrd-${(row.id?c)!}-${(choice.id?c)!}"></label>
+                                                                    </div>
+                                                                </div>
+                                                                </#list>
+                                                            </div>
+                                                        </div>
+                                                        </#list>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END MATRIX RADIO -->
+
+                                                    <#-- MATRIX RATING-->
+                                                    <#if question.type == "matrixrating">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div class="rating-bubbles">
+                                                            <span class="rating-min">
+                                                            <span class="rating-min-text">${(question.minimumRateDescription)!}</span>
+                                                            </span>
+                                                            <span class="rating-max">
+                                                            <span class="rating-max-text">${(question.maximumRateDescription)!}</span>
+                                                            </span>
+                                                        </div>
+                                                        <#list question.rows as row>
+                                                        <div class="options-wrap matrix-wrap">
+                                                            <span class="matrix-title">${(row.title)!}</span>
+                                                            <span>
+                                                            <#list question.minimumValue..question.maximumValue as value>
+                                                            <input class="matrix-radio" type="radio" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}" id="mrt-${(row.id?c)!}-${(value)!}" value="${(value)!}"/>
+                                                            <label for="mrt-${(row.id?c)!}-${(value)!}">${(value)!}</label>
+                                                            </#list>
+                                                            </span>
+                                                        </div>
+                                                        </#list>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END MATRIX RATING -->
+
+                                                    <#-- MATRIX DROPDOWN-->
+                                                    <#if question.type == "matrixdropdown">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <#list question.rows as row>
+                                                        <div class="options-wrap matrix-dropdown">
+                                                            <span class= "label-wrap">${(row.title)!}</span>
+                                                            <span class="select-wrap">
+                                                                <select name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}" id="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}-md">
+                                                                    <option value="" disabled selected hidden>Select</option>
+                                                                    <#list question.choices as choice>
+                                                                    <option value="${(choice.id?c)!}">${(choice.title)!}</option>
+                                                                    </#list>
+                                                                </select>
+                                                                <span class="down-arrow"></span>
+                                                            </span>
+                                                            <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)!}-md" class="error">This is a required question</div>
+                                                        </div>
+                                                        </#list>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END MATRIX DROPDOWN -->
+
+                                                    <#-- CONTACT -->
+                                                    <#if question.type == "contact">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div class="main-contact">
+                                                            <#list question.rows as row>
+                                                            <#if !row.hidden && row.visible>
+                                                            <div class="contact-wrapper">
+                                                                <div class="contact-input-wrap">
+                                                                    <#if row.type == "text">
+                                                                    <label>${(row.title)!}</label>
+                                                                    <input placeholder="${(row.title)!}" type="text"
+                                                                        class="floating-input"
+                                                                        value="" id="first" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
+                                                                    </#if>
+                                                                    <#if row.type == "email">
+                                                                    <label>${(row.title)!}</label>
+                                                                    <input placeholder="Email" type="email"
+                                                                        class="floating-input undefined"
+                                                                        value="" id="email" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
+                                                                    </#if>
+                                                                    <#if row.type == "phone">
+                                                                    <label>${(row.title)!}</label>
+                                                                    <input placeholder="Phone" type="tel"
+                                                                        class="floating-input undefined"
+                                                                        value="" id="tel" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
+                                                                    </#if>
+                                                                    <#if row.type == "country">
+                                                                    <label>${(row.title)!}</label>
+                                                                    <input placeholder="Country" type="text"
+                                                                        class="floating-input"
+                                                                        value="USA" id="country" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}" />
+                                                                    </#if>
+                                                                    <#if row.type == "state">
+                                                                    <div class="dropdown-wrapper">
+                                                                        <div>
+                                                                            <span class="dropdown-menu active">
+                                                                            <label class="">select state *</label></span>
+                                                                            <div class="select-wrap">
+                                                                                <select  id="state" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}">
+                                                                                    <#list states as state>
+                                                                                    <option value="${(state.abbreviation)}">${(state.title)}</option>
+                                                                                    </#list>
+                                                                                </select>
+                                                                                <span class="down-arrow"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </#if>
+                                                                    <#if row.type == "zipcode">
+                                                                    <label class="">${(row.title)!} *</label></span>
+                                                                    <input placeholder="Zip Code" id="zipcode" type="tel"
+                                                                        class="floating-input"
+                                                                        value="" name="${(question.type)!}-${(question.id?c)!}-${(row.type)!}-${(row.id?c)}">
+                                                                    </#if>
+                                                                </div>
+                                                            </div>
+                                                            </#if>
+                                                            </#list>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END CONTACT -->
+
+                                                    <#-- DATETIME -->
+                                                    <#if question.type == "datetime">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(questionIndex)!}. ${(question.title)!}</span>
+                                                        </div>
+                                                        <div class="date-time-wrapper">
+                                                            <#if question.showDate>
+                                                            <div class="date-wrap">
+                                                                <span>Date</span>
+                                                                <input name="select-date" type="date" value="YYYY-DD-MM">
+                                                            </div>
+                                                            </#if>
+                                                            <#if question.showTime>
+                                                            <div class="date-wrap">
+                                                                <span><#if question.showDate>at<#else>Time</#if></span>
+                                                                <span class="select-wrap">
+                                                                    <select name="time" id="time">
+                                                                        <#assign inc = question.interval?then(1, 2) >
+                                                                        <#list question.minimumValue..question.maximumValue as value>
+                                                                        <#assign x = value_index >
+                                                                        <#if value % inc == 0>
+                                                                        <option value="${value}">${(timeValues[x]).label}</option>
+                                                                        </#if>
+                                                                        </#list>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                            </#if>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END DATETIME -->
+
+                                                    <#-- LABEL/HELPTEXT -->
+                                                    <#if question.type == "label">
+                                                    <div class="question-wrap">
+                                                        <div class="question-title">
+                                                            <span>${(question.title)!}</span>
+                                                        </div>
+                                                    </div>
+                                                    </#if>
+                                                    <#-- END LABEL -->
+
+                                                </#list>
+                                            </#list>
+                                            <div class="btn-wrap">
+                                                <button class="btn submit-btn" type="submit" on="tap: AMP.setState({ page : { currentPage : 'home', submitting: true}})">
+                                                    <span class="submit-text">Submit</span>
+                                                    <span class="submitting-text">Submitting</span>
+                                                </button>
+                                            </div>
+                                            <div submit-error class="error text-center form-submit-error">
+                                                Something went wrong ! Please try again later !
+                                            </div>
+                                            <div submitting class="text-center loader">
+                                                <amp-img src="https://birdeye.com/web2/images/src/assets/images/loader/loader-birdeye.gif?a1cef4511f0b9a73f43077c4e5165877" height="60" width="60" style="position: absolute;
+                                                    bottom:200px; left:0; right:0; margin: 0 auto;" noloading>
+                                                </amp-img>
+                                            </div>
+                                        </form>
+                                    </section>
+                                </amp-layout>
+                    </template>
+                    <div fallback style="padding:20px 0; text-align: center;">
+                        <div style="margin:20px;">
+                            <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
+                        </div>
+                        <h3>You have already taken this survey !</h3>
+                    </div>
+                </amp-list>
+            </section>
+        </amp-layout>
+
+        <amp-layout>
+            <section hidden
+                [hidden]="page.currentPage != 'thanks'" style="padding:20px 0; text-align: center;">
+                <div style="margin:20px;">
+                    <amp-img width="50" height="50" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/checkmark-large.png" alt="thanks"/>
+                </div>
+                <h3>${(thankYouMsg)!}</h3>
+            </section>
+        </amp-layout>
+    </body>
+</html>
