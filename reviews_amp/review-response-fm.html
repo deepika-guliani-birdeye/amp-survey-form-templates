@@ -1,0 +1,350 @@
+<!doctype html>
+<html amp4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <script custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js" async></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+  <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+  <style amp-custom>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 15px;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: rgb(33, 33, 33);
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 10px 0px 0px;
+            display: block;
+        }
+
+        strong {
+            font-weight: 500;
+            font-size: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .amp-head p {
+            color: #fff;
+        }
+
+        .content-wrap {
+            max-width: 500px;
+            margin: 0px auto;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            transform: translateY(-38px);
+        }
+
+        a {
+            font-weight: 500;
+            color: rgb(25, 118, 210);
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        img {
+            display: inline-block;
+        }
+
+        .amp-head {
+            margin: 0px auto;
+            max-width: 100%;
+            background-color: #1565c0;
+            text-align: center;
+            padding: 20px 20px 65px;
+        }
+
+        .star-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .star-wrap a {
+            margin-right: 10px;
+        }
+
+        .awesome-exp {
+            margin-bottom: 60px;
+        }
+
+        .awesome-exp p {
+            font-size: 18px;
+            line-height: 1.44
+        }
+
+        .review-by,
+        .review-by strong {
+            font-size: 15px;
+            color: rgb(85, 85, 85);
+        }
+
+        .review-by strong {
+            color: rgb(33, 33, 33);
+        }
+
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
+        .terms-wrap {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .terms-wrap a {
+            font-size: 11px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 5px 0;
+            padding: 0;
+        }
+
+        .terms-wrap li {
+            display: inline-block;
+            color: #1976d2;
+            margin: 0 4px;
+            font-size: 12px;
+        }
+
+        .btn-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-wrap button {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            color: rgb(255, 255, 255);
+            background-color: rgb(25, 118, 210);
+            width: 255px;
+            padding: 15px;
+            border-radius: 2px;
+            transition: all 0.5s ease;
+        }
+
+        textarea {
+            width: 100%;
+            background: #f9fafb;
+            height: 60px;
+            padding: 18px 15px;
+            border: none;
+            border-bottom: 1px solid #2d3e50;
+            font-size: 18px;
+            color: #212121;
+            resize: none;
+            margin-bottom: 15px;
+        }
+
+        ::-webkit-input-placeholder { /* Edge */
+        color: #999;
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #999;
+        }
+
+        ::placeholder {
+        color: #999;
+        }
+
+        textarea:focus,
+        button:focus {
+            outline: 0;
+        }
+
+        .social-reply {
+            font-size: 13px;
+            color: #999999;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .review-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .review-wrapper input, .review-wrapper a {
+            border: 0;
+            font-size: 18px;
+            padding: 10px 15px;
+            color: #1976d2;
+        }
+        .review-wrapper input.enabled-submit:hover, .review-wrapper a:hover {
+            background-color: #f4f6f7;
+            cursor: pointer;
+        }
+        .review-wrapper .disabled-submit {
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+            <!-- style=<#if businessType=="Direct">background-color: "#1565c0" <#else>background-color: "#f4f4f4"</#if> -->
+    <div class="amp-head">
+            <div>
+                <!-- <amp-img width="123" height="28" src="${(logoUrl)!}" alt="logo" title="logo" /> -->
+                <amp-img width="123" height="28" src="https://ci6.googleusercontent.com/proxy/QxD9srN37XBSMxUGWq7bKgs1uqYndzv6kZl2XxQcqNmJC_ec0zh3ULrvkuC-ZVJ8hZUa4woF-FUgneG15zOZAUWmOiu6wmMZI0_YmbmhxckhSdx6A21U=s0-d-e1-ft#https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/logo.png" alt="logo" title="logo" />
+            </div>
+            <p>${(locationName)!}</p>
+            <!-- <font color=<#if businessType=="Direct">"#ffffff" <#else>"#212121"</#if>>${(locationName)!}</font> -->
+    </div>
+    <div class="content-wrap">
+       
+        <#list reviews as reviewObject>
+            <#assign reviewIndex = reviewObject?counter >
+            <div class="review-detail">
+               
+                <div class="star-wrap">
+                    <div>
+                        <#if reviewObject.reviewUrl??>
+                            <a href="${(reviewObject.reviewUrl)!}" target="_blank" >${(reviewObject.sourceAlias)!}</a>
+                        <#else>
+                            ${(reviewObject.sourceAlias)!}
+                        </#if>
+                    </div>
+                    <amp-img width="135" height="25" src="${(reviewObject.starImageUrl)!}"></amp-img>
+                </div>
+
+                <#if reviewObject.reviewText??>
+                    <div class="awesome-exp">
+                        <p>"${(reviewObject.reviewText)!}"</p>
+                    </div>
+                </#if>
+
+                <div class="review-by">
+                    <span>Reviewed by</span>
+                    <strong>${(reviewObject.reviewerName)!}</strong>
+                </div>
+
+                <div class="contact-details">
+                        <#if (reviewObject.reviewerEmail?? && reviewObject.reviewerPhone??)>
+                        <div>
+                            <div>
+                            <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
+                                <a style="color:#1976d2">${(reviewObject.reviewerEmail)!}</a> |
+                                ${(reviewObject.reviewerPhone)!}</p>
+                            </div>
+                        </div>
+                        <#elseif (!reviewObject.reviewerEmail?? && reviewObject.reviewerPhone??)>
+                            <div>
+                            <div>
+                                <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
+                                <a style="color:#1976d2">${(reviewObject.reviewerPhone)!}</p>
+                            </div>
+                            </div>
+                            <#elseif (reviewObject.reviewerEmail?? && !reviewObject.reviewerPhone??)>
+                            <div>
+                                <div>
+                                <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
+                                    <a style="color:#1976d2">${(reviewObject.reviewerEmail)!}</a></p>
+                                </div>
+                            </div>
+                            <#else>
+                        </#if>
+                        <#if reviewObject.canBeContacted??>
+                        <div>
+                            <div>
+                            <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">To
+                                be contacted: <#if reviewObject.canBeContacted>Yes<#else>No</#if>
+                            </p>
+                            </div>
+                        </div>
+                    </#if>
+                </div>
+
+                <template type="amp-mustache" id="submit_success_template_${(reviewIndex)!}">
+                    <div>You replied on ${(reviewObject.sourceAlias)!}</div>
+                    <div>{{replyComment}}</div>
+                    <a href="https://birdeye.com/sign-in">Edit Reply</a>
+                </template>
+                <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
+                    Something went wrong while posting reply !
+                </template>
+                
+                <div class="review-wrap">
+                    <div [class]="userReplied${(reviewIndex)!} == true ? 'reply-max-height' : 'no-replied-max-height'">
+                        <amp-list 
+                            width="auto"
+                            height="143"
+                            layout="fixed-height"
+                            src="https://push-notification-test-37477.firebaseapp.com/getData">
+                                <template type="amp-mustache">
+                                        <amp-layout>
+                                                <section [hidden]="{{canReply}} == false">
+                                                    <form 
+                                                        class="form"
+                                                        method="post" 
+                                                        action-xhr="https://push-notification-test-37477.firebaseapp.com/postReply"
+                                                        custom-validation-reporting="show-all-on-submit"
+                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='https://birdeye.com/dashboard/home');">
+                                                            <div [hidden]="userReplied${(reviewIndex)!} == true">
+                                                                <div class="social-reply">Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}</div>
+
+                                                                <input type="hidden" name="reviewId" value="${(reviewObject.reviewId?c)!}" />
+                                                                <input type="hidden" name="userId" value="${(reviewObject.userId?c)!}" />
+                                                                <input type="hidden" name="businessNumber" value="${(reviewObject.businessNumber?c)!}" />
+                                                                <input type="hidden" name="fromEmail" value="${(fromEmail)!}" />
+
+                                                                <textarea
+                                                                    name="reply"
+                                                                    [hidden]="userReplied${(reviewIndex)!} == true"
+                                                                    placeholder="Reply"
+                                                                    on="input-debounced: AMP.setState({userReply${(reviewIndex)!}: event.value});"
+                                                                    required
+                                                                ></textarea>
+                                                                <div class="review-wrapper">
+                                                                    <input type="submit" [disabled]="!userReply${(reviewIndex)!}" value="Reply" />
+                                                                    <a href="https://birdeye.com/dashboard/reviews">Open Review</a>
+                                                                </div>
+                                                            </div>
+                                                            <div submit-success template="submit_success_template_${(reviewIndex)!}"></div>
+                                                            <div submit-error template="submit_error_template_${(reviewIndex)!}"></div>
+                                                    </form>
+                                                </section>
+
+                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' == '')">
+                                                        <div>{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}</div>
+                                                        <div>{{existingResponse}}</div>
+                                                        <div><a href="https://birdeye.com/sign-in">Edit Reply</a></div>
+                                                </section>
+                
+                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' != '')">
+                                                    <a href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                                                </section>
+            
+                                            </amp-layout>
+                                </template>
+                                <div fallback>
+                                    <a href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                                </div>
+                        </amp-list>
+                    </div>
+                </div>
+            </div>
+        </#list>
+    </div>
+</body>
+</html>
