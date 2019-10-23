@@ -42,7 +42,7 @@
                         <span class="social-reply">You replied on Google</span> 
                         <p class="reply-commment">{{replyComment}}</p>
                     </div>
-                    <a href="https://birdeye.com/sign-in" class="edit-reply">Edit Reply</a> 
+                    <a href="https://birdeye.com/sign-in" class="edit-reply">Edit reply</a> 
                 </template>
                 <template type="amp-mustache" id="submit_error_template_1"> Something went wrong while posting reply ! </template>
                 <div class="review-wrap">
@@ -62,75 +62,14 @@
                                             <div submit-error template="submit_error_template_1"></div>
                                         </form>
                                     </section>
-                                    <section [hidden]="{{canReply}}==true || (userReplied1==true) || ({{canReply}}==false && '{{existingResponse}}'=='')">
+                                    <section [hidden]="{{canReply}}==true || (userReplied1==true) || ({{canReply}}==false && '{{existingResponse}}'=='')" style="margin-bottom: 10px;">
                                         <div class="reply-wrap">
                                             <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}</span> 
                                             <p class="reply-commment">{{existingResponse}}</p>
                                         </div>
-                                        <a href="https://birdeye.com/sign-in" class="edit-reply">Edit Reply</a> 
+                                        <a href="https://birdeye.com/sign-in" class="edit-reply">Edit reply</a> 
                                     </section>
                                     <section [hidden]="{{canReply}}==true || (userReplied1==true) || ({{canReply}}==false && '{{existingResponse}}' !='')"> <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a> </section>
-                                </amp-layout>
-                            </template>
-                            <div fallback> <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a> </div>
-                        </amp-list>
-                    </div>
-                </div>
-            </div>
-            <div class="review-detail">
-                <div class="star-wrap">
-                    <div>  <a href="https://birdeye.com/sign-in" target="_blank" >Google</a>  </div>
-                    <amp-img width="135" height="26" src="https://ci5.googleusercontent.com/proxy/CvEBwvQnWI_sBa4p26ySt79lcd_KvHlJbumb-elz548DFlbnBzTBA4JJEJppmsiGzbKE00L0j4X5gUcvSU24cPrPLl3fybxweI_iatwhEa4V8pY2VQ_4EKG9szQfjonSDlj9Tg=s0-d-e1-ft#https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/ca-email-500-star.png"></amp-img>
-                </div>
-                <div class="awesome-exp">
-                    <p>"I came here not for a bmw but for a used Subaru they had. I was hesitant they would treat me differently bc I was not buying an expensive car but a used Subaru. Jared was top notch. He was so nice and down to earth. He made the whole process easy and painless. I would buy a car here again in a second. This was probably the 4th dealership I went too. It was so clean and even had snacks that I didn't have to wrestle a vending machine for. My only recommendation is more privacy when discussing financial information not to do it in the cubicle but maybe a more private location. I will come back here for sure."</p>
-                </div>
-                <div class="review-by"> <span>Reviewed by</span> <strong>Automation Testing</strong> </div>
-                <div class="contact-details">
-                    <div>
-                        <div>
-                            <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;"> <a style="color:#1976d2">birdeyeqa@birdeye.com</a> | 1234567899</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">To be contacted: Yes </p>
-                        </div>
-                    </div>
-                </div>
-                <template type="amp-mustache" id="submit_success_template_2">
-                    <div class="reply-wrap">
-                        <span class="social-reply">You replied on Google</span> 
-                        <p class="reply-commment">{{replyComment}}</p>
-                    </div>
-                    <a href="https://birdeye.com/sign-in" class="edit-reply">Edit Reply</a> 
-                </template>
-                <template type="amp-mustache" id="submit_error_template_2"> Something went wrong while posting reply ! </template>
-                <div class="review-wrap">
-                    <div [class]="userReplied2==true ? 'reply-max-height' : 'no-replied-max-height'">
-                        <amp-list width="auto" height="1" style="min-height: 90px;" layout="fixed-height" id="replySection2" src="https://push-notification-test-37477.firebaseapp.com/getData">
-                            <template type="amp-mustache">
-                                <amp-layout>
-                                    <section [hidden]="{{canReply}}==false">
-                                        <form class="form" method="post" action-xhr="https://push-notification-test-37477.firebaseapp.com/postReply" custom-validation-reporting="show-all-on-submit" on="submit-success: AMP.setState({userReplied2: true});submit-error: AMP.navigateTo(url='https://birdeye.com/dashboard/home');">
-                                            <div [hidden]="userReplied2==true">
-                                                <div class="social-reply">Your reply will be automatically posted on Google</div>
-                                                <input type="hidden" name="reviewId" value=""/> <input type="hidden" name="responseBy" value=""/> <input type="hidden" name="businessNumber" value=""/> <input type="hidden" name="emailId" value=""/> 
-                                                <textarea name="response" [hidden]="userReplied2==true" placeholder="Reply" on="input-debounced: AMP.setState({userReply2: event.value});tap: replySection2.changeToLayoutContainer" required autoexpand ></textarea>
-                                                <div class="review-wrapper"> <input type="submit" [disabled]="!userReply2" value="Reply" [class]="userReply2? 'enabled-submit' : 'disabled-submit'"/> <a href="https://birdeye.com/dashboard/reviews">Open Review</a> </div>
-                                            </div>
-                                            <div submit-success template="submit_success_template_2"></div>
-                                            <div submit-error template="submit_error_template_2"></div>
-                                        </form>
-                                    </section>
-                                    <section [hidden]="{{canReply}}==true || (userReplied2==true) || ({{canReply}}==false && '{{existingResponse}}'=='')">
-                                        <div class="reply-wrap">
-                                            <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}</span> 
-                                            <p class="reply-commment">{{existingResponse}}</p>
-                                        </div>
-                                        <a href="https://birdeye.com/sign-in" class="edit-reply">Edit Reply</a> 
-                                    </section>
-                                    <section [hidden]="{{canReply}}==true || (userReplied2==true) || ({{canReply}}==false && '{{existingResponse}}' !='')"> <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a> </section>
                                 </amp-layout>
                             </template>
                             <div fallback> <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a> </div>

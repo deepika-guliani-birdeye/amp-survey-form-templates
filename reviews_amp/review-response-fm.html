@@ -340,7 +340,7 @@
                             <span class="social-reply">You replied on ${(reviewObject.sourceAlias)!}</span>
                             <p class="reply-commment">{{replyComment}}</p>
                     </div>
-                    <a href="https://birdeye.com/sign-in" class="edit-reply">Edit Reply</a>
+                    <a href="https://birdeye.com/sign-in" class="edit-reply">Edit reply</a>
                 </template>
 
                 <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
@@ -396,12 +396,12 @@
                                                     </form>
                                                 </section>
 
-                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' == '')">
+                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' == '')" style="margin-bottom: 10px;">
                                                         <div class="reply-wrap">
                                                                 <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}</span>
                                                                 <p class="reply-commment">{{existingResponse}}</p>
                                                         </div>
-                                                        <a href="https://birdeye.com/sign-in" class="edit-reply">Edit Reply</a>
+                                                        <a href="https://birdeye.com/sign-in" class="edit-reply">Edit reply</a>
                                                 </section>
                 
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' != '')">
