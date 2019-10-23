@@ -2,7 +2,6 @@
 <html amp4email>
 <head>
   <meta charset="utf-8">
-  <meta content="*.show,*.hide,*.toggleVisibility,*.toggleClass,*.scrollTo,*.focus,AMP-CAROUSEL.goToSlide,AMP-IMAGE-LIGHTBOX.open,AMP-LIGHTBOX.open,AMP-LIGHTBOX.close,AMP-LIST.changeToLayoutContainer,AMP-LIST.refresh,AMP-SELECTOR.clear,AMP-SELECTOR.selectUp,AMP-SELECTOR.selectDown,AMP-SELECTOR.toggle,AMP-SIDEBAR.open,AMP-SIDEBAR.close,AMP-SIDEBAR.toggle,FORM.clear,FORM.submit,AMP.setState">
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <style amp4email-boilerplate>body{visibility:hidden}</style>
   <script custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js" async></script>
@@ -45,7 +44,7 @@
                 margin: 0px auto;
                 width: 100%;
                 background-color: #fff;
-                padding: 30px 20px;
+                padding: 30px;
                 text-align: center;
                 transform: translateY(-38px);
             }
@@ -158,7 +157,7 @@
                 font-size: 18px;
                 color: #212121;
                 resize: none;
-                margin-bottom: 15px;
+                margin-bottom: 5px;
             }
 
             ::-webkit-input-placeholder {
@@ -255,13 +254,20 @@
     <div class="amp-head">
             <div>
                 <!-- <amp-img width="123" height="28" src="${(logoUrl)!}" alt="logo" title="logo" /> -->
-                <amp-img width="123" height="28" src="https://ci6.googleusercontent.com/proxy/QxD9srN37XBSMxUGWq7bKgs1uqYndzv6kZl2XxQcqNmJC_ec0zh3ULrvkuC-ZVJ8hZUa4woF-FUgneG15zOZAUWmOiu6wmMZI0_YmbmhxckhSdx6A21U=s0-d-e1-ft#https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/logo.png" alt="logo" title="logo" />
+                <amp-img width="70" height="17" src="https://ci6.googleusercontent.com/proxy/QxD9srN37XBSMxUGWq7bKgs1uqYndzv6kZl2XxQcqNmJC_ec0zh3ULrvkuC-ZVJ8hZUa4woF-FUgneG15zOZAUWmOiu6wmMZI0_YmbmhxckhSdx6A21U=s0-d-e1-ft#https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/logo.png" alt="logo" title="logo" />
             </div>
             <p>${(locationName)!}</p>
             <!-- <font color=<#if businessType=="Direct">"#ffffff" <#else>"#212121"</#if>>${(locationName)!}</font> -->
     </div>
     <div class="content-wrap">
-       
+        <#if reviewCount == ''>
+            <p style="font-family:'Roboto',Arial,sans-serif;font-size:20px;font-weight:500;font-style:normal;font-stretch:normal;line-height:1.2;letter-spacing:normal;color:#212121;margin:0;display:block;text-align: center;">You
+              just got ${(reviewCount)!} new reviews</p>
+        <#else>
+              <p style="font-family:'Roboto',Arial,sans-serif;font-size:20px;font-weight:500;font-style:normal;font-stretch:normal;line-height:1.2;letter-spacing:normal;color:#212121;margin:0;display:block;text-align: center;">
+                You just got a new review</p>
+        </#if>
+
         <#list reviews as reviewObject>
             <#assign reviewIndex = reviewObject?counter >
             <div class="review-detail">
@@ -394,13 +400,13 @@
                                                 </section>
                 
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' != '')">
-                                                    <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                                                    <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a>
                                                 </section>
             
                                             </amp-layout>
                                 </template>
                                 <div fallback>
-                                    <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on Birdeye</a>
+                                    <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a>
                                 </div>
                         </amp-list>
                     </div>
