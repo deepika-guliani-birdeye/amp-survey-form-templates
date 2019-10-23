@@ -29,14 +29,16 @@
             }
 
             strong {
-                font-weight: 500;
+                font-weight: 600;
                 font-size: 20px;
                 display: inline-block;
-                margin-bottom: 10px;
+                margin-bottom: 2px;
             }
 
             .amp-head p {
                 color: #fff;
+                font-weight: 600;
+                margin-top: 33px;
             }
 
             .content-wrap {
@@ -47,6 +49,11 @@
                 padding: 30px;
                 text-align: center;
                 transform: translateY(-38px);
+            }
+
+            .content-wrap > strong {
+                line-height: 1.2;
+                margin-bottom: 40px;
             }
 
             a {
@@ -261,11 +268,9 @@
     </div>
     <div class="content-wrap">
         <#if reviewCount == ''>
-            <p style="font-family:'Roboto',Arial,sans-serif;font-size:20px;font-weight:500;font-style:normal;font-stretch:normal;line-height:1.2;letter-spacing:normal;color:#212121;margin:0;display:block;text-align: center;">You
-              just got ${(reviewCount)!} new reviews</p>
+            <strong>You just got ${(reviewCount)!} new reviews</strong>
         <#else>
-              <p style="font-family:'Roboto',Arial,sans-serif;font-size:20px;font-weight:500;font-style:normal;font-stretch:normal;line-height:1.2;letter-spacing:normal;color:#212121;margin:0;display:block;text-align: center;">
-                You just got a new review</p>
+              <strong>You just got a new review</strong>
         </#if>
 
         <#list reviews as reviewObject>
@@ -280,7 +285,7 @@
                             ${(reviewObject.sourceAlias)!}
                         </#if>
                     </div>
-                    <amp-img width="135" height="25" src="${(reviewObject.starImageUrl)!}"></amp-img>
+                    <amp-img width="135" height="26" src="${(reviewObject.starImageUrl)!}"></amp-img>
                 </div>
 
                 <#if reviewObject.reviewText??>
