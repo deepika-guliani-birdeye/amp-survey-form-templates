@@ -264,11 +264,11 @@
             <p>${(locationName)!}</p>
     </div>
     <div class="content-wrap">
-        <!-- <#if reviewCount gt 1>
+        <#if reviewCount gt 1>
             <strong>You just got ${(reviewCount)!} new reviews</strong>
-        <#else> -->
+        <#else>
               <strong>You just got a new review</strong>
-        <!-- </#if> -->
+        </#if>
 
         <#list reviews as reviewObject>
             <#assign reviewIndex = reviewObject?counter >
@@ -337,7 +337,7 @@
                             <span class="social-reply">You replied on ${(reviewObject.sourceAlias)!}</span>
                             <p class="reply-commment">{{replyComment}}</p>
                     </div>
-                    <a href="https://birdeye.com/sign-in" class="edit-reply">Edit reply</a>
+                    <a href="${(readReviewCTA)!}&reviewId=${(reviewObject.reviewId)!}" class="edit-reply">Edit reply</a>
                 </template>
 
                 <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
