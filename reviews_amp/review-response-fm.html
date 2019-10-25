@@ -257,21 +257,18 @@
     </style>
 </head>
 <body>
-            <!-- style=<#if businessType=="Direct">background-color: "#1565c0" <#else>background-color: "#f4f4f4"</#if> -->
     <div class="amp-head">
             <div>
-                <!-- <amp-img width="123" height="28" src="${(logoUrl)!}" alt="logo" title="logo" /> -->
-                <amp-img width="70" height="17" src="https://ci6.googleusercontent.com/proxy/QxD9srN37XBSMxUGWq7bKgs1uqYndzv6kZl2XxQcqNmJC_ec0zh3ULrvkuC-ZVJ8hZUa4woF-FUgneG15zOZAUWmOiu6wmMZI0_YmbmhxckhSdx6A21U=s0-d-e1-ft#https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/logo.png" alt="logo" title="logo" />
+                <amp-img width="70" height="17" src="${(logoUrl)!}" alt="logo" title="logo" />
             </div>
             <p>${(locationName)!}</p>
-            <!-- <font color=<#if businessType=="Direct">"#ffffff" <#else>"#212121"</#if>>${(locationName)!}</font> -->
     </div>
     <div class="content-wrap">
-        <#if reviewCount == ''>
+        <!-- <#if reviewCount gt 1>
             <strong>You just got ${(reviewCount)!} new reviews</strong>
-        <#else>
+        <#else> -->
               <strong>You just got a new review</strong>
-        </#if>
+        <!-- </#if> -->
 
         <#list reviews as reviewObject>
             <#assign reviewIndex = reviewObject?counter >
@@ -352,7 +349,7 @@
                         <amp-list 
                             width="auto"
                             height="1"
-                            style="min-height: 90px;"
+                            style="min-height: 62px;"
                             layout="fixed-height"
                             id="replySection${(reviewIndex)!}"
                             src="https://push-notification-test-37477.firebaseapp.com/getData">
@@ -364,14 +361,15 @@
                                                         method="post" 
                                                         action-xhr="https://push-notification-test-37477.firebaseapp.com/postReply"
                                                         custom-validation-reporting="show-all-on-submit"
-                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='https://birdeye.com/dashboard/home');">
+                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='https://birdeye.com/dashboard/reviews/feed?businessId=123456&reviewId=${(reviewObject.reviewId)!}');">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
                                                                 <div class="social-reply">Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}</div>
 
-                                                                <input type="hidden" name="reviewId" value="${(reviewObject.reviewId?c)!}" />
+                                                                <input type="hidden" name="reviewId" value="${(reviewObject.reviewId)!}" />
                                                                 <input type="hidden" name="responseBy" value="${(reviewObject.userId?c)!}" />
                                                                 <input type="hidden" name="businessNumber" value="${(reviewObject.businessNumber?c)!}" />
                                                                 <input type="hidden" name="emailId" value="${(emailId)!}" />
+                                                                <input type="hidden" name="nexusAuditId" value="${(nexusAuditId)!}" />
 
                                                                 <textarea
                                                                     name="response"
@@ -388,7 +386,7 @@
                                                                         value="Reply"
                                                                         [class]="userReply${(reviewIndex)!} ? 'enabled-submit' : 'disabled-submit'"
                                                                     />
-                                                                    <a href="https://birdeye.com/dashboard/reviews">Open Review</a>
+                                                                    <a href="${(readReviewCTA)!}&reviewId=${(reviewObject.reviewId)!}" [text]="userReply${(reviewIndex)!} ? 'Read on BirdEye' ? 'Open Review'"></a>
                                                                 </div>
                                                             </div>
                                                             <div submit-success template="submit_success_template_${(reviewIndex)!}"></div>
@@ -398,20 +396,25 @@
 
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' == '')" style="margin-bottom: 10px;">
                                                         <div class="reply-wrap">
-                                                                <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}</span>
+                                                                <div [hidden]="{{isAutoResponse}}">
+                                                                    <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;{{responseDate}}</span>
+                                                                </div>
+                                                                <div [hidden]="!{{isAutoResponse}}">
+                                                                        <span class="social-reply">Response auto-posted on&nbsp;{{sourceName}}&nbsp;{{responseDate}}</span>
+                                                                </div>
                                                                 <p class="reply-commment">{{existingResponse}}</p>
                                                         </div>
-                                                        <a href="https://birdeye.com/sign-in" class="edit-reply">Edit reply</a>
+                                                        <a href="${(readReviewCTA)!}&reviewId=${(reviewObject.reviewId)!}" class="edit-reply">Edit reply</a>
                                                 </section>
                 
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' != '')">
-                                                    <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a>
+                                                    <a class="edit-reply" href="${(readReviewCTA)!}&reviewId=${(reviewObject.reviewId)!}">Reply</a>
                                                 </section>
             
                                             </amp-layout>
                                 </template>
                                 <div fallback>
-                                    <a class="edit-reply" href="https://birdeye.com/dashboard/home">Read on BirdEye</a>
+                                    <a class="edit-reply" href="${(readReviewCTA)!}&reviewId=${(reviewObject.reviewId)!}">Reply</a>
                                 </div>
                         </amp-list>
                     </div>
@@ -420,14 +423,84 @@
         </#list>
     </div>
 
-    <!-- Footer html -->
-    <!-- <div style="max-width: 500px; margin: 0 auto; text-align: center" class="table-container"> </div>
-    <table role="presentation" style="background:#f4f4f4; padding-bottom:20px; padding-top: 20px; padding-left: 0px; padding-right: 0px;"
-      border="0" height="100" cellspacing="0" cellpadding="0" align="center" width="100%">
+    <#if showAdvocacyBanner>
+        <table role="presentation" width="100%">
+          <tbody>
+            <tr>
+              <td style="padding-left:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;text-align:center;background: #e3ebf1;"
+                width="100%">
+                <div style="max-width: 500px; margin: 0 auto; text-align: center" class="table-container">
+                  <table role="presentation"
+                    style="padding:0px;background-color: #e3ebf1;">
+                    <tbody>
+                      <tr>
+                        <td height="50"></td>
+                      </tr>
+                      <tr>
+                        <td width="100%" style="padding: 0 20px;">
+                          <table role="presentation" style="font-family: 'Roboto',Arial, sans-serif;margin:0;" width="100%"
+                            cellspacing="0" cellpadding="0">
+                            <tbody>
+                              <tr>
+                                <td style="padding: 0 10px;word-wrap:break-word;font-size:0;"
+                                  valign="middle" height="100%"
+                                  class="p-20">
+                                  <p style=" font-size: 24px; font-weight: 900; font-style: normal; font-stretch: normal; line-height: normal; letter-spacing: normal; color: #2d3e50; margin: 0; ">You’re
+                                    rocking it!</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td height="20"></td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 0 10px;word-wrap:break-word;font-size:0;"
+                                  height="100%"
+                                  class="p-20">
+                                  <p style="font-family:'Roboto',Arial,sans-serif;font-size: 15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.44;letter-spacing:normal;color: #2d3e50;margin:0;display:block;text-align: center;margin:0;">Love
+                                    BirdEye? Tell others how you feel!</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td height="15"></td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div style="max-width: 500px;margin: 0 auto;text-align: center;" class="table-container">
+                                    <table>
+                                      <tbody>
+                                        <tr>
+                                          <td height="40" style="padding:0px;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:2px;font-family:'Roboto',Arial,sans-serif;font-size:18px;font-weight:500;color:#ffffff;width: 261px;height: 52px;border-radius: 2px;background-color: #455b76;"
+                                            align="center" valign="middle"> <a href="${(advocacyCTA)!}"
+                                              style="text-decoration:none;padding:0px;color:#ffffff;display: block;font-size: 19px;line-height: normal;">Leave
+                                              us a review</a></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </#if>
+
+    <div style="max-width: 500px; margin: 0 auto; text-align: center" class="table-container"> </div>
+    <table role="presentation" style="background:#f4f4f4; padding-bottom:20px; padding-top: 20px; padding-left: 0px; padding-right: 0px;" width="100%">
       <tbody>
         <tr>
           <td>
-            <div style="color:#666666;font-family:'Roboto',Arial,sans-serif;font-size:10px;font-weight:300;font-style:normal;font-stretch:normal;line-height:14px;letter-spacing:normal;text-align:center;width:100%;height:54px;display:block;vertical-align:top;margin:0 auto;text-decoration: none;">
+            <div style="color:#666666;font-family:'Roboto',Arial,sans-serif;font-size:10px;font-weight:300;font-style:normal;font-stretch:normal;line-height:14px;letter-spacing:normal;text-align:center;width:100%;height:54px;display:block;margin:0 auto;text-decoration: none;">
               Powered by <a href="${(homepageUrl)!}" target="_blank" style="color:#1976d2; text-decoration: none;">${(businessName)!}</a>
               <br>
               <#if !(businessType=="Whitelabel" )> <a href="${(privacyPolicyUrl)!}" style="color:#1976d2; text-decoration: none;"
@@ -437,7 +510,7 @@
           </td>
         </tr>
       </tbody>
-    </table> -->
+    </table>
 
 </body>
 </html>
