@@ -382,7 +382,7 @@
                                                         method="post" 
                                                         action-xhr="https://demo5.birdeye.com/api/resources/v1/review/AMP/reply"
                                                         custom-validation-reporting="show-all-on-submit"
-                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!})&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}';">
+                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}';">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
                                                                 <div class="social-reply">Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}</div>
 
