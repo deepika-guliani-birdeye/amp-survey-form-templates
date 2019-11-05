@@ -254,6 +254,27 @@
                 border-radius: 2px;
                 color: #fff;
             }
+            .footer-wrap {
+                max-width: 500px;
+                margin: 0 auto;
+                text-align: center;
+                color: #666666;
+                font-weight: 300;
+                font-size: 10px;
+                transform: translateY(-13px);
+                padding-bottom: 20px;
+            }
+
+            .footer-wrap span,
+            .footer-wrap a {
+                font-size: 10px;
+                font-weight: 300;
+                line-height: 14px;
+            }
+
+            .footer-wrap a {
+                color: #1976d2;
+            }
     </style>
 </head>
 <body>
@@ -370,6 +391,7 @@
                                                                 <input type="hidden" name="businessNumber" value="${(reviewObject.businessNumber?c)!}" />
                                                                 <input type="hidden" name="emailId" value="${(emailId)!}" />
                                                                 <input type="hidden" name="nexusAuditId" value="${(nexusAuditId)!}" />
+                                                                <!-- 345678 -->
 
                                                                 <textarea
                                                                     name="response"
@@ -386,7 +408,7 @@
                                                                         value="Reply"
                                                                         [class]="userReply${(reviewIndex)!} ? 'enabled-submit' : 'disabled-submit'"
                                                                     />
-                                                                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}')&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}" [text]="userReply${(reviewIndex)!} ? 'Read on BirdEye' ? 'Open Review'"></a>
+                                                                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}')&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}" [text]="userReply${(reviewIndex)!} ? 'Read on BirdEye' : 'Open Review'"></a>
                                                                 </div>
                                                             </div>
                                                             <div submit-success template="submit_success_template_${(reviewIndex)!}"></div>
@@ -397,10 +419,10 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' == '')" style="margin-bottom: 10px;">
                                                         <div class="reply-wrap">
                                                                 <div [hidden]="{{isAutoResponse}}">
-                                                                    <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;{{responseDate}}</span>
+                                                                    <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
                                                                 </div>
                                                                 <div [hidden]="!{{isAutoResponse}}">
-                                                                        <span class="social-reply">Response auto-posted on&nbsp;{{sourceName}}&nbsp;{{responseDate}}</span>
+                                                                        <span class="social-reply">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
                                                                 </div>
                                                                 <p class="reply-commment">{{existingResponse}}</p>
                                                         </div>
