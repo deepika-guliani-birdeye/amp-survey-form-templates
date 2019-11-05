@@ -355,10 +355,10 @@
 
                 <template type="amp-mustache" id="submit_success_template_${(reviewIndex)!}">
                     <div class="reply-wrap">
-                            <span class="social-reply">You replied on ${(reviewObject.sourceAlias)!}</span>
+                            <span class="social-reply">You replied on ${(reviewObject.sourceAlias)!} on {{responseDate}}</span>
                             <p class="reply-commment">{{replyComment}}</p>
                     </div>
-                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}')&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}" class="edit-reply">Edit reply</a>
+                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}" class="edit-reply">Edit reply</a>
                 </template>
 
                 <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
@@ -373,7 +373,6 @@
                             style="min-height: 62px;"
                             layout="fixed-height"
                             id="replySection${(reviewIndex)!}"
-                            binding="refresh"
                             src="https://demo5.birdeye.com/api/resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(emailId)!}">
                                 <template type="amp-mustache">
                                         <amp-layout>
@@ -436,11 +435,6 @@
             
                                             </amp-layout>
                                 </template>
-                                <div overflow
-                                    class="list-overflow" 
-                                    style="background-color:red;">
-                                    See more
-                                </div>
                                 <div fallback>
                                     <a class="edit-reply" href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}">Reply</a>
                                 </div>
