@@ -665,11 +665,11 @@
                                                             <div class="pseudo-wrap">
                                                                 <span class="before"></span>
                                                                 <span class="after"></span>
-                                                                <label for="${(question.type)!}-${(question.id?c)!}-radio">${(choice.title)!}</label>
+                                                                <label for="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-radio">${(choice.title)!}</label>
                                                             </div>
                                                         </div>
                                                         </#list>
-                                                        <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-radio" class="error">This is a required question</div>
+                                                        <div visible-when-invalid="valueMissing" validation-for="${(question.type)!}-${(question.id?c)!}-${(choice.id?c)!}-radio" class="error">This is a required question</div>
                                                     </div>
                                                     </#if>
                                                     <#-- RADIO -->
