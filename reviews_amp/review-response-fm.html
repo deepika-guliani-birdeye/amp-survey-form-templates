@@ -315,9 +315,11 @@
 </head>
 <body>
     <div class="amp-head">
-            <div>
-                <amp-img width="70" height="17" src="${(logoUrl)!}" alt="logo" title="logo" />
-            </div>
+            <#if logoUrl>
+                <div>
+                    <amp-img width="70" height="17" src="${(logoUrl)!}" alt="logo" title="logo" />
+                </div>
+            </#if>
             <p>${(locationName)!}</p>
     </div>
     <div class="content-wrap">
@@ -420,7 +422,7 @@
                             style="min-height: 62px;"
                             layout="fixed-height"
                             id="replySection${(reviewIndex)!}"
-                            src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(emailId)!}">
+                            src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
                                 <template type="amp-mustache">
                                         <amp-layout>
                                                 <section [hidden]="{{canReply}} == false">
@@ -436,7 +438,7 @@
                                                                 <input type="hidden" name="reviewId" value="${(reviewObject.reviewId)!}" />
                                                                 <input type="hidden" name="responseBy" value="${(reviewObject.userId?c)!}" />
                                                                 <input type="hidden" name="businessNumber" value="${(reviewObject.businessNumber?c)!}" />
-                                                                <input type="hidden" name="emailId" value="${(emailId)!}" />
+                                                                <input type="hidden" name="emailId" value="${(ampEmailId)!}" />
                                                                 <input type="hidden" name="nexusAuditId" value="${(nexusAuditId?c)!}" />
                                                                 <!-- 345678 -->
 
