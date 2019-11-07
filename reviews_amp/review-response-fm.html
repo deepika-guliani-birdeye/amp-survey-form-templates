@@ -348,7 +348,9 @@
                             ${(reviewObject.sourceAlias)!}
                         </#if>
                     </div>
-                    <amp-img width="135" height="26" src="${(reviewObject.starImageUrl)!}"></amp-img>
+                    <#if reviewObject.starImageUrl??>
+                        <amp-img width="135" height="26" src="${(reviewObject.starImageUrl)!}"></amp-img>
+                    </#if>
                 </div>
 
                 <#if reviewObject.reviewText??>
