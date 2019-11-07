@@ -246,6 +246,7 @@
                 color: #555555;
                 font-size: 18px;
                 line-height: 1.3;
+                white-space: pre-line;
             }
 
             .edit-reply {
@@ -424,7 +425,7 @@
                                                     <form 
                                                         class="form"
                                                         method="post" 
-                                                        action-xhr="${(ampApiRoot)!}/resources/v1/review/AMP/reply"
+                                                        action-xhr="${(ampApiRoot)!}resources/v1/review/AMP/reply"
                                                         custom-validation-reporting="show-all-on-submit"
                                                         on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
@@ -447,7 +448,7 @@
                                                                 ></textarea>
                                                                 <div class="review-wrapper">
                                                                     <button 
-                                                                        [class]="userReply${(reviewIndex)!} ? 'enabled-submit edit-reply' : 'disabled-submit edit-reply'" 
+                                                                        [class]="userReply${(reviewIndex)!} ? 'enabled-submit' : 'disabled-submit'" 
                                                                         [disabled]="!userReply${(reviewIndex)!}"
                                                                         type="submit">
                                                                             <span class="reply-text">Reply</span>
