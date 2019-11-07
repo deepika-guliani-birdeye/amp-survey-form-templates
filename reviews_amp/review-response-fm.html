@@ -508,8 +508,12 @@
         <a href="${(homepageUrl)!}" target="_blank">${(businessName)!}</a> 
         <br>
         <#if !(businessType=="Whitelabel" )>
-            <a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a> &nbsp;-&nbsp; 
-            <a href="${(termsOfServiceUrl)!}">Terms of Service</a>
+            <#if privacyPolicyUrl??>
+                <a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a> &nbsp;-&nbsp;
+            </#if>
+            <#if termsOfServiceUrl??>
+                <a href="${(termsOfServiceUrl)!}">Terms of Service</a>
+            </#if>
         </#if>
     </div>
 
