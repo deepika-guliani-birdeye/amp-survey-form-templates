@@ -403,7 +403,7 @@
                             <span class="social-reply">You replied on ${(reviewObject.sourceAlias)!} on {{responseDate}}</span>
                             <p class="reply-commment">{{replyComment}}</p>
                     </div>
-                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}" class="edit-reply">Edit reply</a>
+                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="edit-reply">Open review</a>
                 </template>
 
                 <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
@@ -460,7 +460,7 @@
                                                                         value="Reply"
                                                                         [class]="userReply${(reviewIndex)!} ? 'enabled-submit' : 'disabled-submit'"
                                                                     /> -->
-                                                                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}" [text]="userReply${(reviewIndex)!} ? 'Read on BirdEye' : 'Open Review'"></a>
+                                                                    <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" [text]="userReply${(reviewIndex)!} ? 'Read on BirdEye' : 'Open Review'"></a>
                                                                 </div>
                                                             </div>
                                                             <div submit-success template="submit_success_template_${(reviewIndex)!}"></div>
@@ -483,17 +483,17 @@
                                                                 </div>
                                                                 <p class="reply-commment">{{existingResponse}}</p>
                                                         </div>
-                                                        <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}" class="edit-reply">Open review</a>
+                                                        <a href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="edit-reply">Open review</a>
                                                 </section>
                 
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' != '')">
-                                                    <a class="edit-reply" href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}">Reply</a>
+                                                    <a class="edit-reply" href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply</a>
                                                 </section>
             
                                             </amp-layout>
                                 </template>
                                 <div fallback>
-                                    <a class="edit-reply" href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}">Reply</a>
+                                    <a class="edit-reply" href="${(readReviewCTA)!}&reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply</a>
                                 </div>
                         </amp-list>
                     </div>
