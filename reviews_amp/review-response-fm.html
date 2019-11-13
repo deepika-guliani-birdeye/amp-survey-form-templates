@@ -266,8 +266,8 @@
                 color: #666666;
                 font-weight: 300;
                 font-size: 10px;
-		position: relative;
-		top: 10px;
+		        position: relative;
+		        top: 10px;
                 padding-bottom: 20px;
             }
 
@@ -478,7 +478,7 @@
                                                     </form>
                                                 </section>
 
-                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' == '')" style="margin-bottom: 10px;">
+                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                         <div class="reply-wrap">
                                                                 <div [hidden]="{{isAutoResponse}}">
                                                                     <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
@@ -491,7 +491,7 @@
                                                         <a href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="edit-reply">Open review</a>
                                                 </section>
                 
-                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && '{{existingResponse}}' != '')">
+                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==true)">
                                                     <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply</a>
                                                 </section>
             
