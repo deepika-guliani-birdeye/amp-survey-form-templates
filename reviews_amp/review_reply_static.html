@@ -307,14 +307,14 @@
                                             <div submit-error template="submit_error_template_1"></div>
                                         </form>
                                     </section>
-                                    <section [hidden]="{{canReply}}==true || (userReplied1==true) || ({{canReply}}==false && '{{existingResponse}}'=='')" style="margin-bottom: 10px;">
+                                    <section [hidden]="{{canReply}}==true || (userReplied1==true) || ({{canReply}}==false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                         <div class="reply-wrap">
-                                            <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;{{responseDate}}</span> 
+                                            <span class="social-reply">{{responseBy}}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;{{responseDate}}</span> 
                                             <p class="reply-commment">{{existingResponse}}</p>
                                         </div>
                                         <a href="https://birdeye.com/dashboard/reviews/feed?businessId=123456&reviewId=" class="edit-reply">Edit reply</a> 
                                     </section>
-                                    <section [hidden]="{{canReply}}==true || (userReplied1==true) || ({{canReply}}==false && '{{existingResponse}}' !='')"> <a class="edit-reply" href="https://birdeye.com/dashboard/reviews/feed?businessId=123456&reviewId=">Reply</a> </section>
+                                    <section [hidden]="{{canReply}}==true || (userReplied1==true) || ({{canReply}}==false && {{responseExists}}==true)"> <a class="edit-reply" href="https://birdeye.com/dashboard/reviews/feed?businessId=123456&reviewId=">Reply</a> </section>
                                 </amp-layout>
                             </template>
                             <div fallback> <a class="edit-reply" href="https://birdeye.com/dashboard/reviews/feed?businessId=123456&reviewId=">Reply</a> </div>
