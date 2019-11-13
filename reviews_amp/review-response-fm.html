@@ -412,7 +412,8 @@
                 </template>
 
                 <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
-                    Something went wrong while posting reply !
+                    <div>{{message}}</div>
+                    <div><a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Open dashboard</a></div>
                 </template>
                 
                 <div class="review-wrap">
