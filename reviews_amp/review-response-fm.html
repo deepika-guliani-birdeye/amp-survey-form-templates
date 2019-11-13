@@ -412,7 +412,7 @@
                 </template>
 
                 <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
-                    <div>{{message}}</div>
+                    <div style="margin-bottom: 10px;">{{message}}</div>
                     <div><a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Open dashboard</a></div>
                 </template>
                 
