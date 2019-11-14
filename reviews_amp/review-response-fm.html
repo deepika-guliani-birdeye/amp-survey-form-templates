@@ -432,8 +432,8 @@
                                                         class="form"
                                                         method="post" 
                                                         action-xhr="${(ampApiRoot)!}resources/v1/review/AMP/reply"
-                                                        custom-validation-reporting="show-all-on-submit"
-                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });submit-error: AMP.navigateTo(url='${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
+                                                        custom-validation-reporting="as-you-go"
+                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });valid:AMP.setState({reply${(reviewIndex)!}Disabled: false}); invalid:AMP.setState({reply${(reviewIndex)!}Disabled : true});submit-error: AMP.navigateTo(url='${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
                                                                 <div class="social-reply">Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}</div>
 
@@ -452,11 +452,12 @@
                                                                     required
                                                                     maxlength="4000"
                                                                     autoexpand
+                                                                    pattern=".*\S+.*"
                                                                 ></textarea>
                                                                 <div class="review-wrapper">
                                                                     <button 
-                                                                        [class]="userReply${(reviewIndex)!} ? 'enabled-submit' : 'disabled-submit'" 
-                                                                        [disabled]="!userReply${(reviewIndex)!}"
+                                                                        [class]="(!userReply${(reviewIndex)!} || reply${(reviewIndex)!}Disabled) ? 'disabled-submit' : 'enabled-submit'" 
+                                                                        [disabled]="!userReply${(reviewIndex)!} || reply${(reviewIndex)!}Disabled"
                                                                         type="submit">
                                                                             <span class="reply-text">Reply</span>
                                                                             <span class="replying-text">Replying</span>
