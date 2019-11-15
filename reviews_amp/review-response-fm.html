@@ -382,7 +382,11 @@
                 </#if>
 
                 <div class="review-by">
-                    <span>Reviewed by</span>
+                    <#if !allDirectFeedback>
+                        <span>Reviewed by</span>
+                    <#else>
+                        <span>Contacted by</span>
+                    </#if>
                     <strong>${(reviewObject.reviewerName)!}</strong>
                 </div>
 
