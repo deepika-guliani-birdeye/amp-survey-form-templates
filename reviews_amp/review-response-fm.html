@@ -381,6 +381,11 @@
                     </div>
                 </#if>
 
+                <#if reviewObject.reviewText??>
+                <#else>
+                    <div style="height: 32px;"></div>
+                </#if>
+
                 <div class="review-by">
                     <#if !allDirectFeedback>
                         <span>Reviewed by</span>
@@ -435,19 +440,22 @@
                 </template>
 
                 <template type="amp-mustache" id="submit_error_template_${(reviewIndex)!}">
+                    <div>There was some error in posting reply !</div>
                     <div style="margin-bottom: 10px;">{{message}}</div>
                     <div><a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Open dashboard</a></div>
                 </template>
                 
                 <div class="review-wrap">
                     <div [class]="userReplied${(reviewIndex)!} == true ? 'reply-max-height' : 'no-replied-max-height'">
-                        <amp-list 
-                            width="auto"
-                            height="1"
-                            style="min-height: 62px;"
-                            layout="fixed-height"
-                            id="replySection${(reviewIndex)!}"
-                            src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
+                            <!-- Manage height for amp list when review text exists or not -->
+                            <#if reviewObject.reviewText??>
+                            <amp-list 
+                                width="auto"
+                                height="1"
+                                style="min-height: 62px;"
+                                layout="fixed-height"
+                                id="replySection${(reviewIndex)!}"
+                                src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
                                 <template type="amp-mustache">
                                         <amp-layout>
                                                 <section [hidden]="{{canReply}} == false">
@@ -526,7 +534,95 @@
                                 <div fallback>
                                     <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply</a>
                                 </div>
-                        </amp-list>
+                            </amp-list>
+                            <#else>
+                            <amp-list 
+                                width="auto"
+                                height="100"
+                                style="min-height: 62px;"
+                                layout="fixed-height"
+                                id="replySection${(reviewIndex)!}"
+                                src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
+                                <template type="amp-mustache">
+                                        <amp-layout>
+                                                <section [hidden]="{{canReply}} == false">
+                                                    <form 
+                                                        class="form"
+                                                        method="post" 
+                                                        action-xhr="${(ampApiRoot)!}resources/v1/review/AMP/reply"
+                                                        custom-validation-reporting="as-you-go"
+                                                        on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });valid:AMP.setState({reply${(reviewIndex)!}Disabled: false}); invalid:AMP.setState({reply${(reviewIndex)!}Disabled : true});submit-error: AMP.navigateTo(url='${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
+                                                            <div [hidden]="userReplied${(reviewIndex)!} == true">
+                                                                <div class="social-reply">Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}</div>
+
+                                                                <input type="hidden" name="reviewId" value="${(reviewObject.reviewId)!}" />
+                                                                <input type="hidden" name="responseBy" value="${(reviewObject.userId?c)!}" />
+                                                                <input type="hidden" name="businessNumber" value="${(reviewObject.businessNumber?c)!}" />
+                                                                <input type="hidden" name="emailId" value="${(ampEmailId)!}" />
+                                                                <input type="hidden" name="nexusAuditId" value="${(nexusAuditId?c)!}" />
+                                                                <!-- 345678 -->
+
+                                                                <textarea
+                                                                    name="response"
+                                                                    [hidden]="userReplied${(reviewIndex)!} == true"
+                                                                    placeholder="Reply"
+                                                                    on="input-debounced: AMP.setState({userReply${(reviewIndex)!}: event.value});tap: replySection${(reviewIndex)!}.changeToLayoutContainer"
+                                                                    required
+                                                                    maxlength="4000"
+                                                                    autoexpand
+                                                                    pattern=".*\S+.*"
+                                                                ></textarea>
+                                                                <div class="review-wrapper">
+                                                                    <button 
+                                                                        [class]="(!userReply${(reviewIndex)!} || reply${(reviewIndex)!}Disabled) ? 'disabled-submit' : 'enabled-submit'" 
+                                                                        [disabled]="!userReply${(reviewIndex)!} || reply${(reviewIndex)!}Disabled"
+                                                                        type="submit">
+                                                                            <span class="reply-text">Reply</span>
+                                                                            <span class="replying-text">Replying</span>
+                                                                    </button>
+                                                                    <!-- <input 
+                                                                        type="submit" 
+                                                                        [disabled]="!userReply${(reviewIndex)!}" 
+                                                                        value="Reply"
+                                                                        [class]="userReply${(reviewIndex)!} ? 'enabled-submit' : 'disabled-submit'"
+                                                                    /> -->
+                                                                    <a href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Open review</a>
+                                                                </div>
+                                                            </div>
+                                                            <div submit-success template="submit_success_template_${(reviewIndex)!}"></div>
+                                                            <div submit-error template="submit_error_template_${(reviewIndex)!}"></div>
+                                                            <div submitting class="text-center loader">
+                                                                    <amp-img src="https://birdeye.com/web2/images/src/assets/images/loader/loader-birdeye.gif?a1cef4511f0b9a73f43077c4e5165877" height="60" width="60" style="position: absolute;
+                                                                        bottom:200px; left:0; right:0; margin: 0 auto;" noloading>
+                                                                    </amp-img>
+                                                            </div>
+                                                    </form>
+                                                </section>
+
+                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
+                                                        <div class="reply-wrap">
+                                                                <div [hidden]="{{isAutoResponse}}">
+                                                                    <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                </div>
+                                                                <div [hidden]="!{{isAutoResponse}}">
+                                                                        <span class="social-reply">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                </div>
+                                                                <p class="reply-commment">{{existingResponse}}</p>
+                                                        </div>
+                                                        <a href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="edit-reply">Open review</a>
+                                                </section>
+                
+                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==true)">
+                                                    <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply</a>
+                                                </section>
+            
+                                            </amp-layout>
+                                </template>
+                                <div fallback>
+                                    <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply</a>
+                                </div>
+                            </amp-list>
+                            </#if>
                     </div>
                 </div>
             </div>
