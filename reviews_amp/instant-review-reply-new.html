@@ -60,6 +60,23 @@
                 color: #999999;
             }
 
+            .address ul {
+                display: flex;
+                list-style-type: disc;
+            }
+
+            .address li {
+                margin-left: 5px;
+                margin-right: 15px;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            .address li:first-child {
+                list-style-type: none;
+                margin-left: 0;
+            }
+
             .content-wrap {
                 max-width: 500px;
                 margin: 0px auto;
@@ -99,7 +116,6 @@
                 align-items: center;
                 text-align: left;
                 justify-content: space-between;
-                margin-bottom: 22px;
             }
 
             .star-wrap a {
@@ -362,6 +378,31 @@
             .social-icons a:first-child {
                 margin-left: 0;
             }
+            .source-review {
+                display: flex;
+                align-items: center;
+            }
+            .star-review-wrap {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 22px;
+            }
+            .flex-v-center {
+                display: flex;
+                align-items: center;
+            }
+            .review-name {
+                font-size: 18px;
+                font-weight: 500;
+                color: #212121;
+                margin-top: 2px;
+            }
+            @media only screen and (max-width: 480px) {
+                .open-reply {
+                    display: none;	
+                }
+            }
     </style>
 </head>
 <body>
@@ -385,8 +426,30 @@
             <#assign reviewIndex = reviewObject?counter >
             <div class="review-detail">
                 <h2 class="content-heading">Here’s how <span>${(reviewObject.reviewerName)!}</span> rated your location</h2>
+
+                <div class="star-review-wrap">  
+                    <div class="star-wrap">
+                        <div class="source-review">
+                            <#if reviewObject.reviewUrl??>
+                                <a href="${(reviewObject.reviewUrl)!}" target="_blank">
+                                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                                </a>
+                            <#else>
+                                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                            </#if>
+                            
+                            <div>
+                                <amp-img width="135" height="26" src="${(reviewObject.starImageUrl)!}"></amp-img>
+                                <div class="review-name">${(reviewObject.reviewerName)!}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-v-center"> 
+                        <a href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="open-reply">Open review</a>
+                    </div>
+                </div>
                
-                <div class="star-wrap">
+                <!-- <div class="star-wrap">
                     <div>
                         <#if reviewObject.reviewUrl??>
                             <a href="${(reviewObject.reviewUrl)!}" target="_blank" >${(reviewObject.sourceAlias)!}</a>
@@ -407,11 +470,7 @@
                             <amp-img width="135" height="26" src="${(reviewObject.starImageUrl)!}"></amp-img>
                         </#if>
                     </div>
-                </div>
-
-                <div>
-                    <a href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="edit-reply">Open review</a>
-                </div>
+                </div> -->
 
                 <#if reviewObject.reviewText??>
                     <div class="awesome-exp">
@@ -673,14 +732,16 @@
             </a>
         </div>
         <div class="address">
-            <#if businessInlineAddress??>
-                <div>${businessInlineAddress}</div>
-            </#if>
-            <div>
-                <#if privacyPolicyUrl??><a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a></#if> 
-                <#if termsOfServiceUrl??><a href="${(termsOfServiceUrl)!}">• Terms of Service</a></#if> 
-                • Unsubscribe
-            </div>
+            <ul>
+                <#if businessInlineAddress??>
+                    <div>${businessInlineAddress}</div>
+                </#if>
+                <div>
+                    <#if privacyPolicyUrl??><li><a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a></li</#if> 
+                    <#if termsOfServiceUrl??><li><a href="${(termsOfServiceUrl)!}">• Terms of Service</a></li></#if> 
+                    • Unsubscribe
+                </div>
+            </ul>
         </div>
         <div class="social-icons">
             <a href="https://www.instagram.com/wearebirdeye/">
