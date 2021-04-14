@@ -411,23 +411,33 @@
             .ml-5 {
                 margin-left: 5px;
             }
+            span.mobile { display: none; }
             @media only screen and (max-width: 600px) {
                 .reviewer-email {
                     max-width: 50px;
-                      white-space: nowrap;
+                    white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
             }
+            @media (max-width: 600px) {
+                span.mobile { display: block; }
+                span.desktop { display: none; }
+            }
     </style>
 </head>
 <body>
+
+    <!-- HEADER -->
     <div class="amp-head">
             <p>${(locationName)!}</p>
             <#if address??>
                 <p class="sub-heading">${(address)!}</p>
             </#if>
     </div>
+    <!-- END HEADER -->
+
+    <!-- MAIN CONTENT -->
     <div class="content-wrap">
         <div class="logo-wrap">
             <#if logoUrl??>	
@@ -441,7 +451,14 @@
         <#list reviews as reviewObject>
             <#assign reviewIndex = reviewObject?counter >
             <div class="review-detail">
-                <h2 class="content-heading">Here’s how <span>${(reviewObject.reviewerName)!}</span> rated your location</h2>
+                <h2 class="content-heading">
+                    <#if !allDirectFeedback>
+                        Here’s how <span>${(reviewObject.reviewerName)!}</span> rated your location
+                    <#else>
+                        Here’s the feedback <span>${(reviewObject.reviewerName)!}</span> left
+                    </#if>
+                    
+                </h2>
 
                 <div class="star-review-wrap">  
                     <div class="star-wrap">
@@ -451,7 +468,13 @@
                                     <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
                                 </a>
                             <#else>
-                                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                                <#if !allDirectFeedback>
+                                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                                <#else>
+                                    <!-- DIRECT FEEDBACK IMAGE-->
+                                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/source/icons/392.png" width="45" height="45"/>
+                                    <!-- END DIRECT FEEDBACK IMAGE-->
+                                </#if>
                             </#if>
                             
                             <div>
@@ -470,41 +493,29 @@
                                 </#if>
                                 <div>
                                     <span class="review-name">${(reviewObject.reviewerName)!}</span>
-                                    <span class="reviewer-email">${(reviewObject.reviewerEmail)!}</span>
                                 </div>
+                                <#if reviewObject.reviewerEmail??>
+                                    <div>
+                                        <span class="reviewer-email">${(reviewObject.reviewerEmail)!}</span>
+                                    </div>
+                                </#if>
+                                <#if reviewObject.canBeContacted??>
+                                    <div>
+                                        <span class="reviewer-email"><#if reviewObject.canBeContacted>Can be contacted<#else>Asked not to be contacted</#if></span>
+                                    </div>
+                                    
+                                </#if>
                             </div>
                         </div>
                     </div>
                     <div class="flex-v-center">
                         <a href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="open-reply flex-v-center">
-                            <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/24-px-arrows-arrow-up-right-square.png" width="24" height="24"></amp-img> 
-                            <span class="ml-5">Open review</span>
+                            <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/24-px-arrows-arrow-up-right-square.png" width="24" height="24"></amp-img>
+                            <span class="desktop ml-5">Open review</span>
+                            <span class="mobile ml-5">Open</span>
                         </a>
                     </div>
                 </div>
-               
-                <!-- <div class="star-wrap">
-                    <div>
-                        <#if reviewObject.reviewUrl??>
-                            <a href="${(reviewObject.reviewUrl)!}" target="_blank" >${(reviewObject.sourceAlias)!}</a>
-                        <#else>
-                            ${(reviewObject.sourceAlias)!}
-                        </#if>
-                        <#if reviewObject.sourceId?? && reviewObject.sourceId==110>
-                            <#if reviewObject.recommended?? && !reviewObject.recommended??>
-                                <amp-img width="135" height="26" src="${(reviewObject.starImageUrl)!}"></amp-img>
-                            <#elseif reviewObject.recommended?? && reviewObject.recommended==0>
-                                <amp-img height="20" width="20" style="margin-right:3px; vertical-align: middle;" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/no-star-rating-box.png"></amp-img>
-                                    <b style="font-size: 15px; font-weight: bold; font-style: normal; font-stretch: normal; color: #455b76;">Not recommended</b>
-                            <#else>
-                                <amp-img width="20" height="20" style="margin-right:3px;vertical-align: middle;" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/star-rating-box.png"></amp-img>
-                                <b style="font-size: 15px; font-weight: bold; font-style: normal; font-stretch: normal; color: #f57c00;">Recommended</b>
-                            </#if>
-                        <#elseif reviewObject.starImageUrl??>
-                            <amp-img width="135" height="26" src="${(reviewObject.starImageUrl)!}"></amp-img>
-                        </#if>
-                    </div>
-                </div> -->
 
                 <#if reviewObject.reviewText??>
                     <div class="awesome-exp">
@@ -516,51 +527,6 @@
                 <#else>
                     <div style="height: 32px;"></div>
                 </#if>
-
-                <!-- <div class="review-by">
-                    <#if !allDirectFeedback>
-                        <span>Reviewed by</span>
-                    <#else>
-                        <span>Contacted by</span>
-                    </#if>
-                    <strong>${(reviewObject.reviewerName)!}</strong>
-                </div> -->
-
-                <!-- <div class="contact-details">
-                        <#if (reviewObject.reviewerEmail?? && reviewObject.reviewerPhone??)>
-                        <div>
-                            <div>
-                            <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
-                                <a style="color:#1976d2">${(reviewObject.reviewerEmail)!}</a> |
-                                ${(reviewObject.reviewerPhone)!}</p>
-                            </div>
-                        </div>
-                        <#elseif (!reviewObject.reviewerEmail?? && reviewObject.reviewerPhone??)>
-                            <div>
-                            <div>
-                                <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
-                                <a style="color:#1976d2">${(reviewObject.reviewerPhone)!}</p>
-                            </div>
-                            </div>
-                            <#elseif (reviewObject.reviewerEmail?? && !reviewObject.reviewerPhone??)>
-                            <div>
-                                <div>
-                                <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">
-                                    <a style="color:#1976d2">${(reviewObject.reviewerEmail)!}</a></p>
-                                </div>
-                            </div>
-                            <#else>
-                        </#if>
-                        <#if reviewObject.canBeContacted??>
-                        <div>
-                            <div>
-                            <p style="font-family:'Roboto',Arial,sans-serif;font-size:15px;font-weight:400;font-style:normal;font-stretch:normal;line-height:1.33;letter-spacing:normal;color:#212121;display:block;text-align: center;margin:0;">To
-                                be contacted: <#if reviewObject.canBeContacted>Yes<#else>No</#if>
-                            </p>
-                            </div>
-                        </div>
-                    </#if>
-                </div> -->
 
                 <template type="amp-mustache" id="submit_success_template_${(reviewIndex)!}">
                     <div class="reply-wrap">
@@ -597,7 +563,13 @@
                                                         custom-validation-reporting="as-you-go"
                                                         on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });valid:AMP.setState({reply${(reviewIndex)!}Disabled: false}); invalid:AMP.setState({reply${(reviewIndex)!}Disabled : true});submit-error: AMP.navigateTo(url='${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
-                                                                <div class="social-reply">Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}</div>
+                                                                <div class="social-reply">
+                                                                    <#if !allDirectFeedback>
+                                                                        Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}
+                                                                    <#else>
+                                                                        Your reply will be emailed to the reviewer
+                                                                    </#if>
+                                                                </div>
 
                                                                 <input type="hidden" name="reviewId" value="${(reviewObject.reviewId)!}" />
                                                                 <input type="hidden" name="responseBy" value="${(reviewObject.userId?c)!}" />
@@ -683,7 +655,13 @@
                                                         custom-validation-reporting="as-you-go"
                                                         on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });valid:AMP.setState({reply${(reviewIndex)!}Disabled: false}); invalid:AMP.setState({reply${(reviewIndex)!}Disabled : true});submit-error: AMP.navigateTo(url='${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
-                                                                <div class="social-reply">Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}</div>
+                                                                <div class="social-reply">
+                                                                    <#if !allDirectFeedback>
+                                                                        Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}
+                                                                    <#else>
+                                                                        Your reply will be emailed to the reviewer
+                                                                    </#if>
+                                                                </div>
 
                                                                 <input type="hidden" name="reviewId" value="${(reviewObject.reviewId)!}" />
                                                                 <input type="hidden" name="responseBy" value="${(reviewObject.userId?c)!}" />
@@ -757,8 +735,9 @@
             </div>
         </#list>
     </div>
+    <!-- END MAIN CONTENT -->
 
-
+    <!-- FOOTER -->
     <div class="footer-wrap"> 
         <div class="footer-logo">
             <a href=${homepageUrl}>
@@ -805,6 +784,7 @@
             </#if>
         </#if>
     </div> -->
+    <!-- END FOOTER -->
 
 </body>
 </html>
