@@ -38,20 +38,20 @@
             .amp-head p {
                 color: #212121;
                 font-weight: 600;
-                margin-top: 33px;
-                  font-size: 14px;
-                  text-align: left;
+                font-size: 14px;
+                text-align: left;
+                margin-top: 0;
             }
-              
+            
             .amp-head p.sub-heading {
                 color: #212121;
                 margin-top: 0px;
                 font-weight: 400;
             }
-  
+
             .logo-wrap {
                 text-align: left;
-                margin-bottom: 30px;
+                margin-bottom: 60px;
             }
 
             .address {
@@ -63,6 +63,7 @@
             .address ul {
                 display: flex;
                 list-style-type: disc;
+                flex-wrap: nowrap;
             }
 
             .address li {
@@ -309,8 +310,8 @@
                 position: relative;
                 top: 10px;
                 margin-top: 42px;
-                  text-align: left;
-                  padding: 0 30px 20px;
+                text-align: left;
+                padding: 0 30px 20px;
             }
 
             .footer-wrap span,
@@ -334,10 +335,10 @@
                 cursor: not-allowed;
             }
             .form.amp-form-submitting .review-wrapper .replying-text {
-               display: inline-block;
+            display: inline-block;
             }
             .form.amp-form-submitting .review-wrapper .reply-text {
-               display: none;
+            display: none;
             }
             .submitting-loader img, .submitting-loader span {
                 vertical-align: middle; 
@@ -372,6 +373,9 @@
             .address {
                 margin-bottom: 20px;
             }
+            .social-icons {
+                margin-bottom: 36px;
+            }
             .social-icons a{
                 margin-left: 10px;
             }
@@ -397,13 +401,12 @@
                 font-weight: 500;
                 color: #212121;
                 margin-top: 2px;
-                display: inline-block;
-                vertical-align: middle;
+            display: inline-block;
+            vertical-align: middle;
             }
             .reviewer-email {
                 font-size: 18px;
                 color: #999;
-                margin-left: 10px;
                 font-weight: 400;
                 display: inline-block;
                 vertical-align: middle;
@@ -411,10 +414,17 @@
             .ml-5 {
                 margin-left: 5px;
             }
+            .border-image {
+                border: 1px solid #ccc;
+                border-radius: 50%;
+            }
+            .fz-16 {
+                font-size: 16px;
+            }
             span.mobile { display: none; }
             @media only screen and (max-width: 600px) {
                 .reviewer-email {
-                    max-width: 50px;
+                    max-width: 140px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -465,11 +475,11 @@
                         <div class="source-review">
                             <#if reviewObject.reviewUrl??>
                                 <a href="${(reviewObject.reviewUrl)!}" target="_blank">
-                                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                                    <amp-img class="border-image" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
                                 </a>
                             <#else>
                                 <#if !allDirectFeedback>
-                                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                                    <amp-img class="border-image" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
                                 <#else>
                                     <!-- DIRECT FEEDBACK IMAGE-->
                                     <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/source/icons/392.png" width="45" height="45"/>
@@ -530,7 +540,7 @@
 
                 <template type="amp-mustache" id="submit_success_template_${(reviewIndex)!}">
                     <div class="reply-wrap">
-                            <span class="social-reply">You replied on ${(reviewObject.sourceAlias)!} on {{responseDate}}</span>
+                            <span class="social-reply fz-16">You replied on ${(reviewObject.sourceAlias)!} on {{responseDate}}</span>
                             <p class="reply-commment">{{replyComment}}</p>
                     </div>
                     <a href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>" class="edit-reply">Open review</a>
@@ -563,7 +573,7 @@
                                                         custom-validation-reporting="as-you-go"
                                                         on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });valid:AMP.setState({reply${(reviewIndex)!}Disabled: false}); invalid:AMP.setState({reply${(reviewIndex)!}Disabled : true});submit-error: AMP.navigateTo(url='${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
-                                                                <div class="social-reply">
+                                                                <div class="social-reply fz-16">
                                                                     <#if !allDirectFeedback>
                                                                         Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}
                                                                     <#else>
@@ -618,10 +628,10 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                             <div [hidden]="{{isAutoResponse}}">
-                                                                <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <div [hidden]="!{{isAutoResponse}}">
-                                                                    <span class="social-reply">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                    <span class="social-reply fz-16">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <p class="reply-commment">{{existingResponse}}</p>
                                                     </div>
@@ -655,7 +665,7 @@
                                                         custom-validation-reporting="as-you-go"
                                                         on="submit-success: AMP.setState({userReplied${(reviewIndex)!}: true });valid:AMP.setState({reply${(reviewIndex)!}Disabled: false}); invalid:AMP.setState({reply${(reviewIndex)!}Disabled : true});submit-error: AMP.navigateTo(url='${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}&entid=${(reviewObject.enterpriseId?c)!}');">
                                                             <div [hidden]="userReplied${(reviewIndex)!} == true">
-                                                                <div class="social-reply">
+                                                                <div class="social-reply fz-16">
                                                                     <#if !allDirectFeedback>
                                                                         Your reply will be automatically posted on ${(reviewObject.sourceAlias)!}
                                                                     <#else>
@@ -710,10 +720,10 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                             <div [hidden]="{{isAutoResponse}}">
-                                                                <span class="social-reply">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <div [hidden]="!{{isAutoResponse}}">
-                                                                    <span class="social-reply">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                    <span class="social-reply fz-16">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <p class="reply-commment">{{existingResponse}}</p>
                                                     </div>
@@ -757,17 +767,17 @@
             </ul>
         </div>
         <div class="social-icons">
+            <a href="https://twitter.com/birdeye_">
+                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-twitter.png" height="16" width="16"></amp-img>
+            </a>
+            <a href="https://www.facebook.com/BirdeyeReviews">
+                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-facebook.png" height="16" width="16"></amp-img>
+            </a>
             <a href="https://www.instagram.com/wearebirdeye/">
                 <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/icon-16-px-social-instagram.png" height="16" width="16"></amp-img>
             </a>
             <a href="https://www.linkedin.com/company/birdeye">
                 <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-linkedin.png" height="16" width="16"></amp-img>
-            </a>
-            <a href="https://www.facebook.com/BirdeyeReviews">
-                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-facebook.png" height="16" width="16"></amp-img>
-            </a>
-            <a href="https://twitter.com/birdeye_">
-                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-twitter.png" height="16" width="16"></amp-img>
             </a>
         </div>
     </div>
