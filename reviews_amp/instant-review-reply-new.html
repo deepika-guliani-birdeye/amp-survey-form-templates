@@ -441,8 +441,8 @@
     <!-- HEADER -->
     <div class="amp-head">
             <p>${(locationName)!}</p>
-            <#if address??>
-                <p class="sub-heading">${(address)!}</p>
+            <#if businessInlineAddress??>
+                <p class="sub-heading">${(businessInlineAddress)!}</p>
             </#if>
     </div>
     <!-- END HEADER -->
@@ -748,39 +748,40 @@
     <!-- END MAIN CONTENT -->
 
     <!-- FOOTER -->
-    <div class="footer-wrap"> 
-        <div class="footer-logo">
-            <a href=${homepageUrl}>
-                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/group-31.png" width="99" height="23" />
-            </a>
+    <#if !(businessType=="Whitelabel" )>
+        <div class="footer-wrap"> 
+            <div class="footer-logo">
+                <a href=${homepageUrl}>
+                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/group-31.png" width="99" height="23" />
+                </a>
+            </div>
+            <div class="address">
+                <ul>
+                    <#if businessInlineAddress??>
+                        <div>${businessInlineAddress}</div>
+                    </#if>
+                    <div>
+                        <#if privacyPolicyUrl??><li><a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a></li</#if> 
+                        <#if termsOfServiceUrl??><li><a href="${(termsOfServiceUrl)!}">• Terms of Service</a></li></#if>
+                    </div>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="https://twitter.com/birdeye_">
+                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-twitter.png" height="16" width="16"></amp-img>
+                </a>
+                <a href="https://www.facebook.com/BirdeyeReviews">
+                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-facebook.png" height="16" width="16"></amp-img>
+                </a>
+                <a href="https://www.instagram.com/wearebirdeye/">
+                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/icon-16-px-social-instagram.png" height="16" width="16"></amp-img>
+                </a>
+                <a href="https://www.linkedin.com/company/birdeye">
+                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-linkedin.png" height="16" width="16"></amp-img>
+                </a>
+            </div>
         </div>
-        <div class="address">
-            <ul>
-                <#if businessInlineAddress??>
-                    <div>${businessInlineAddress}</div>
-                </#if>
-                <div>
-                    <#if privacyPolicyUrl??><li><a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a></li</#if> 
-                    <#if termsOfServiceUrl??><li><a href="${(termsOfServiceUrl)!}">• Terms of Service</a></li></#if> 
-                    • Unsubscribe
-                </div>
-            </ul>
-        </div>
-        <div class="social-icons">
-            <a href="https://twitter.com/birdeye_">
-                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-twitter.png" height="16" width="16"></amp-img>
-            </a>
-            <a href="https://www.facebook.com/BirdeyeReviews">
-                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-facebook.png" height="16" width="16"></amp-img>
-            </a>
-            <a href="https://www.instagram.com/wearebirdeye/">
-                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/icon-16-px-social-instagram.png" height="16" width="16"></amp-img>
-            </a>
-            <a href="https://www.linkedin.com/company/birdeye">
-                <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/16-px-social-linkedin.png" height="16" width="16"></amp-img>
-            </a>
-        </div>
-    </div>
+    </#if>
     <!-- <div class="footer-wrap">
         <span>Powered by</span>
         <a href="${(homepageUrl)!}" target="_blank">${(businessName)!}</a> 
