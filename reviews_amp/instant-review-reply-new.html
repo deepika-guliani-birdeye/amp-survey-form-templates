@@ -73,6 +73,13 @@
                 cursor: pointer;
             }
 
+            .address li a {
+                text-decoration: underline;
+                color: #999999;
+                font-size: 12px;
+                font-weight: 400;
+            }
+
             .address li:first-child {
                 list-style-type: none;
                 margin-left: 0;
@@ -452,7 +459,7 @@
         <div class="logo-wrap">
             <#if logoUrl??>	
                 <div>
-                    <amp-img alt="logo" height="26" width="108" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/logo.png" title="logo" />
+                    <amp-img alt="logo" height="26" width="108" src="[LogoV2]" title="logo" />
                     <!-- <amp-img alt="logo" height="26" width="108" src="${(logoUrl)!}" title="logo" />	 -->
                 </div>	
             </#if>
@@ -475,11 +482,11 @@
                         <div class="source-review">
                             <#if reviewObject.reviewUrl??>
                                 <a href="${(reviewObject.reviewUrl)!}" target="_blank">
-                                    <amp-img class="border-image" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                                    <amp-img class="border-image" src="${(reviewObject.sourceLogoURL)!}" width="45" height="45"/>
                                 </a>
                             <#else>
                                 <#if !allDirectFeedback>
-                                    <amp-img class="border-image" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/${(reviewObject.sourceAlias)!}.png" width="45" height="45"/>
+                                    <amp-img class="border-image" src="${(reviewObject.sourceLogoURL)!}" width="45" height="45"/>
                                 <#else>
                                     <!-- DIRECT FEEDBACK IMAGE-->
                                     <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/source/icons/392.png" width="45" height="45"/>
@@ -748,22 +755,19 @@
     <!-- END MAIN CONTENT -->
 
     <!-- FOOTER -->
-    <#if !(businessType=="Whitelabel" )>
+    <#if !(businessType=="Whitelabel")>
         <div class="footer-wrap"> 
             <div class="footer-logo">
                 <a href=${homepageUrl}>
-                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/email/group-31.png" width="99" height="23" />
+                    <amp-img src="[Product Footer Logo]" width="99" height="23" />
                 </a>
             </div>
             <div class="address">
+                <div>250 Cambridge Ave Suite 103, Palo Alto, CA 94306</div>
                 <ul>
-                    <#if businessInlineAddress??>
-                        <div>${businessInlineAddress}</div>
-                    </#if>
-                    <div>
-                        <#if privacyPolicyUrl??><li><a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a></li</#if> 
-                        <#if termsOfServiceUrl??><li><a href="${(termsOfServiceUrl)!}">• Terms of Service</a></li></#if>
-                    </div>
+                    <li><a href="[Privacy Policy URL]" target="_blank">Privacy Policy</a></li>
+                    <li><a href="[Terms of Service URL]" target="_blank">Terms of Service</a></li>
+                    <li><a href="[UNSUBSCRIBE_LINK]" target="_blank">Unsubscribe</a></li>
                 </ul>
             </div>
             <div class="social-icons">
@@ -782,20 +786,6 @@
             </div>
         </div>
     </#if>
-    <!-- <div class="footer-wrap">
-        <span>Powered by</span>
-        <a href="${(homepageUrl)!}" target="_blank">${(businessName)!}</a> 
-        <br>
-        <#if !(businessType=="Whitelabel" )>
-            <#if privacyPolicyUrl??>
-                <a href="${(privacyPolicyUrl)!}" target="_blank">Privacy Policy</a> &nbsp;-&nbsp;
-            </#if>
-            <#if termsOfServiceUrl??>
-                <a href="${(termsOfServiceUrl)!}">Terms of Service</a>
-            </#if>
-        </#if>
-    </div> -->
-    <!-- END FOOTER -->
 
 </body>
 </html>
