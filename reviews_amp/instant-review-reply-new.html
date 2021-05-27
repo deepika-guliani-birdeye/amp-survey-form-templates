@@ -483,14 +483,14 @@
                         <div class="source-review">
                             <#if reviewObject.reviewUrl??>
                                 <a href="${(reviewObject.reviewUrl)!}" target="_blank">
-                                    <amp-img class="border-image" src="${(reviewObject.sourceLogoURL)!}" width="45" height="45"/>
+                                    <amp-img class="border-image" src="${(reviewObject.sourceLogoURL)!}" width="45" height="45"></amp-img>
                                 </a>
                             <#else>
                                 <#if !allDirectFeedback>
-                                    <amp-img class="border-image" src="${(reviewObject.sourceLogoURL)!}" width="45" height="45"/>
+                                    <amp-img class="border-image" src="${(reviewObject.sourceLogoURL)!}" width="45" height="45"></amp-img>
                                 <#else>
                                     <!-- DIRECT FEEDBACK IMAGE-->
-                                    <amp-img src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/source/icons/392.png" width="45" height="45"/>
+                                    <amp-img class="border-image" src="https://d3cnqzq0ivprch.cloudfront.net/prod/css/images/source/icons/392.png" width="45" height="45"></amp-img>
                                     <!-- END DIRECT FEEDBACK IMAGE-->
                                 </#if>
                             </#if>
