@@ -475,7 +475,12 @@
             <div class="review-detail">
                 <h2 class="content-heading">
                     <#if !allDirectFeedback>
-                        Here’s how <span>${(reviewObject.reviewerName)!}</span> rated your location
+                        <#if reviewObject.isAnonymousReviewer>
+                            Your location just received a new review
+                        <#else>
+                            <span>${(reviewObject.reviewerName)!} just left a new review
+                        </#if>
+                        <!-- Here’s how <span>${(reviewObject.reviewerName)!}</span> rated your location -->
                     <#else>
                         Here’s the feedback <span>${(reviewObject.reviewerName)!}</span> left
                     </#if>
@@ -577,14 +582,13 @@
                             <#if reviewObject.reviewText??>
                             <amp-list 
                                 width="auto"
-                                height="1"
                                 style="min-height: 62px;"
-                                layout="fixed-height"
+                                layout="container"
                                 id="replySection${(reviewIndex)!}"
                                 src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
                                 <template type="amp-mustache">
                                         <amp-layout>
-                                                <section [hidden]="{{canReply}} == false">
+                                                <section [hidden]="{{canReply}} == false || ${reviewObject.canBeReplied} == false">
                                                     <form 
                                                         class="form"
                                                         method="post" 
@@ -656,16 +660,20 @@
                                                     </div>
                                                 </section>
                 
-                                                <section class="align-left" [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==true)">
-                                                    <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
-                                                </section>
+                                                <#if reviewObject.canBeReplied>
+                                                    <section class="align-left" [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==true)">
+                                                        <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
+                                                    </section>
+                                                <#/if>
             
                                             </amp-layout>
                                 </template>
                                 <div fallback>
-                                    <div class="align-left">
-                                        <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
-                                    </div>
+                                    <#if reviewObject.canBeReplied>
+                                        <div class="align-left">
+                                            <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
+                                        </div>
+                                    <#/if>
                                 </div>
                             </amp-list>
                             <#else>
@@ -673,12 +681,12 @@
                                 width="auto"
                                 height="100"
                                 style="min-height: 62px;"
-                                layout="fixed-height"
+                                layout="container"
                                 id="replySection${(reviewIndex)!}"
                                 src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
                                 <template type="amp-mustache">
                                         <amp-layout>
-                                                <section [hidden]="{{canReply}} == false">
+                                                <section [hidden]="{{canReply}} == false || ${reviewObject.canBeReplied} == false">
                                                     <form 
                                                         class="form"
                                                         method="post" 
@@ -750,14 +758,20 @@
                                                     </div>
                                                 </section>
                 
-                                                <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==true)">
-                                                    <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
-                                                </section>
+                                                <#if reviewObject.canBeReplied>
+                                                    <section class="align-left" [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==true)">
+                                                        <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
+                                                    </section>
+                                                <#/if>
             
                                             </amp-layout>
                                 </template>
                                 <div fallback>
-                                    <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
+                                    <#if reviewObject.canBeReplied>
+                                        <div class="align-left">
+                                            <a class="edit-reply" href="${readReviewCTA?replace('businessId=${(reviewObject.businessNumber?c)!}', '')}reviewid=${(reviewObject.reviewId)!}&businessid=${(reviewObject.businessNumber?c)!}<#if reviewObject.enterpriseId??>&entid=${(reviewObject.enterpriseId?c)!}</#if>">Reply to review</a>
+                                        </div>
+                                    </#if>
                                 </div>
                             </amp-list>
                             </#if>
