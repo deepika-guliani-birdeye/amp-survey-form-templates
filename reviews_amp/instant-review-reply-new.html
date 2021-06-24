@@ -562,7 +562,7 @@
 
                 <template type="amp-mustache" id="submit_success_template_${(reviewIndex)!}">
                     <div class="reply-wrap">
-                            <span class="social-reply fz-16">You replied on ${(reviewObject.sourceAlias)!} on {{responseDate}}</span>
+                            <span class="social-reply fz-16">You replied on {{responseDate}}</span>
                             <p class="reply-commment">{{replyComment}}</p>
                     </div>
                     <div class="align-left">
@@ -582,7 +582,7 @@
                             <#if reviewObject.reviewText??>
                             <amp-list 
                                 width="auto"
-                                style="min-height: 62px;"
+                                style="min-height: 130px;"
                                 layout="container"
                                 id="replySection${(reviewIndex)!}"
                                 src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
@@ -651,10 +651,10 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                             <div [hidden]="{{isAutoResponse}}">
-                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <div [hidden]="!{{isAutoResponse}}">
-                                                                    <span class="social-reply fz-16">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                    <span class="social-reply fz-16">Response auto-posted on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <p class="reply-commment">{{existingResponse}}</p>
                                                     </div>
@@ -745,10 +745,10 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                             <div [hidden]="{{isAutoResponse}}">
-                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <div [hidden]="!{{isAutoResponse}}">
-                                                                    <span class="social-reply fz-16">Response auto-posted on&nbsp;{{sourceName}}&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                    <span class="social-reply fz-16">Response auto-posted on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                             <p class="reply-commment">{{existingResponse}}</p>
                                                     </div>
