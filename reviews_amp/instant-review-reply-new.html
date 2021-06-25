@@ -658,7 +658,7 @@
                                                                 <div [hidden]="{{respondedByUserId}} == ${(reviewObject.userId?c)!} && {{respondedByUserId}} == null">
                                                                     <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                                 </div>
-                                                                <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!}) && {{respondedByUserId}}">
+                                                                <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!}) && {{respondedByUserId}} == null">
                                                                     <span class="social-reply fz-16">You&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                                 </div>
                                                             </div>
