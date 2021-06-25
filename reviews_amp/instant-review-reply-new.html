@@ -652,13 +652,13 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                             <div [hidden]="{{isAutoResponse}}">
-                                                                <div [hidden]="{{respondedByUserId != null}}">
+                                                                <div [hidden]="{{respondedByUserId}} != null">
                                                                     <span class="social-reply fz-16">Business&nbsp;response&nbsp;on&nbsp;{{responseDate}}</span>
                                                                 </div>
-                                                                <div [hidden]="{{respondedByUserId}} == ${(reviewObject.userId?c)!} && {{respondedByUserId == null}}">
+                                                                <div [hidden]="{{respondedByUserId}} == ${(reviewObject.userId?c)!} && {{respondedByUserId}} == null">
                                                                     <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                                 </div>
-                                                                <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!}) && {{respondedByUserId == null}}">
+                                                                <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!}) && {{respondedByUserId}}">
                                                                     <span class="social-reply fz-16">You&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                                 </div>
                                                             </div>
@@ -754,13 +754,13 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                         <div [hidden]="{{isAutoResponse}}">
-                                                            <div [hidden]="{{respondedByUserId != null}}">
+                                                            <div [hidden]="{{respondedByUserId}} != null">
                                                                 <span class="social-reply fz-16">Business&nbsp;response&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
-                                                            <div [hidden]="{{respondedByUserId}} == ${(reviewObject.userId?c)!} && {{respondedByUserId == null}}">
+                                                            <div [hidden]="{{respondedByUserId}} == ${(reviewObject.userId?c)!} && {{respondedByUserId}} == null">
                                                                 <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
-                                                            <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!}) && {{respondedByUserId == null}}">
+                                                            <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!}) && {{respondedByUserId}} == null">
                                                                 <span class="social-reply fz-16">You&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
                                                             </div>
                                                         </div>
