@@ -581,10 +581,10 @@
                             <!-- Manage height for amp list when review text exists or not -->
                             <#if reviewObject.reviewText??>
                             <amp-list 
-                                width="auto"
+                                width="auto" 
                                 height="1"
                                 style="min-height: 130px;"
-                                layout="container"
+                                layout="fixed-height"
                                 id="replySection${(reviewIndex)!}"
                                 src="${(ampApiRoot)!}resources/v1/review/AMP/review/${(reviewObject.reviewId)!}/user/${(reviewObject.userId?c)!}/business/${(reviewObject.businessNumber?c)!}/email/${(ampEmailId)!}">
                                 <template type="amp-mustache">
@@ -652,7 +652,12 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                             <div [hidden]="{{isAutoResponse}}">
-                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                <div [hidden]="{{respondedByUserId}} == ${(reviewObject.userId?c)!}">
+                                                                    <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                </div>
+                                                                <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!})">
+                                                                    <span class="social-reply fz-16">You&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                </div>
                                                             </div>
                                                             <div [hidden]="!{{isAutoResponse}}">
                                                                     <span class="social-reply fz-16">Response auto-posted on&nbsp;{{responseDate}}</span>
@@ -746,7 +751,12 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                             <div [hidden]="{{isAutoResponse}}">
-                                                                <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                <div [hidden]="{{respondedByUserId}} == ${(reviewObject.userId?c)!}">
+                                                                    <span class="social-reply fz-16">{{responseBy}}&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                </div>
+                                                                <div [hidden]="(!{{respondedByUserId}} == ${(reviewObject.userId?c)!})">
+                                                                    <span class="social-reply fz-16">You&nbsp;replied&nbsp;on&nbsp;{{responseDate}}</span>
+                                                                </div>
                                                             </div>
                                                             <div [hidden]="!{{isAutoResponse}}">
                                                                     <span class="social-reply fz-16">Response auto-posted on&nbsp;{{responseDate}}</span>
