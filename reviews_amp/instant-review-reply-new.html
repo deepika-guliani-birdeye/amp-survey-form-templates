@@ -652,7 +652,7 @@
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
                                                         <div [hidden]="{{isAutoResponse}}">
-                                                            <div class="social-reply fz-16" [text]="{{respondedByUserId}} == null ? 'Business response on {{responseDate}}' : ({{respondedByUserId}} == ${(reviewObject.userId?c)!} ? 'You replied on {{responseDate}}' : '{{responseBy}} replied on {{responseDate}}') "></div>
+                                                            <div class="social-reply fz-16" [text]='("{{respondedByUserId}}" == "") ? "Business response on {{responseDate}}" : ("{{respondedByUserId}}" == "${(reviewObject.userId?c)!}" ? "You replied on {{responseDate}}" : "{{responseBy}} replied on {{responseDate}}")'></div>
                                                         </div>
                                                         <div [hidden]="!{{isAutoResponse}}">
                                                             <span class="social-reply fz-16">Response auto-posted on&nbsp;{{responseDate}}</span>
@@ -745,13 +745,13 @@
 
                                                 <section [hidden]="{{canReply}} == true || (userReplied${(reviewIndex)!} == true) || ({{canReply}} == false && {{responseExists}}==false)" style="margin-bottom: 10px;">
                                                     <div class="reply-wrap">
-                                                        <div [hidden]="{{isAutoResponse}}">
-                                                            <div class="social-reply fz-16" [text]="{{respondedByUserId}} == null ? 'Business response on {{responseDate}}' : ({{respondedByUserId}} == ${(reviewObject.userId?c)!} ? 'You replied on {{responseDate}}' : '{{responseBy}} replied on {{responseDate}}') "></div>
-                                                        </div>
-                                                        <div [hidden]="!{{isAutoResponse}}">
-                                                            <span class="social-reply fz-16">Response auto-posted on&nbsp;{{responseDate}}</span>
-                                                        </div>
-                                                        <p class="reply-commment">{{existingResponse}}</p>
+                                                            <div [hidden]="{{isAutoResponse}}">
+                                                                    <div class="social-reply fz-16" [text]='("{{respondedByUserId}}" == "") ? "Business response on {{responseDate}}" : ("{{respondedByUserId}}" == "${(reviewObject.userId?c)!}" ? "You replied on {{responseDate}}" : "{{responseBy}} replied on {{responseDate}}")'></div>
+                                                            </div>
+                                                            <div [hidden]="!{{isAutoResponse}}">
+                                                                <span class="social-reply fz-16">Response auto-posted on&nbsp;{{responseDate}}</span>
+                                                            </div>
+                                                            <p class="reply-commment">{{existingResponse}}</p>
                                                     </div>
                                                 </section>
 
